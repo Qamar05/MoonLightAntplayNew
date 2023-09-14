@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <!--
+        Base application theme, dependent on API level. This theme is replaced
+        by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
+
+    -->
+    <style name="AppBaseTheme" parent="android:Theme">
+        <item name="android:itemBackground">@color/white</item>
+        <item name="colorPrimary">@color/white</item>
+        <!--
+            Theme customizations available in newer API levels can go in
+            res/values-vXX/styles.xml, while customizations related to
+            backward-compatibility can go here.
+
+        -->
+    </style>
+
+    <!-- Application theme. -->
+    <style name="AppTheme" parent="AppBaseTheme">
+        <!-- All customizations that are NOT specific to a particular API-level can go here. -->
+        <item name="android:windowActionBar">false</item>
+        <item name="android:windowNoTitle">true</item>
+
+    </style>
+
+    <style name="MyAutofilledHighlight" parent="Theme.AppCompat.NoActionBar">
+        <item name="android:autofilledHighlight" tools:ignore="NewApi">@drawable/my_bgdrawable</item>
+    </style>
+    <style name="StreamBaseTheme" parent="AppBaseTheme">
+        <!-- Transparent streaming background to avoid extra overdraw -->
+        <item name="android:windowBackground">@android:color/transparent</item>
+    </style>
+
+    <!-- Stream activity theme -->
+    <style name="StreamTheme" parent="StreamBaseTheme">
+        <!-- All customizations that are NOT specific to a particular API-level can go here. -->
+        <item name="android:windowActionBar">false</item>
+        <item name="android:windowNoTitle">true</item>
+    </style>
+
+    <style name="NewAppTheme" parent="AppBaseTheme">
+        <!-- customize the color palette -->
+        <item name="android:windowTranslucentStatus" tools:targetApi="kitkat">true</item>
+    </style>
+
+    <style name="TabAppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    </style>
+
+    <style name="MyPopupAppTheme" parent="Theme.AppCompat.Light">
+        <item name="popupMenuStyle">@style/popupMenuStyle</item>
+    </style>
+
+    <style name="popupMenuStyle" parent="Widget.AppCompat.PopupMenu">
+        <item name="android:popupBackground">@android:color/white</item>
+    </style>
+
+    <style name="CustomDialog" parent="Theme.AppCompat.Light.Dialog">
+<!--        <item name="android:background">@color/color_236349</item>-->
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:screenSize">large</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+    </style>
+
+    <style name="CustomDialog2" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:background">@color/color_236349</item>
+        <item name="android:screenSize">normal</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+    </style>
+
+
+</resources>
