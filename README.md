@@ -5,12 +5,12 @@
 
 [Moonlight for Android](https://moonlight-stream.org) is an open source client for NVIDIA GameStream, as used by the NVIDIA Shield.
 
-Moonlight for Android will allow you to stream your full collection of games from your Windows PC to your Android device,
-whether in your own home or over the internet._
+_Moonlight for Android will allow you to stream your full collection of games from your Windows PC to your Android device,_
+whether in your own home or over the internet.**_**
 
-Moonlight also has a [PC client](https://github.com/moonlight-stream/moonlight-qt) and [iOS/tvOS client](https://github.com/moonlight-stream/moonlight-ios).
+Moonlight also has a [PC client](https://github.com/moonlight-stream/moonlight-qt) and [iOS/tvOS client](https://github.com/moonlight-stream/moonlight-ios)
 
-You can follow development on our [Discord server](https://moonlight-stream.org/discord) and help translate Moonlight into your language on [Weblate](https://hosted.weblate.org/projects/moonlight/moonlight-android/).
+You can follow development on our [Discord server](https://moonlight-stream.org/discord) and help translate Moonlight into your language on [Weblate](https://hosted.weblate.org/projects/moonlight/moonlight-android/).**_~~~~
 
 ## Downloads
 * [Google Play Store](https://play.google.com/store/apps/details?id=com.limelight)

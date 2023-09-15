@@ -73,7 +73,6 @@ public class LoginWithOTP extends AppCompatActivity implements View.OnClickListe
             public void onFailure(Call<SendOTPResponse> call, Throwable t) {
                 progressBar.setVisibility(View.GONE);
                 Toast.makeText(mContext, t.getMessage(), Toast.LENGTH_SHORT).show();
-
             }
         });
     }
