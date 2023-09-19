@@ -7,6 +7,7 @@ import com.antplay.models.GetVMResponse;
 import com.antplay.models.LoginRequestModal;
 import com.antplay.models.MessageResponse;
 import com.antplay.models.PaymentHistory_modal;
+import com.antplay.models.RefreshRequestModel;
 import com.antplay.models.ResetEmailReq;
 import com.antplay.models.ResultResponse;
 import com.antplay.models.SendOTPResponse;
@@ -42,6 +43,8 @@ public interface RetrofitAPI {
     Call<ResponseBody> getVMFromServer(@Header("Authorization") String token);
     @POST("login/")
     Call<ResponseBody> userLogin(@Body LoginRequestModal loginRequestModal);
+    @POST("login/refresh/")
+    Call<ResponseBody> userRefresh(@Body RefreshRequestModel refreshRequestModel);
     @POST("register/")
     Call<UserRegisterResp> userRegister(@Body UserRegisterRequest userRegisterRequest);
     @POST("request-reset-email/")

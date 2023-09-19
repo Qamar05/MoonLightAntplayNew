@@ -96,8 +96,6 @@ public class SubscriptionPlanActivity extends AppCompatActivity implements Subsc
             getPlanApi();
         else
             AppUtils.showInternetDialog(mContext);
-
-
     }
 
     private void getPlanApi() {

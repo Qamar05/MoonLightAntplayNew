@@ -31,7 +31,9 @@ import com.antplay.binding.crypto.AndroidCryptoProvider;
 import com.antplay.computers.ComputerManagerService;
 import com.antplay.grid.PcGridAdapter;
 import com.antplay.grid.assets.DiskAssetLoader;
+import com.antplay.models.LoginRequestModal;
 import com.antplay.models.MessageResponse;
+import com.antplay.models.RefreshRequestModel;
 import com.antplay.models.VMTimerReq;
 import com.antplay.nvstream.http.ComputerDetails;
 import com.antplay.nvstream.http.NvApp;
@@ -1382,7 +1384,22 @@ catch (Exception e){
                             }
                         } catch (Exception e) {
                         }
-                    } else if (response.code() == 404 || response.code() == 500 || response.code() == 400 || response.code() == 401) {
+                    }
+                    else if(response.code()==401){
+                        try {
+                            JSONObject jObj = new JSONObject(response.errorBody().string());
+                            String code  =  jObj.getString("code");
+                            if(code.equalsIgnoreCase("token_not_valid")){
+                                callRefreshAPi();
+                            }
+
+                        } catch (Exception e) {
+                            throw new RuntimeException(e);
+                        }
+
+
+                    }
+                    else if (response.code() == 404 || response.code() == 500 || response.code() == 400) {
                         openDialog(false, getResources().getString(R.string.searching_pc_first));
 
                        try {
@@ -1795,6 +1812,43 @@ catch (Exception e){
             btnStartVM.setText("Start");
         });
         paymentSuccessDialog.show();
+    }
+
+    private void callRefreshAPi() {
+        String refreshToken =  SharedPreferenceUtils.getString(PcView.this,Const.REFRESH_TOKEN);
+        RefreshRequestModel refreshRequestModel = new RefreshRequestModel(refreshToken);
+        Call<ResponseBody> call = retrofitAPI.userRefresh(refreshRequestModel);
+        call.enqueue(new Callback<>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if (response.code() == 200) {
+                    try {
+                        String responseValue = response.body().string();
+                        JSONObject jObj = new JSONObject(responseValue);
+                        String accessToken = jObj.getString("access");
+                        SharedPreferenceUtils.saveString(PcView.this, Const.ACCESS_TOKEN, accessToken);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                } else if (response.code() == Const.ERROR_CODE_400 ||
+                        response.code()==Const.ERROR_CODE_500||
+                        response.code()==Const.ERROR_CODE_404 ||
+                        response.code()==401) {
+                    try {
+                        JSONObject jObj = new JSONObject(response.errorBody().string());
+                        Toast.makeText(PcView.this, jObj.getString("detail"), Toast.LENGTH_SHORT).show();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    Toast.makeText(PcView.this, "Something went wrong, please try again later.", Toast.LENGTH_LONG).show();
+                }
+            }
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                Log.i("Error: ", "" + t.getMessage());
+            }
+        });
     }
 
 }

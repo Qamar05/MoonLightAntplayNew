@@ -75,11 +75,9 @@ public class ForgotPasswordActivity extends Activity {
                         }
                     }
                 }
-
                 @Override
                 public void onFailure(Call<ResultResponse> call, Throwable t) {
                     progressBar.setVisibility(View.GONE);
-                    Log.i("Error: ", "" + t.getMessage());
                 }
             });
         }

@@ -137,9 +137,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             String responseValue = response.body().string();
                             JSONObject jObj = new JSONObject(responseValue);
                             String accessToken = jObj.getJSONObject("data").getString("access");
+                            String refreshToken = jObj.getJSONObject("data").getString("refresh");
                             String loginEmail = jObj.getString("email");
                             SharedPreferenceUtils.saveUserLoggedIn(LoginActivity.this, Const.IS_LOGGED_IN, true);
                             SharedPreferenceUtils.saveString(LoginActivity.this, Const.ACCESS_TOKEN, accessToken);
+                            SharedPreferenceUtils.saveString(LoginActivity.this, Const.REFRESH_TOKEN, refreshToken);
                             SharedPreferenceUtils.saveString(LoginActivity.this, Const.LOGIN_EMAIL, loginEmail);
                             SharedPreferenceUtils.saveString(LoginActivity.this,Const.SHOW_OVERLAY,"false");
                             AppUtils.navigateScreen(LoginActivity.this, PcView.class);
@@ -185,6 +187,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             showPassword = false;
         }
     }
+
 
 
 }

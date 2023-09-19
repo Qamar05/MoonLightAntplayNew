@@ -295,7 +295,7 @@ public class AppView extends AppCompatActivity implements AdapterFragmentCallbac
         UiHelper.setLocale(this);
 
         setContentView(R.layout.activity_app_view);
-        Log.i("testtt" , "2");
+
 
         // Allow floating expanded PiP overlays while browsing apps
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
@@ -624,7 +624,6 @@ public class AppView extends AppCompatActivity implements AdapterFragmentCallbac
             public void onItemClick(AdapterView<?> arg0, View arg1, int pos,
                                     long id) {
                 AppObject app = (AppObject) appGridAdapter.getItem(pos);
-                Log.i("testtt" , "3");
 
                 // Only open the context menu if something is running, otherwise start it
                 if (lastRunningAppId != 0) {
