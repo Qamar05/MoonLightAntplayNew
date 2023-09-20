@@ -165,9 +165,9 @@ dependencies {
     implementation 'com.google.android.gms:play-services-auth-api-phone:18.0.1'
     implementation 'com.github.skydoves:powermenu:2.2.0'
     implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.0.0'
-    implementation 'com.google.firebase:firebase-bom:32.2.3'
+    implementation(platform("com.google.firebase:firebase-bom:32.3.1"))
 
-    implementation'com.google.firebase:firebase-crashlytics'
-    implementation 'com.google.firebase:firebase-analytics'
+    implementation("com.google.firebase:firebase-crashlytics")
+    implementation("com.google.firebase:firebase-analytics")
 
 }
