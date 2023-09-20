@@ -42,7 +42,6 @@ public class Const {
     public static String PHONE_NUMBER="phone_number";
     public static String STATE="state";
     public static String ADDRESS="address";
-
     public static String CITY="city";
     public static String PINCODE="pincode";
 

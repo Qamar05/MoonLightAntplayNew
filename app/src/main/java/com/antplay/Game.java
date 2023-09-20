@@ -228,8 +228,6 @@ public class Game extends Activity implements SurfaceHolder.Callback,
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        Log.i("testt12" , "test");
-
         UiHelper.setLocale(this);
 
         // We don't want a title bar

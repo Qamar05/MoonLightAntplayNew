@@ -1403,6 +1403,7 @@ catch (Exception e){
                         openDialog(false, getResources().getString(R.string.searching_pc_first));
 
                        try {
+                           text_PcName.setText("");
                            tvTimer.setText("00:00:00 hrs.");
                            searchPC = findViewById(R.id.searchPC);
                            searchPC.setText(getResources().getString(R.string.searching_pc_first));

@@ -16,7 +16,7 @@ public class SplashActivity extends Activity {
     private String TAG = "ANT_PLAY";
     boolean isNotFirstTime,isAlreadyLogin;
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void  onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
         isNotFirstTime=  SharedPreferenceUtils.getBoolean(SplashActivity.this,Const.IS_FIRST_TIME);
