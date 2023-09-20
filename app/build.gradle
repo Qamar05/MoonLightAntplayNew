@@ -1,4 +1,6 @@
 apply plugin: 'com.android.application'
+apply plugin:'com.google.firebase.crashlytics'
+apply plugin: 'com.google.gms.google-services'
 
 android {
     ndkVersion "23.2.8568313"
@@ -9,7 +11,7 @@ android {
     namespace 'com.antplay'
 
     defaultConfig {
-        minSdk 16
+        minSdk 21
         targetSdk 33
 
         versionName "11.0"
@@ -163,5 +165,9 @@ dependencies {
     implementation 'com.google.android.gms:play-services-auth-api-phone:18.0.1'
     implementation 'com.github.skydoves:powermenu:2.2.0'
     implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.0.0'
+    implementation 'com.google.firebase:firebase-bom:32.2.3'
+
+    implementation'com.google.firebase:firebase-crashlytics'
+    implementation 'com.google.firebase:firebase-analytics'
 
 }
