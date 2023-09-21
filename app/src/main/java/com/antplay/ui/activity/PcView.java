@@ -483,7 +483,7 @@ public class PcView extends AppCompatActivity implements AdapterFragmentCallback
                 }
             }
             else if(btnText.equalsIgnoreCase("connect")){
-
+                btnStartVM.setClickable(false);
                 doPair(myComputerDetails);
             }
         });
@@ -886,15 +886,19 @@ catch (Exception e){
 
                 final String toastMessage = message;
                 final boolean toastSuccess = success;
+
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
+
                         if (toastMessage != null) {
+                            btnStartVM.setClickable(true);
                             Toast.makeText(PcView.this, toastMessage, Toast.LENGTH_LONG).show();
                         }
                         if (toastSuccess) {
                             doAppList(computer, true, false);
                         } else {
+                            btnStartVM.setClickable(true);
                             startActivity(getIntent());
 //                            startComputerUpdates();
                         }

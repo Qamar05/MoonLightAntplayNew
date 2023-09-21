@@ -81,6 +81,7 @@
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -99,6 +100,13 @@
 
 
         </LinearLayout>
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -204,10 +212,6 @@
 
 
         </LinearLayout>
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -224,6 +228,7 @@
                     android:paddingBottom="@dimen/_10sdp">
 
                     <ImageView
+                        android:tint="@color/white"
                         android:layout_width="@dimen/_12sdp"
                         android:layout_height="@dimen/_12sdp"
                         android:layout_marginLeft="@dimen/_12sdp"
@@ -235,7 +240,7 @@
                         android:layout_marginLeft="@dimen/_5sdp"
                         android:text="@string/discord"
                         android:textAllCaps="true"
-                        android:textColor="@color/black"
+                        android:textColor="@color/white"
                         android:textSize="@dimen/_10sdp"
                         android:textStyle="bold" />
 
@@ -260,7 +265,7 @@
                     android:layout_height="0.5dp"
                     android:layout_marginLeft="@dimen/_10sdp"
                     android:layout_marginRight="@dimen/_10sdp"
-                    android:background="@color/black" />
+                    android:background="@color/white" />
 
                 <LinearLayout
                     android:id="@+id/linear_instagram"
@@ -272,6 +277,7 @@
                     android:paddingBottom="@dimen/_10sdp">
 
                     <ImageView
+                        android:tint="@color/white"
                         android:layout_width="@dimen/_12sdp"
                         android:layout_height="@dimen/_12sdp"
                         android:layout_marginLeft="@dimen/_12sdp"
@@ -283,7 +289,7 @@
                         android:layout_marginLeft="@dimen/_5sdp"
                         android:text="@string/instagram"
                         android:textAllCaps="true"
-                        android:textColor="@color/black"
+                        android:textColor="@color/white"
                         android:textSize="@dimen/_10sdp"
                         android:textStyle="bold" />
 
@@ -308,7 +314,7 @@
                     android:layout_height="1dp"
                     android:layout_marginLeft="@dimen/_10sdp"
                     android:layout_marginRight="@dimen/_10sdp"
-                    android:background="@color/black" />
+                    android:background="@color/white" />
 
                 <LinearLayout
                     android:id="@+id/linear_website"
@@ -320,6 +326,7 @@
                     android:paddingBottom="@dimen/_10sdp">
 
                     <ImageView
+                        android:tint="@color/white"
                         android:layout_width="@dimen/_12sdp"
                         android:layout_height="@dimen/_12sdp"
                         android:layout_marginLeft="@dimen/_12sdp"
@@ -331,7 +338,7 @@
                         android:layout_marginLeft="@dimen/_5sdp"
                         android:text="@string/website"
                         android:textAllCaps="true"
-                        android:textColor="@color/black"
+                        android:textColor="@color/white"
                         android:textSize="@dimen/_10sdp"
                         android:textStyle="bold" />
 
@@ -356,7 +363,7 @@
                     android:layout_height="1dp"
                     android:layout_marginLeft="@dimen/_10sdp"
                     android:layout_marginRight="@dimen/_10sdp"
-                    android:background="@color/black" />
+                    android:background="@color/white" />
 
                 <LinearLayout
                     android:id="@+id/linear_paymentHistory"
@@ -368,6 +375,7 @@
                     android:paddingBottom="@dimen/_10sdp">
 
                     <ImageView
+                        android:tint="@color/white"
                         android:layout_width="@dimen/_12sdp"
                         android:layout_height="@dimen/_12sdp"
                         android:layout_marginLeft="@dimen/_12sdp"
@@ -379,7 +387,7 @@
                         android:layout_marginLeft="@dimen/_5sdp"
                         android:text="@string/payment_history"
                         android:textAllCaps="true"
-                        android:textColor="@color/black"
+                        android:textColor="@color/white"
                         android:textSize="@dimen/_10sdp"
                         android:textStyle="bold" />
 
@@ -404,7 +412,7 @@
                     android:layout_height="1dp"
                     android:layout_marginLeft="@dimen/_10sdp"
                     android:layout_marginRight="@dimen/_10sdp"
-                    android:background="@color/black" />
+                    android:background="@color/white" />
 
                 <LinearLayout
                     android:id="@+id/linear_aboutUs"
@@ -416,6 +424,7 @@
                     android:paddingBottom="@dimen/_10sdp">
 
                     <ImageView
+                        android:tint="@color/white"
                         android:layout_width="@dimen/_12sdp"
                         android:layout_height="@dimen/_12sdp"
                         android:layout_marginLeft="@dimen/_12sdp"
@@ -427,7 +436,7 @@
                         android:layout_marginLeft="@dimen/_5sdp"
                         android:text="@string/contact"
                         android:textAllCaps="true"
-                        android:textColor="@color/black"
+                        android:textColor="@color/white"
                         android:textSize="@dimen/_10sdp"
                         android:textStyle="bold" />
 
@@ -452,7 +461,7 @@
                     android:layout_height="1dp"
                     android:layout_marginLeft="@dimen/_10sdp"
                     android:layout_marginRight="@dimen/_10sdp"
-                    android:background="@color/black" />
+                    android:background="@color/white" />
 
                 <LinearLayout
                     android:id="@+id/linear_changePassword"
@@ -464,6 +473,7 @@
                     android:paddingBottom="@dimen/_10sdp">
 
                     <ImageView
+                        android:tint="@color/white"
                         android:layout_width="@dimen/_12sdp"
                         android:layout_height="16dp"
                         android:layout_marginLeft="@dimen/_12sdp"
@@ -476,7 +486,7 @@
                         android:layout_marginLeft="@dimen/_5sdp"
                         android:text="@string/change_pass"
                         android:textAllCaps="true"
-                        android:textColor="@color/black"
+                        android:textColor="@color/white"
                         android:textSize="@dimen/_10sdp"
                         android:textStyle="bold" />
 
@@ -501,7 +511,7 @@
                     android:layout_height="1dp"
                     android:layout_marginLeft="@dimen/_10sdp"
                     android:layout_marginRight="@dimen/_10sdp"
-                    android:background="@color/black" />
+                    android:background="@color/white" />
 
                 <LinearLayout
                     android:id="@+id/linear_agreements"
@@ -513,6 +523,7 @@
                     android:paddingBottom="@dimen/_10sdp">
 
                     <ImageView
+                        android:tint="@color/white"
                         android:layout_width="@dimen/_12sdp"
                         android:layout_height="@dimen/_12sdp"
                         android:layout_marginLeft="@dimen/_12sdp"
@@ -524,7 +535,7 @@
                         android:layout_marginLeft="@dimen/_5sdp"
                         android:text="@string/user_agreement"
                         android:textAllCaps="true"
-                        android:textColor="@color/black"
+                        android:textColor="@color/white"
                         android:textSize="@dimen/_10sdp"
                         android:textStyle="bold" />
 
@@ -549,7 +560,7 @@
                     android:layout_height="1dp"
                     android:layout_marginLeft="@dimen/_10sdp"
                     android:layout_marginRight="@dimen/_10sdp"
-                    android:background="@color/black" />
+                    android:background="@color/white" />
                 <LinearLayout
                     android:id="@+id/linear_FAQ"
                     android:layout_width="match_parent"
@@ -560,6 +571,7 @@
                     android:paddingBottom="@dimen/_10sdp">
 
                     <ImageView
+                        android:tint="@color/white"
                         android:layout_width="@dimen/_12sdp"
                         android:layout_height="@dimen/_12sdp"
                         android:layout_marginLeft="@dimen/_12sdp"
@@ -571,7 +583,7 @@
                         android:layout_marginLeft="@dimen/_5sdp"
                         android:text="FAQ"
                         android:textAllCaps="true"
-                        android:textColor="@color/black"
+                        android:textColor="@color/white"
                         android:textSize="@dimen/_10sdp"
                         android:textStyle="bold" />
 
@@ -596,7 +608,7 @@
                     android:layout_height="1dp"
                     android:layout_marginLeft="@dimen/_10sdp"
                     android:layout_marginRight="@dimen/_10sdp"
-                    android:background="@color/black" />
+                    android:background="@color/white" />
 
 
                 <LinearLayout
@@ -609,6 +621,7 @@
                     android:paddingBottom="@dimen/_10sdp">
 
                     <ImageView
+                        android:tint="@color/white"
                         android:layout_width="@dimen/_12sdp"
                         android:layout_height="@dimen/_12sdp"
                         android:layout_marginLeft="@dimen/_12sdp"
@@ -620,7 +633,7 @@
                         android:layout_marginLeft="@dimen/_5sdp"
                         android:text="@string/privacy_policy"
                         android:textAllCaps="true"
-                        android:textColor="@color/black"
+                        android:textColor="@color/white"
                         android:textSize="@dimen/_10sdp"
                         android:textStyle="bold" />
 
@@ -645,7 +658,56 @@
                     android:layout_height="1dp"
                     android:layout_marginLeft="@dimen/_10sdp"
                     android:layout_marginRight="@dimen/_10sdp"
-                    android:background="@color/black" />
+                    android:background="@color/white" />
+
+                <LinearLayout
+                    android:id="@+id/lineardeleteUser"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingTop="@dimen/_8sdp"
+                    android:paddingBottom="@dimen/_8sdp">
+
+                    <ImageView
+                        android:layout_width="16dp"
+                        android:layout_height="24dp"
+                        android:layout_marginLeft="@dimen/_12sdp"
+                        android:src="@drawable/baseline_delete_outline_24"
+                        android:tint="@color/white" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/_5sdp"
+                        android:text="Delete Account"
+                        android:textAllCaps="true"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/_10sdp"
+                        android:textStyle="bold" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="right"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="@dimen/_12sdp"
+                            android:layout_marginLeft="@dimen/_12sdp"
+                            android:layout_marginRight="@dimen/_15sdp"
+                            android:src="@drawable/forward" />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginLeft="@dimen/_10sdp"
+                    android:layout_marginRight="@dimen/_10sdp"
+                    android:background="@color/white" />
 
                 <LinearLayout
                     android:id="@+id/logout_linear"
@@ -657,6 +719,7 @@
                     android:paddingBottom="@dimen/_10sdp">
 
                     <ImageView
+                        android:tint="@color/white"
                         android:layout_width="@dimen/_12sdp"
                         android:layout_height="@dimen/_12sdp"
                         android:layout_marginLeft="@dimen/_12sdp"
@@ -668,7 +731,7 @@
                         android:layout_marginLeft="@dimen/_5sdp"
                         android:text="@string/logout"
                         android:textAllCaps="true"
-                        android:textColor="@color/black"
+                        android:textColor="@color/white"
                         android:textSize="@dimen/_10sdp"
                         android:textStyle="bold" />
 
@@ -694,9 +757,10 @@
                     android:layout_marginLeft="@dimen/_10sdp"
                     android:layout_marginRight="@dimen/_10sdp"
                     android:layout_marginBottom="@dimen/_10sdp"
-                    android:background="@color/black" />
+                    android:background="@color/white" />
 
 
+            </LinearLayout>
             </LinearLayout>
         </ScrollView>
 

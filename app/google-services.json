@@ -7,9 +7,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:750899011162:android:bdddc92c8e2d4ec123c263",
+        "mobilesdk_app_id": "1:750899011162:android:bafdbfd5ec4a9d3f23c263",
         "android_client_info": {
-          "package_name": "com.antplay.debug"
+          "package_name": "com.antplay.app"
         }
       },
       "oauth_client": [
@@ -36,9 +36,9 @@
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:750899011162:android:9d4921f93ba1fc9c23c263",
+        "mobilesdk_app_id": "1:750899011162:android:d806873be1ce9fcc23c263",
         "android_client_info": {
-          "package_name": "com.antplay.release"
+          "package_name": "com.antplay.debug"
         }
       },
       "oauth_client": [

@@ -118,7 +118,7 @@ android {
             // is to please change the applicationId before you publish.
             //
             // TL;DR: Leave the following line alone!
-            applicationIdSuffix ".unofficial"
+            applicationIdSuffix ".app"
             resValue "string", "app_label", "AntPlay"
             resValue "string", "app_label_root", "AntPlay (Root)"
 

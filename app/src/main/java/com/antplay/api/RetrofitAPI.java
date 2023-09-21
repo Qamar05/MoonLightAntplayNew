@@ -75,6 +75,8 @@ public interface RetrofitAPI {
     Call<MessageResponse> stopVM(@Header("Authorization") String token ,@Body VMTimerReq vmTimerReq);
     @GET("getvmip")
     Call<ResponseBody> getVMIP(@Header("Authorization") String token);
+    @POST("deleteuser/")
+    Call<ResponseBody> deleteUser(@Header("Authorization") String Token);
 }
 
 

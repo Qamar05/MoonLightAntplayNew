@@ -33,6 +33,7 @@ import com.antplay.utils.DateFormatterHelper;
 import com.antplay.utils.SharedPreferenceUtils;
 
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -40,14 +41,16 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+//{"success":true,"message":"User deleted successfully"}
 public class ProfileActivity extends AppCompatActivity implements View.OnClickListener {
 
     LinearLayout backLinear, logoutLinear, linear_Change, linearAgree, linearWebsite, linearAbout,
-            linearPayment, linearEdit, linearDiscord, linearInstagram, linearPrivacyPolicy,linear_FAQ;
+            linearPayment, linearEdit, linearDiscord, linearInstagram, linearPrivacyPolicy,linear_FAQ,lineardeleteUser;
 
     TextView  tv_manageSubs, txtUserID,txtExpiryDate,txtCurrentPlan;
     String strEmailId,access_token;
@@ -85,6 +88,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         txtUserID = (TextView) findViewById(R.id.txtUserEmailID);
         txtExpiryDate = (TextView) findViewById(R.id.txtExpiryDate);
         linearPrivacyPolicy = (LinearLayout) findViewById(R.id.linear_privacyPolicy);
+        lineardeleteUser = (LinearLayout) findViewById(R.id.lineardeleteUser);
         loadingProgressBar =  findViewById(R.id.loadingProgressBar);
         linear_FAQ =  findViewById(R.id.linear_FAQ);
 
@@ -101,6 +105,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         linearAbout.setOnClickListener(this);
         linearPayment.setOnClickListener(this);
         linearEdit.setOnClickListener(this);
+        lineardeleteUser.setOnClickListener(this);
 
         if(AppUtils.isOnline(mContext)) {
             getUserDetails();
@@ -267,6 +272,8 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
             case R.id.linear_FAQ:
                 Intent faqIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(Const.FAQ_URL));
                 startActivity(faqIntent);
+            case R.id.lineardeleteUser:
+                deleteAccountDialog();
                 break;
         }
     }
@@ -393,5 +400,57 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
             e.printStackTrace();
         }
     }
+    private void deleteUser() {
+        loadingProgressBar.setVisibility(View.VISIBLE);
+        Call<ResponseBody> call = retrofitAPI.deleteUser("Bearer " + access_token);
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                loadingProgressBar.setVisibility(View.GONE);
+                if (response.code() == 200) {
+                    AppUtils.navigateScreen((Activity) mContext,LoginActivity.class);
+                    finishAffinity();
+                } else if (response.code() == 404 || response.code() == 500 || response.code() == 400) {
+//                    try {
+//                        JSONObject jObj = new JSONObject(response.errorBody().string());
+//                        Toast.makeText(ProfileActivity.this, jObj.getString("detail"), Toast.LENGTH_SHORT).show();
+//                    } catch (Exception e) {
+//                        e.printStackTrace();
+//                    }
+                }
 
-}
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                AppUtils.showToast(Const.something_went_wrong, mContext);
+            }
+        });
+    }
+
+    private void deleteAccountDialog() {
+            Dialog dialog = new Dialog(mContext);
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            dialog.setContentView(R.layout.dialog_logout);
+            dialog.setCancelable(false);
+            dialog.setCanceledOnTouchOutside(false);
+            dialog.getWindow().setLayout(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
+            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            TextView titleText = dialog.findViewById(R.id.titleText);
+            TextView msgText = dialog.findViewById(R.id.msgText);
+            Button txtNo = dialog.findViewById(R.id.txtNo);
+            Button txtYes = dialog.findViewById(R.id.txtYes);
+            titleText.setText(getResources().getString(R.string.delete_txt));
+            msgText.setText(getResources().getString(R.string.delete_msg));
+            txtYes.setText("Continue");
+            txtNo.setText("Cancel ");
+            txtYes.setOnClickListener(view -> {
+                dialog.dismiss();
+                deleteUser();
+            });
+            txtNo.setOnClickListener(view -> {
+                dialog.dismiss();
+            });
+            dialog.show();
+        }
+    }
