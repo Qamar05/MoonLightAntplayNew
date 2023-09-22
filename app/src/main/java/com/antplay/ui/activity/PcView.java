@@ -1181,7 +1181,6 @@ catch (Exception e){
         text_PcName.setText("" + details.name);
         if(status!=null) {
             if (status.equalsIgnoreCase("running")) {
-                SharedPreferenceUtils.saveBoolean(PcView.this, Const.IS_VM_DISCONNECTED, true);
                 if (!btnShutDownStatus)
                     btnStartVM.setVisibility(View.VISIBLE);
                 else

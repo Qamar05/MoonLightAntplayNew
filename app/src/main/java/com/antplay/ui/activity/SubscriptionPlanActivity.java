@@ -48,19 +48,15 @@ public class SubscriptionPlanActivity extends AppCompatActivity implements Subsc
     List<BillingDataList> planList;
     ProgressBar progressSubscriptionPlan;
     ImageView imgBack;
-
     TextView backText;
-
     TextView tvNoDataFound;
     String accessToken;
     SubscriptionPlanAdapter.ButtonClickListener buttonClickListener;
     RetrofitAPI retrofitAPI;
     Context mContext;
     LinearLayout back_linear;
+    boolean isFirstTimePayment;
 
-    boolean paymentStatus =  false;
-
-    boolean isSUBScriptionScreen;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,6 +66,7 @@ public class SubscriptionPlanActivity extends AppCompatActivity implements Subsc
         rvSubscriptionPlans = findViewById(R.id.rvSubscriptionPlans);
         retrofitAPI = APIClient.getRetrofitInstance().create(RetrofitAPI.class);
         accessToken = SharedPreferenceUtils.getString(SubscriptionPlanActivity.this, Const.ACCESS_TOKEN);
+        isFirstTimePayment =  SharedPreferenceUtils.getBoolean(mContext , Const.FIRST_TIME_PAYMENT);
         progressSubscriptionPlan = findViewById(R.id.progressSubscriptionPlan);
         tvNoDataFound = findViewById(R.id.tvNoDataFound);
         imgBack = findViewById(R.id.imgBack);
@@ -87,8 +84,12 @@ public class SubscriptionPlanActivity extends AppCompatActivity implements Subsc
         swipeLayout.setColorSchemeColors(getResources().getColor(R.color.teal_700));
         imgBack.setOnClickListener(v -> finish());
         back_linear.setOnClickListener(view -> {
-            AppUtils.navigateScreen((Activity) mContext,PcView.class);
-            finishAffinity();
+            if(isFirstTimePayment) {
+                AppUtils.navigateScreen((Activity) mContext, PcView.class);
+                finishAffinity();
+            }
+            else
+                finish();
         });
 
         buttonClickListener = this;
@@ -162,8 +163,12 @@ public class SubscriptionPlanActivity extends AppCompatActivity implements Subsc
 
     @Override
     public void onBackPressed() {
-        AppUtils.navigateScreen((Activity) mContext,PcView.class);
-        finishAffinity();
+        if(isFirstTimePayment) {
+            AppUtils.navigateScreen((Activity) mContext, PcView.class);
+            finishAffinity();
+        }
+        else
+            finish();
     }
 
 

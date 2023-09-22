@@ -73,6 +73,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         access_token = SharedPreferenceUtils.getString(mContext, Const.ACCESS_TOKEN);
 
 
+
         backLinear = (LinearLayout) findViewById(R.id.back_linear);
         txtCurrentPlan =  findViewById(R.id.txtCurrentPlan);
         logoutLinear = (LinearLayout) findViewById(R.id.logout_linear);

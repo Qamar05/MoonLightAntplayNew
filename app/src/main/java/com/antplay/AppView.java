@@ -18,8 +18,10 @@ import com.antplay.ui.fragments.AdapterFragment;
 import com.antplay.ui.intrface.AdapterFragmentCallbacks;
 import com.antplay.utils.AppUtils;
 import com.antplay.utils.CacheHelper;
+import com.antplay.utils.Const;
 import com.antplay.utils.MyDialog;
 import com.antplay.utils.ServerHelper;
+import com.antplay.utils.SharedPreferenceUtils;
 import com.antplay.utils.ShortcutHelper;
 import com.antplay.utils.SpinnerDialog;
 import com.antplay.utils.UiHelper;
@@ -290,6 +292,7 @@ public class AppView extends AppCompatActivity implements AdapterFragmentCallbac
         // between binding to CMS and onResume()
         inForeground = true;
 
+        SharedPreferenceUtils.saveBoolean(AppView.this, Const.IS_VM_DISCONNECTED, true);
         shortcutHelper = new ShortcutHelper(this);
 
         UiHelper.setLocale(this);

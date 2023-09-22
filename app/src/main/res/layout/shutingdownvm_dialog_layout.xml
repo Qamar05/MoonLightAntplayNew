@@ -66,7 +66,7 @@
         android:lineSpacingExtra="3sp"
         android:text="@string/are_you_sure"
         android:textColor="@color/white"
-        android:textSize="18sp" />
+        android:textSize="14sp" />
 
     <Button
         android:visibility="gone"
