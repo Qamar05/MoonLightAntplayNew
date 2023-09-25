@@ -4,18 +4,19 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class RefreshRequestModel {
-    @SerializedName("access")
+    @SerializedName("refresh")
     @Expose
-    private String access;
+    private String refresh;
 
-    public RefreshRequestModel(String access) {
-        this.access = access;
+    public RefreshRequestModel(String refresh) {
+        this.refresh = refresh;
     }
 
-    public String getAccess() {
-        return access;
+    public String getRefresh() {
+        return refresh;
     }
-    public void setAccess(String access) {
-        this.access = access;
+
+    public void setRefresh(String refresh) {
+        this.refresh = refresh;
     }
 }

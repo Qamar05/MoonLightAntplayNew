@@ -3,14 +3,13 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/layout_dialog"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_width="@dimen/_250sdp"
+    android:layout_height="@dimen/_110sdp"
     android:background="@drawable/inset_dialog"
     android:layout_gravity="center"
     android:paddingLeft="@dimen/_10sdp"
     android:paddingBottom="@dimen/_10sdp"
     android:paddingRight="@dimen/_10sdp"
-    android:layout_margin="@dimen/_30sdp"
     android:orientation="vertical">
 
 

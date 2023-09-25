@@ -197,7 +197,7 @@
                             android:layout_width="@dimen/_12sdp"
                             android:layout_height="@dimen/_12sdp"
                             android:layout_marginLeft="@dimen/_10sdp"
-                            android:src="@drawable/setting" />
+                            android:src="@drawable/ic_setting" />
 
                         <TextView
                             android:id="@+id/tv_manageSubscription"

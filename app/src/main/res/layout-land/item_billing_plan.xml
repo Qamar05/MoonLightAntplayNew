@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="@dimen/_5sdp">
+    android:layout_marginTop="@dimen/_5sdp"
+    android:layout_marginRight="@dimen/_5sdp">
 
 
     <RelativeLayout
@@ -34,11 +36,11 @@
             android:textSize="15sp" />
 
         <TextView
-            android:layout_marginTop="3dp"
             android:id="@+id/txtValidity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/txtPlaneName"
+            android:layout_marginTop="3dp"
             android:fontFamily="sans-serif"
             android:text="1 Day"
             android:textColor="@color/white"
@@ -70,7 +72,8 @@
             android:layout_width="15dp"
             android:layout_height="15dp"
             android:layout_below="@id/viewSeparator"
-            android:layout_marginTop="12dp"            android:src="@drawable/arrow" />
+            android:layout_marginTop="12dp"
+            android:src="@drawable/arrow" />
 
         <TextView
             android:id="@+id/tv_gpu"
@@ -177,9 +180,7 @@
             android:layout_width="match_parent"
             android:layout_height="45dp"
             android:layout_below="@id/imgSpacLine5"
-            android:layout_marginStart="10dp"
             android:layout_marginTop="20dp"
-            android:layout_marginEnd="10dp"
             android:layout_marginBottom="10dp"
             android:background="@drawable/payment_button_bg"
             android:gravity="center"

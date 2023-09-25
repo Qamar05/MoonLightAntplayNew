@@ -29,7 +29,7 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_150sdp"
+                android:layout_height="@dimen/_170sdp"
                 android:background="@drawable/videobackground"
                 android:orientation="vertical">
 
@@ -135,38 +135,36 @@
                             android:visibility="visible" />
 
                         <LinearLayout
+                            android:gravity="right"
                             android:layout_marginRight="@dimen/_10sdp"
                             android:layout_width="match_parent"
-                            android:weightSum="2"
                             android:layout_height="wrap_content">
 
                         <Button
                             android:id="@+id/btnStartVM"
-                            android:layout_width="0dp"
+                            android:layout_width="@dimen/_80sdp"
                             android:layout_height="@dimen/_22sdp"
-                            android:layout_weight="1"
-                            android:layout_marginStart="5dp"
-                            android:layout_marginEnd="5dp"
+                            android:layout_marginEnd="@dimen/_1sdp"
                             android:background="@drawable/btngradient_white"
                             android:text="@string/start_vm"
                             android:textAllCaps="false"
                             android:textColor="@color/black"
                             android:textSize="@dimen/_9sdp"
-                            android:visibility="invisible" />
+                            android:visibility="invisible"
+                          />
 
-                        <Button
+                            <Button
+                            android:visibility="invisible"
                             android:id="@+id/btnShutDownVM"
-                            android:layout_width="0dp"
+                            android:layout_width="@dimen/_80sdp"
                             android:layout_height="@dimen/_22sdp"
                             android:background="@drawable/btngradient_white"
                             android:text="@string/stop_vm"
                             android:layout_marginStart="5dp"
                             android:layout_marginEnd="5dp"
-                            android:layout_weight="1"
                             android:textAllCaps="false"
                             android:textColor="@color/black"
-                            android:textSize="@dimen/_9sdp"
-                            android:visibility="invisible" />
+                            android:textSize="@dimen/_9sdp" />
 
                         <TextView
                             android:layout_width="wrap_content"

@@ -19,7 +19,6 @@
             android:background="@color/transparent_green" />
 
         <androidx.cardview.widget.CardView
-
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/profileButton"
@@ -29,7 +28,7 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_150sdp"
+                android:layout_height="@dimen/_200sdp"
                 android:background="@drawable/videobackground"
                 android:orientation="vertical">
 
@@ -123,7 +122,6 @@
                         android:orientation="horizontal">
 
                         <TextView
-                            android:textSize="@dimen/_12sdp"
                             android:id="@+id/text_PcName"
                             android:layout_width="@dimen/_80sdp"
                             android:layout_height="wrap_content"
@@ -134,49 +132,46 @@
                             android:visibility="visible" />
 
                         <LinearLayout
+                            android:gravity="right"
                             android:layout_marginRight="@dimen/_10sdp"
                             android:layout_width="match_parent"
-                            android:weightSum="2"
                             android:layout_height="wrap_content">
 
-                        <Button
-                            android:textSize="@dimen/_12sdp"
-                            android:id="@+id/btnStartVM"
-                            android:layout_width="0dp"
-                            android:layout_height="@dimen/_28sdp"
-                            android:layout_weight="1"
-                            android:layout_marginStart="5dp"
-                            android:layout_marginEnd="5dp"
-                            android:background="@drawable/btngradient_white"
-                            android:text="@string/start_vm"
-                            android:textAllCaps="false"
-                            android:textColor="@color/black"
-                            android:visibility="invisible" />
+                            <Button
+                                android:id="@+id/btnStartVM"
+                                android:layout_width="@dimen/_120sdp"
+                                android:layout_height="@dimen/_32sdp"
+                                android:layout_marginEnd="@dimen/_1sdp"
+                                android:background="@drawable/btngradient_white_landscape"
+                                android:text="@string/start_vm"
+                                android:textAllCaps="false"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/_14sdp"/>
 
-                        <Button
-                            android:id="@+id/btnShutDownVM"
-                            android:layout_width="0dp"
-                            android:layout_height="@dimen/_28sdp"
-                            android:background="@drawable/btngradient_white"
-                            android:text="@string/stop_vm"
-                            android:layout_marginStart="5dp"
-                            android:layout_marginEnd="5dp"
-                            android:layout_weight="1"
-                            android:textAllCaps="false"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/_12sdp"
-                            android:visibility="invisible" />
+                            <Button
+                                android:id="@+id/btnShutDownVM"
+                                android:layout_width="@dimen/_120sdp"
+                                android:layout_height="@dimen/_32sdp"
+                                android:background="@drawable/btngradient_white_landscape"
+                                android:text="@string/stop_vm"
+                                android:layout_marginStart="5dp"
+                                android:layout_marginEnd="5dp"
+                                android:textAllCaps="false"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/_14sdp" />
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:layout_marginLeft="@dimen/_5sdp"
-                            android:text=""
-                            android:textColor="@color/gray"
-                            android:textSize="@dimen/_10sdp"
-                            android:visibility="gone" />
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_marginLeft="@dimen/_5sdp"
+                                android:text=""
+                                android:textColor="@color/gray"
+                                android:textSize="@dimen/_10sdp"
+                                android:visibility="gone" />
                         </LinearLayout>
                     </LinearLayout>
+
+
 
 
                 </LinearLayout>

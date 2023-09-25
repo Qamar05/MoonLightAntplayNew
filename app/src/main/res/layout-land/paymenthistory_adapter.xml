@@ -128,7 +128,6 @@
                 android:layout_marginRight="@dimen/_5sdp"
                 android:background="@color/gray" />
 
-
             <LinearLayout
                 android:id="@+id/linearLayout_payment_adapter"
                 android:layout_width="match_parent"
@@ -142,7 +141,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/_10sdp"
                     android:orientation="horizontal"
-                    android:weightSum="2">
+                    android:weightSum="4">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -193,15 +192,6 @@
                             android:textColor="@color/white" />
                     </LinearLayout>
 
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/_10sdp"
-                    android:orientation="horizontal"
-                    android:weightSum="2">
-
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -250,12 +240,11 @@
                             android:textColor="@color/white" />
                     </LinearLayout>
 
-
                 </LinearLayout>
 
 
-            </LinearLayout>
 
+            </LinearLayout>
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>

@@ -64,7 +64,7 @@ public class StreamSettings extends Activity {
 
         setContentView(R.layout.activity_stream_settings);
         UiHelper.notifyNewRootView(this);
-//        findViewById(R.id.back_linear_payment).setOnClickListener(view -> onBackPressed());
+        findViewById(R.id.back_linear_payment).setOnClickListener(view -> onBackPressed());
 
     }
 

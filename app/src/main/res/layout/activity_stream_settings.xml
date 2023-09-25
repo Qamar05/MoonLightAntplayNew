@@ -13,37 +13,31 @@
         android:background="@color/transparent_green"/>
 
 
-<!--    <LinearLayout-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="match_parent"-->
-<!--        android:orientation="vertical">-->
+    <LinearLayout
+        android:id="@+id/back_linear_payment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:orientation="horizontal">
 
+        <ImageView
+            android:layout_width="@dimen/_10sdp"
+            android:layout_height="@dimen/_10sdp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:src="@drawable/backarrow" />
 
-<!--    <LinearLayout-->
-<!--        android:id="@+id/back_linear_payment"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginTop="@dimen/_10sdp"-->
-<!--        android:orientation="horizontal">-->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:fontFamily="sans-serif"
+            android:text="@string/back"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_12sdp"
+            android:textStyle="normal" />
 
-<!--        <ImageView-->
-<!--            android:layout_width="@dimen/_10sdp"-->
-<!--            android:layout_height="@dimen/_10sdp"-->
-<!--            android:layout_gravity="center"-->
-<!--            android:layout_marginLeft="@dimen/_10sdp"-->
-<!--            android:src="@drawable/backarrow" />-->
-
-<!--        <TextView-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginLeft="5dp"-->
-<!--            android:fontFamily="sans-serif"-->
-<!--            android:text="@string/back"-->
-<!--            android:textColor="@color/white"-->
-<!--            android:textSize="@dimen/_12sdp"-->
-<!--            android:textStyle="normal" />-->
-
-<!--    </LinearLayout>-->
+    </LinearLayout>
 
 <!--    <LinearLayout-->
 <!--        android:visibility="gone"-->

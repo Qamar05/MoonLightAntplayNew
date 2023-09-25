@@ -16,7 +16,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginRight="@dimen/_20sdp"
         android:layout_marginLeft="@dimen/_20sdp"
-        android:layout_marginTop="@dimen/_30sdp"
+        android:layout_marginTop="@dimen/_20sdp"
         android:background="@drawable/logo"
         android:layout_width="@dimen/_120sdp"
         android:layout_height="@dimen/_50sdp"/>
@@ -32,14 +32,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_above="@+id/linearBottom"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
+
             android:orientation="vertical">
 
             <EditText
+                android:layout_marginLeft="@dimen/landscape_marginLeft"
+                android:layout_marginRight="@dimen/landscape_marginRight"
                 android:id="@+id/et_email"
                 android:layout_width="match_parent"
-                android:layout_height="52dp"
+                android:layout_height="46dp"
                 android:layout_centerInParent="true"
                 android:layout_marginTop="1dp"
                 android:background="@drawable/white_border_bg"
@@ -51,10 +52,12 @@
 
 
             <LinearLayout
+                android:layout_marginLeft="@dimen/landscape_marginLeft"
+                android:layout_marginRight="@dimen/landscape_marginRight"
                 android:orientation="horizontal"
                 android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
-                android:layout_height="52dp"
+                android:layout_height="46dp"
                 android:background="@drawable/white_border_bg">
 
 
@@ -92,13 +95,13 @@
         </LinearLayout>
 
         <LinearLayout
+            android:layout_marginLeft="@dimen/landscape_marginLeft"
+            android:layout_marginRight="@dimen/landscape_marginRight"
             android:id="@+id/linearBottom"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:layout_marginStart="20dp"
             android:layout_marginTop="20dp"
-            android:layout_marginEnd="20dp"
             android:layout_marginBottom="20dp"
             android:orientation="vertical">
 
