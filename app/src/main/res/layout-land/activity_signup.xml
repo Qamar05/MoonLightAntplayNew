@@ -30,6 +30,7 @@
             android:layout_height="@dimen/_50sdp"/>
         <ScrollView
             android:layout_marginTop="@dimen/_50sdp"
+            android:layout_marginBottom="@dimen/_10sdp"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -333,37 +334,39 @@
             app:layout_constraintTop_toBottomOf="@+id/edtAddress"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/chkBoxUserAgreement" />
+            <Button
+                app:layout_constraintTop_toBottomOf="@+id/chkBoxUserAgreement"
+                android:layout_marginLeft="@dimen/landscape_marginLeft"
+                android:layout_marginRight="@dimen/landscape_marginRight"
+                android:id="@+id/btnSignUp"
+                android:layout_width="match_parent"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:layout_height="@dimen/_34sdp"
+                android:layout_marginBottom="@dimen/_4sdp"
+                android:background="@drawable/btngradient"
+                android:fontFamily="sans-serif"
+                android:text="@string/signup"
+                android:textColor="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                app:layout_constraintTop_toBottomOf="@+id/btnSignUp"
+                android:layout_marginTop="@dimen/_6sdp"
+                android:id="@+id/txtAlreadyRegister"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_marginBottom="@dimen/_20sdp"
+                android:fontFamily="sans-serif"
+                android:text="@string/alreadyRegister"
+                android:textColor="@color/textColor"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>
 
-        <Button
-            android:layout_marginLeft="@dimen/landscape_marginLeft"
-            android:layout_marginRight="@dimen/landscape_marginRight"
-            android:id="@+id/btnSignUp"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_34sdp"
-            android:layout_marginBottom="@dimen/_4sdp"
-            android:background="@drawable/btngradient"
-            android:fontFamily="sans-serif"
-            android:text="@string/signup"
-            android:textColor="@color/white"
-            app:layout_constraintBottom_toTopOf="@+id/txtAlreadyRegister"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-
-        <TextView
-            android:id="@+id/txtAlreadyRegister"
-            android:layout_width="wrap_content"
-            android:layout_height="20dp"
-            android:layout_marginBottom="@dimen/_8sdp"
-            android:fontFamily="sans-serif"
-            android:text="@string/alreadyRegister"
-            android:textColor="@color/textColor"
-            android:textSize="12sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
 
         <ProgressBar
             android:id="@+id/progressSignUp"

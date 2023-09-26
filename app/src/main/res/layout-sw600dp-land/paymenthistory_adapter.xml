@@ -50,7 +50,6 @@
                     android:paddingLeft="@dimen/_5sdp">
 
                     <TextView
-                        android:textSize="@dimen/_12sdp"
                         android:id="@+id/plan_Name"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -60,7 +59,6 @@
                         android:textStyle="bold" />
 
                     <TextView
-                        android:textSize="@dimen/_11sdp"
                         android:id="@+id/trans_date"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -94,7 +92,6 @@
                             app:tint="@color/white" />
 
                         <TextView
-                            android:textSize="@dimen/_11sdp"
                             android:id="@+id/tv_amount_up"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
@@ -154,7 +151,6 @@
                         android:orientation="vertical">
 
                         <TextView
-                            android:textSize="@dimen/_11sdp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="sans-serif"
@@ -163,7 +159,6 @@
                             android:textStyle="bold" />
 
                         <TextView
-                            android:textSize="@dimen/_10sdp"
                             android:id="@+id/transactionId"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -181,7 +176,6 @@
                         android:orientation="vertical">
 
                         <TextView
-                            android:textSize="@dimen/_11sdp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="sans-serif"
@@ -190,7 +184,6 @@
                             android:textStyle="bold" />
 
                         <TextView
-                            android:textSize="@dimen/_10sdp"
                             android:id="@+id/planName"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -207,7 +200,6 @@
                         android:orientation="vertical">
 
                         <TextView
-                            android:textSize="@dimen/_11sdp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="sans-serif"
@@ -216,7 +208,6 @@
                             android:textStyle="bold" />
 
                         <TextView
-                            android:textSize="@dimen/_10sdp"
                             android:id="@+id/status"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -233,7 +224,6 @@
                         android:orientation="vertical">
 
                         <TextView
-                            android:textSize="@dimen/_11sdp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="sans-serif"
@@ -242,7 +232,6 @@
                             android:textStyle="bold" />
 
                         <TextView
-                            android:textSize="@dimen/_10sdp"
                             android:id="@+id/amount"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"

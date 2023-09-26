@@ -124,8 +124,8 @@
                     <TextView
                         app:layout_constraintLeft_toLeftOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        android:paddingTop="@dimen/_5sdp"
-                        android:paddingBottom="@dimen/_5sdp"
+                        android:paddingTop="@dimen/_6sdp"
+                        android:paddingBottom="@dimen/_6sdp"
                         android:paddingLeft="@dimen/_10sdp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -137,8 +137,8 @@
                     <TextView
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintRight_toRightOf="parent"
-                        android:paddingTop="@dimen/_5sdp"
-                        android:paddingBottom="@dimen/_5sdp"
+                        android:paddingTop="@dimen/_6sdp"
+                        android:paddingBottom="@dimen/_6sdp"
                         android:paddingRight="@dimen/_10sdp"
                         android:id="@+id/txtCurrentPlan"
                         android:layout_width="wrap_content"
@@ -161,8 +161,8 @@
                     <TextView
                         app:layout_constraintLeft_toLeftOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        android:paddingTop="@dimen/_5sdp"
-                        android:paddingBottom="@dimen/_5sdp"
+                        android:paddingTop="@dimen/_6sdp"
+                        android:paddingBottom="@dimen/_6sdp"
                         android:paddingLeft="@dimen/_10sdp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -174,8 +174,8 @@
                     <TextView
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintRight_toRightOf="parent"
-                        android:paddingTop="@dimen/_5sdp"
-                        android:paddingBottom="@dimen/_5sdp"
+                        android:paddingTop="@dimen/_6sdp"
+                        android:paddingBottom="@dimen/_6sdp"
                         android:paddingRight="@dimen/_10sdp"
                         android:id="@+id/txtExpiryDate"
                         android:layout_width="wrap_content"
@@ -217,8 +217,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif"
-                    android:paddingTop="@dimen/_3sdp"
-                    android:paddingBottom="@dimen/_3sdp"
+                    android:paddingTop="@dimen/_6sdp"
+                    android:paddingBottom="@dimen/_6sdp"
                     android:paddingLeft="@dimen/_6sdp"
                     android:gravity="center_vertical"
                     android:text="@string/manage_subscription"
@@ -240,7 +240,6 @@
                         android:layout_weight="1"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content">
-
                         <LinearLayout
                             android:id="@+id/linear_discord"
                             android:layout_width="match_parent"
@@ -252,8 +251,8 @@
 
                             <ImageView
                                 android:tint="@color/white"
-                                android:layout_width="@dimen/_8sdp"
-                                android:layout_height="@dimen/_8sdp"
+                                android:layout_width="@dimen/_12sdp"
+                                android:layout_height="@dimen/_12sdp"
                                 android:layout_marginLeft="@dimen/_12sdp"
                                 android:src="@drawable/discord" />
 
@@ -275,21 +274,19 @@
 
                                 <ImageView
                                     android:layout_width="wrap_content"
-                                    android:layout_height="@dimen/_8sdp"
+                                    android:layout_height="@dimen/_12sdp"
                                     android:layout_marginLeft="@dimen/_12sdp"
                                     android:layout_marginRight="@dimen/_15sdp"
                                     android:src="@drawable/forward" />
                             </LinearLayout>
 
                         </LinearLayout>
-
                         <View
                             android:layout_width="match_parent"
                             android:layout_height="1dp"
                             android:layout_marginLeft="@dimen/_10sdp"
                             android:layout_marginRight="@dimen/_10sdp"
                             android:background="@color/white" />
-
                         <LinearLayout
                             android:id="@+id/linear_website"
                             android:layout_width="match_parent"
@@ -301,9 +298,8 @@
 
                             <ImageView
                                 android:tint="@color/white"
-
-                                android:layout_width="@dimen/_8sdp"
-                                android:layout_height="@dimen/_8sdp"
+                                android:layout_width="@dimen/_12sdp"
+                                android:layout_height="@dimen/_12sdp"
                                 android:layout_marginLeft="@dimen/_12sdp"
                                 android:src="@drawable/website" />
 
@@ -325,22 +321,19 @@
 
                                 <ImageView
                                     android:layout_width="wrap_content"
-                                    android:layout_height="@dimen/_8sdp"
+                                    android:layout_height="@dimen/_12sdp"
                                     android:layout_marginLeft="@dimen/_12sdp"
                                     android:layout_marginRight="@dimen/_15sdp"
                                     android:src="@drawable/forward" />
                             </LinearLayout>
 
                         </LinearLayout>
-
                         <View
                             android:layout_width="match_parent"
                             android:layout_height="1dp"
                             android:layout_marginLeft="@dimen/_10sdp"
                             android:layout_marginRight="@dimen/_10sdp"
                             android:background="@color/white" />
-
-
                         <LinearLayout
                             android:id="@+id/linear_aboutUs"
                             android:layout_width="match_parent"
@@ -352,8 +345,8 @@
 
                             <ImageView
                                 android:tint="@color/white"
-                                android:layout_width="@dimen/_8sdp"
-                                android:layout_height="@dimen/_8sdp"
+                                android:layout_width="@dimen/_12sdp"
+                                android:layout_height="@dimen/_12sdp"
                                 android:layout_marginLeft="@dimen/_12sdp"
                                 android:src="@drawable/ic_contact_us" />
 
@@ -375,22 +368,19 @@
 
                                 <ImageView
                                     android:layout_width="wrap_content"
-                                    android:layout_height="@dimen/_8sdp"
+                                    android:layout_height="@dimen/_12sdp"
                                     android:layout_marginLeft="@dimen/_12sdp"
                                     android:layout_marginRight="@dimen/_15sdp"
                                     android:src="@drawable/forward" />
                             </LinearLayout>
 
                         </LinearLayout>
-
                         <View
                             android:layout_width="match_parent"
                             android:layout_height="1dp"
                             android:layout_marginLeft="@dimen/_10sdp"
                             android:layout_marginRight="@dimen/_10sdp"
                             android:background="@color/white" />
-
-
                         <LinearLayout
                             android:id="@+id/linear_agreements"
                             android:layout_width="match_parent"
@@ -402,9 +392,8 @@
 
                             <ImageView
                                 android:tint="@color/white"
-
-                                android:layout_width="@dimen/_8sdp"
-                                android:layout_height="@dimen/_8sdp"
+                                android:layout_width="@dimen/_12sdp"
+                                android:layout_height="@dimen/_12sdp"
                                 android:layout_marginLeft="@dimen/_12sdp"
                                 android:src="@drawable/user_agreement" />
 
@@ -426,23 +415,19 @@
 
                                 <ImageView
                                     android:layout_width="wrap_content"
-                                    android:layout_height="@dimen/_8sdp"
+                                    android:layout_height="@dimen/_12sdp"
                                     android:layout_marginLeft="@dimen/_12sdp"
                                     android:layout_marginRight="@dimen/_15sdp"
                                     android:src="@drawable/forward" />
                             </LinearLayout>
 
                         </LinearLayout>
-
                         <View
                             android:layout_width="match_parent"
                             android:layout_height="1dp"
                             android:layout_marginLeft="@dimen/_10sdp"
                             android:layout_marginRight="@dimen/_10sdp"
                             android:background="@color/white" />
-
-
-
                         <LinearLayout
                             android:id="@+id/linear_privacyPolicy"
                             android:layout_width="match_parent"
@@ -454,9 +439,8 @@
 
                             <ImageView
                                 android:tint="@color/white"
-
-                                android:layout_width="@dimen/_8sdp"
-                                android:layout_height="@dimen/_8sdp"
+                                android:layout_width="@dimen/_12sdp"
+                                android:layout_height="@dimen/_12sdp"
                                 android:layout_marginLeft="@dimen/_12sdp"
                                 android:src="@drawable/user_agreement" />
 
@@ -478,23 +462,19 @@
 
                                 <ImageView
                                     android:layout_width="wrap_content"
-                                    android:layout_height="@dimen/_8sdp"
+                                    android:layout_height="@dimen/_12sdp"
                                     android:layout_marginLeft="@dimen/_12sdp"
                                     android:layout_marginRight="@dimen/_15sdp"
                                     android:src="@drawable/forward" />
                             </LinearLayout>
 
                         </LinearLayout>
-
                         <View
                             android:layout_width="match_parent"
                             android:layout_height="1dp"
                             android:layout_marginLeft="@dimen/_10sdp"
                             android:layout_marginRight="@dimen/_10sdp"
                             android:background="@color/white" />
-
-
-
                         <LinearLayout
                             android:id="@+id/logout_linear"
                             android:layout_width="match_parent"
@@ -506,8 +486,8 @@
 
                             <ImageView
                                 android:tint="@color/white"
-                                android:layout_width="@dimen/_8sdp"
-                                android:layout_height="@dimen/_8sdp"
+                                android:layout_width="@dimen/_12sdp"
+                                android:layout_height="@dimen/_12sdp"
                                 android:layout_marginLeft="@dimen/_12sdp"
                                 android:src="@drawable/logouts" />
 
@@ -529,14 +509,13 @@
 
                                 <ImageView
                                     android:layout_width="wrap_content"
-                                    android:layout_height="@dimen/_8sdp"
+                                    android:layout_height="@dimen/_12sdp"
                                     android:layout_marginLeft="@dimen/_12sdp"
                                     android:layout_marginRight="@dimen/_15sdp"
                                     android:src="@drawable/forward" />
                             </LinearLayout>
 
                         </LinearLayout>
-
                         <View
                             android:layout_width="match_parent"
                             android:layout_height="1dp"
@@ -545,7 +524,6 @@
                             android:layout_marginBottom="@dimen/_10sdp"
                             android:background="@color/white" />
                     </LinearLayout>
-
 
                     <LinearLayout
                         android:orientation="vertical"
@@ -563,8 +541,8 @@
 
                             <ImageView
                                 android:tint="@color/white"
-                                android:layout_width="@dimen/_8sdp"
-                                android:layout_height="@dimen/_8sdp"
+                                android:layout_width="@dimen/_12sdp"
+                                android:layout_height="@dimen/_12sdp"
                                 android:layout_marginLeft="@dimen/_12sdp"
                                 android:src="@drawable/instagram" />
 
@@ -586,7 +564,7 @@
 
                                 <ImageView
                                     android:layout_width="wrap_content"
-                                    android:layout_height="@dimen/_8sdp"
+                                    android:layout_height="@dimen/_12sdp"
                                     android:layout_marginLeft="@dimen/_12sdp"
                                     android:layout_marginRight="@dimen/_15sdp"
                                     android:src="@drawable/forward" />
@@ -600,7 +578,6 @@
                             android:layout_marginLeft="@dimen/_10sdp"
                             android:layout_marginRight="@dimen/_10sdp"
                             android:background="@color/white" />
-
                         <LinearLayout
                             android:id="@+id/linear_paymentHistory"
                             android:layout_width="match_parent"
@@ -612,9 +589,8 @@
 
                             <ImageView
                                 android:tint="@color/white"
-
-                                android:layout_width="@dimen/_8sdp"
-                                android:layout_height="@dimen/_8sdp"
+                                android:layout_width="@dimen/_12sdp"
+                                android:layout_height="@dimen/_12sdp"
                                 android:layout_marginLeft="@dimen/_12sdp"
                                 android:src="@drawable/paymenthistory" />
 
@@ -636,22 +612,19 @@
 
                                 <ImageView
                                     android:layout_width="wrap_content"
-                                    android:layout_height="@dimen/_8sdp"
+                                    android:layout_height="@dimen/_12sdp"
                                     android:layout_marginLeft="@dimen/_12sdp"
                                     android:layout_marginRight="@dimen/_15sdp"
                                     android:src="@drawable/forward" />
                             </LinearLayout>
 
                         </LinearLayout>
-
                         <View
                             android:layout_width="match_parent"
                             android:layout_height="1dp"
                             android:layout_marginLeft="@dimen/_10sdp"
                             android:layout_marginRight="@dimen/_10sdp"
                             android:background="@color/white" />
-
-
                         <LinearLayout
                             android:id="@+id/linear_changePassword"
                             android:layout_width="match_parent"
@@ -663,9 +636,8 @@
 
                             <ImageView
                                 android:tint="@color/white"
-
-                                android:layout_width="@dimen/_8sdp"
-                                android:layout_height="@dimen/_8sdp"
+                                android:layout_width="@dimen/_12sdp"
+                                android:layout_height="@dimen/_12sdp"
                                 android:layout_marginLeft="@dimen/_12sdp"
                                 android:src="@drawable/lock" />
 
@@ -688,22 +660,19 @@
 
                                 <ImageView
                                     android:layout_width="wrap_content"
-                                    android:layout_height="@dimen/_8sdp"
+                                    android:layout_height="@dimen/_12sdp"
                                     android:layout_marginLeft="@dimen/_12sdp"
                                     android:layout_marginRight="@dimen/_15sdp"
                                     android:src="@drawable/forward" />
                             </LinearLayout>
 
                         </LinearLayout>
-
                         <View
                             android:layout_width="match_parent"
                             android:layout_height="1dp"
                             android:layout_marginLeft="@dimen/_10sdp"
                             android:layout_marginRight="@dimen/_10sdp"
                             android:background="@color/white" />
-
-
                         <LinearLayout
                             android:id="@+id/linear_FAQ"
                             android:layout_width="match_parent"
@@ -711,11 +680,11 @@
                             android:gravity="center_vertical"
                             android:orientation="horizontal"
                             android:paddingTop="@dimen/_10sdp"
-                            android:paddingBottom="@dimen/_10sdp">
+                            android:paddingBottom="@dimen/_9sdp">
 
                             <ImageView
-                                android:layout_width="@dimen/_10sdp"
-                                android:layout_height="@dimen/_10sdp"
+                                android:layout_width="@dimen/_12sdp"
+                                android:layout_height="@dimen/_12sdp"
                                 android:layout_marginLeft="@dimen/_12sdp"
                                 android:tint="@color/white"
 
@@ -739,14 +708,13 @@
 
                                 <ImageView
                                     android:layout_width="wrap_content"
-                                    android:layout_height="@dimen/_8sdp"
+                                    android:layout_height="@dimen/_12sdp"
                                     android:layout_marginLeft="@dimen/_12sdp"
                                     android:layout_marginRight="@dimen/_15sdp"
                                     android:src="@drawable/forward" />
                             </LinearLayout>
 
                         </LinearLayout>
-
                         <View
                             android:layout_width="match_parent"
                             android:layout_height="1dp"
@@ -759,12 +727,12 @@
                             android:layout_height="wrap_content"
                             android:gravity="center_vertical"
                             android:orientation="horizontal"
-                            android:paddingTop="@dimen/_8sdp"
+                            android:paddingTop="@dimen/_9sdp"
                             android:paddingBottom="@dimen/_8sdp">
 
                             <ImageView
-                                android:layout_width="16dp"
-                                android:layout_height="24dp"
+                                android:layout_width="14dp"
+                                android:layout_height="22dp"
                                 android:layout_marginLeft="@dimen/_12sdp"
                                 android:src="@drawable/baseline_delete_outline_24"
                                 android:tint="@color/white" />
@@ -787,7 +755,7 @@
 
                                 <ImageView
                                     android:layout_width="wrap_content"
-                                    android:layout_height="@dimen/_8sdp"
+                                    android:layout_height="@dimen/_12sdp"
                                     android:layout_marginLeft="@dimen/_12sdp"
                                     android:layout_marginRight="@dimen/_15sdp"
                                     android:src="@drawable/forward" />

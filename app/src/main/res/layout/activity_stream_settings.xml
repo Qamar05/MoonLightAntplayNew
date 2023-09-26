@@ -14,6 +14,7 @@
 
 
     <LinearLayout
+        android:visibility="gone"
         android:id="@+id/back_linear_payment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

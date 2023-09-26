@@ -25,17 +25,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@+id/linearBottom"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:orientation="horizontal"
-        android:weightSum="2">
+        android:layout_marginLeft="@dimen/landscape_marginLeft"
+        android:layout_marginRight="@dimen/landscape_marginRight"
+        android:orientation="vertical">
 
         <Button
             android:id="@+id/btn_login"
             android:layout_width="match_parent"
             android:layout_height="52dp"
             android:layout_alignParentBottom="true"
-            android:layout_marginRight="5dp"
             android:layout_weight="1"
             android:background="@drawable/btnshape"
             android:fontFamily="sans-serif"
@@ -43,11 +41,11 @@
             android:textColor="@color/gray" />
 
         <Button
+            android:layout_marginTop="10dp"
             android:id="@+id/btn_register"
             android:layout_width="match_parent"
             android:layout_height="52dp"
             android:layout_alignParentBottom="true"
-            android:layout_marginLeft="5dp"
             android:layout_weight="1"
             android:background="@drawable/btnshape"
             android:fontFamily="sans-serif"
@@ -60,15 +58,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
-        android:layout_marginEnd="20dp"
+        android:layout_marginLeft="@dimen/landscape_marginRight"
+        android:layout_marginRight="@dimen/landscape_marginRight"
         android:layout_marginBottom="20dp"
         android:orientation="vertical">
 
         <Button
-            android:layout_marginLeft="@dimen/landscape_marginRight"
-            android:layout_marginRight="@dimen/landscape_marginRight"
             android:id="@+id/continueWithOTP"
             android:layout_width="match_parent"
             android:layout_height="46dp"
