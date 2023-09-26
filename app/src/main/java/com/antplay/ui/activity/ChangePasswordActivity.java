@@ -38,6 +38,7 @@ public class ChangePasswordActivity extends AppCompatActivity implements View.On
     LinearLayout backLinear;
     EditText edTxtOldPassword, edTxtNewPassword, edTxtConfirmPassword;
     Button btnUpdate;
+
     private ProgressBar progressBar;
     String access_token;
     RetrofitAPI retrofitAPI;
