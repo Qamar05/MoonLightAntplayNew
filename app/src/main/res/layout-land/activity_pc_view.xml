@@ -72,14 +72,14 @@
                 </LinearLayout>
 
                 <ImageView
-                    android:visibility="invisible"
-                    android:layout_marginRight="@dimen/_10sdp"
                     android:id="@+id/ivRefresh"
                     android:layout_width="@dimen/_30sdp"
                     android:layout_height="@dimen/_30sdp"
                     android:layout_alignParentRight="true"
                     android:layout_marginTop="@dimen/_20sdp"
-                    android:src="@drawable/baseline_refresh_24" />
+                    android:layout_marginRight="@dimen/_10sdp"
+                    android:src="@drawable/baseline_refresh_24"
+                    android:visibility="invisible" />
 
                 <ImageView
                     android:id="@+id/imgBackground"
@@ -132,10 +132,10 @@
                             android:visibility="visible" />
 
                         <LinearLayout
-                            android:gravity="right"
-                            android:layout_marginRight="@dimen/_10sdp"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="@dimen/_10sdp"
+                            android:gravity="right">
 
                             <Button
                                 android:id="@+id/btnStartVM"
@@ -146,19 +146,21 @@
                                 android:text="@string/start_vm"
                                 android:textAllCaps="false"
                                 android:textColor="@color/black"
-                                android:textSize="@dimen/_14sdp"/>
+                                android:textSize="@dimen/_14sdp"
+                                android:visibility="invisible" />
 
                             <Button
                                 android:id="@+id/btnShutDownVM"
                                 android:layout_width="@dimen/_120sdp"
                                 android:layout_height="@dimen/_32sdp"
-                                android:background="@drawable/btngradient_white_landscape"
-                                android:text="@string/stop_vm"
                                 android:layout_marginStart="5dp"
                                 android:layout_marginEnd="5dp"
+                                android:background="@drawable/btngradient_white_landscape"
+                                android:text="@string/stop_vm"
                                 android:textAllCaps="false"
                                 android:textColor="@color/black"
-                                android:textSize="@dimen/_14sdp" />
+                                android:textSize="@dimen/_14sdp"
+                                android:visibility="invisible" />
 
                             <TextView
                                 android:layout_width="wrap_content"
@@ -170,13 +172,7 @@
                                 android:visibility="gone" />
                         </LinearLayout>
                     </LinearLayout>
-
-
-
-
                 </LinearLayout>
-
-
             </RelativeLayout>
         </androidx.cardview.widget.CardView>
 
@@ -266,12 +262,12 @@
                     android:src="@drawable/timerwatch" />
 
                 <ProgressBar
-                    android:visibility="gone"
                     android:id="@+id/progressBar"
                     android:layout_width="@dimen/_12sdp"
                     android:layout_height="@dimen/_12sdp"
                     android:layout_gravity="center"
-                    android:indeterminate="true"></ProgressBar>
+                    android:indeterminate="true"
+                    android:visibility="gone"></ProgressBar>
 
 
                 <TextView
@@ -282,8 +278,8 @@
                     android:fontFamily="sans-serif"
                     android:gravity="center"
                     android:text=""
-                    android:textSize="@dimen/_12sdp"
                     android:textColor="@color/black"
+                    android:textSize="@dimen/_12sdp"
                     android:textStyle="normal" />
 
 
