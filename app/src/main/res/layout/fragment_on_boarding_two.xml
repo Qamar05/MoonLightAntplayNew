@@ -13,6 +13,8 @@
 
 
     <TextView
+        android:layout_centerInParent="true"
+        android:gravity="center"
         android:id="@+id/txtPlayPC"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -26,6 +28,7 @@
         android:textSize="25sp" />
 
     <TextView
+        android:gravity="center"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/txtPlayPC"
@@ -33,7 +36,6 @@
         android:fontFamily="sans-serif"
         android:layout_marginStart="@dimen/_20sdp"
         android:layout_marginEnd="@dimen/_20sdp"
-        android:gravity="center"
         android:text="@string/more_professional"
         android:textColor="@color/gray"
         android:textSize="18sp" />

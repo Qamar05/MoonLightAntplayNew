@@ -16,7 +16,7 @@
     <ImageView
         android:layout_marginLeft="@dimen/_20sdp"
         android:background="@drawable/three_finger"
-        android:layout_marginTop="@dimen/_100sdp"
+        android:layout_marginTop="@dimen/_40sdp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:id="@+id/ivThreeFinger"
@@ -35,20 +35,22 @@
         android:id="@+id/txtOpenKeyword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_100sdp"
+        android:layout_marginTop="@dimen/_40sdp"
         android:fontFamily="sans-serif"
         android:text="@string/open_keyword"
         android:textAlignment="center"
         android:textColor="@color/white"
-        android:textSize="25sp"
+        android:textSize="18sp"
         android:gravity="center_horizontal" />
 
 
     <ImageView
+        android:backgroundTint="@color/white"
+        android:tint="@color/white"
         app:layout_constraintTop_toBottomOf="@+id/txtOpenKeyword"
         android:layout_marginLeft="@dimen/_20sdp"
         android:background="@drawable/two_finger"
-        android:layout_marginTop="@dimen/_70sdp"
+        android:layout_marginTop="@dimen/_40sdp"
         app:layout_constraintLeft_toLeftOf="parent"
         android:id="@+id/ivTwoFinger"
         android:layout_width="@dimen/_50sdp"
@@ -66,12 +68,12 @@
         android:id="@+id/txtTapRightClick"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_70sdp"
+        android:layout_marginTop="@dimen/_40sdp"
         android:fontFamily="sans-serif"
         android:text="@string/tapRightCLick"
         android:textAlignment="center"
         android:textColor="@color/white"
-        android:textSize="25sp"
+        android:textSize="18sp"
         android:gravity="center_horizontal" />
 
 

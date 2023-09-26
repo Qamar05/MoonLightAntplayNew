@@ -3,7 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/onboarding_landone">
+    android:background="@drawable/onboardingtwo">
+
 
     <View
         android:layout_width="match_parent"
@@ -12,15 +13,17 @@
 
 
     <TextView
+        android:layout_centerInParent="true"
         android:gravity="center"
         android:id="@+id/txtPlayPC"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
         android:layout_marginStart="@dimen/_20sdp"
+        android:layout_marginTop="@dimen/_70sdp"
         android:layout_marginEnd="@dimen/_20sdp"
-        android:text="@string/play_pc_game"
+        android:text="@string/connect_a_gamepad"
         android:textAlignment="center"
+        android:fontFamily="sans-serif"
         android:textColor="@color/white"
         android:textSize="@dimen/_14sdp" />
 
@@ -30,8 +33,12 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/txtPlayPC"
         android:layout_centerHorizontal="true"
-        android:text="@string/by_using_smartphone"
+        android:fontFamily="sans-serif"
+        android:layout_marginStart="@dimen/_20sdp"
+        android:layout_marginEnd="@dimen/_20sdp"
+        android:text="@string/more_professional"
         android:textColor="@color/gray"
         android:textSize="@dimen/_10sdp" />
+
 
 </RelativeLayout>
