@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginTop="@dimen/_5sdp"
@@ -12,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/gradienttext"
-        android:padding="15dp"
+        android:padding="@dimen/_8sdp"
         android:visibility="visible">
 
         <TextView
@@ -22,7 +21,7 @@
             android:fontFamily="sans-serif"
             android:text="Basic"
             android:textColor="@color/white"
-            android:textSize="20sp" />
+            android:textSize="@dimen/_14sdp" />
 
         <TextView
             android:id="@+id/txtPlaneAmount"
@@ -33,18 +32,18 @@
             android:fontFamily="sans-serif"
             android:text="1 Rs."
             android:textColor="@color/white"
-            android:textSize="15sp" />
+            android:textSize="@dimen/_11sdp" />
 
         <TextView
+            android:layout_marginTop="3dp"
             android:id="@+id/txtValidity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/txtPlaneName"
-            android:layout_marginTop="3dp"
             android:fontFamily="sans-serif"
             android:text="1 Day"
             android:textColor="@color/white"
-            android:textSize="12sp" />
+            android:textSize="@dimen/_11sdp" />
 
         <TextView
             android:id="@+id/txtDurationInHours"
@@ -57,7 +56,7 @@
             android:fontFamily="sans-serif"
             android:text="2 Hours"
             android:textColor="@color/white"
-            android:textSize="12sp" />
+            android:textSize="@dimen/_11sdp" />
 
         <View
             android:id="@+id/viewSeparator"
@@ -86,7 +85,7 @@
             android:fontFamily="sans-serif"
             android:text="GetForce GTX 1660 6GB GPU"
             android:textColor="@color/white"
-            android:textSize="15sp" />
+            android:textSize="@dimen/_12sdp" />
 
         <ImageView
             android:id="@+id/imgSpacLine2"
@@ -107,7 +106,7 @@
             android:fontFamily="sans-serif"
             android:text="8 CPU"
             android:textColor="@color/white"
-            android:textSize="15sp" />
+            android:textSize="@dimen/_12sdp" />
 
         <ImageView
             android:id="@+id/imgSpacLine3"
@@ -128,7 +127,7 @@
             android:fontFamily="sans-serif"
             android:text="12GB Ram"
             android:textColor="@color/white"
-            android:textSize="15sp" />
+            android:textSize="@dimen/_12sdp" />
 
         <ImageView
             android:id="@+id/imgSpacLine4"
@@ -149,7 +148,7 @@
             android:fontFamily="sans-serif"
             android:text="400 SSD"
             android:textColor="@color/white"
-            android:textSize="15sp" />
+            android:textSize="@dimen/_12sdp" />
 
         <ImageView
             android:id="@+id/imgSpacLine5"
@@ -171,23 +170,22 @@
             android:fontFamily="sans-serif"
             android:text="Upstream 50 MBP"
             android:textColor="@color/white"
-            android:textSize="15sp"
+            android:textSize="@dimen/_12sdp"
             android:visibility="gone" />
 
 
         <TextView
             android:id="@+id/txtSubscribe"
             android:layout_width="match_parent"
-            android:layout_height="45dp"
+            android:layout_height="40dp"
             android:layout_below="@id/imgSpacLine5"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="10dp"
+            android:layout_marginTop="@dimen/_12sdp"
             android:background="@drawable/payment_button_bg"
             android:gravity="center"
             android:text="@string/subscribe"
             android:textAllCaps="true"
             android:textColor="@color/white"
-            android:textSize="15sp" />
+            android:textSize="@dimen/_14sdp" />
 
         <TextView
             android:id="@+id/active_plan"
@@ -197,7 +195,6 @@
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
             android:layout_marginEnd="10dp"
-            android:layout_marginBottom="10dp"
             android:background="@drawable/payment_button_bg"
             android:gravity="center"
             android:text="@string/active_plan"

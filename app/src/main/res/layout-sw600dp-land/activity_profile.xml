@@ -711,14 +711,13 @@
                         android:gravity="center_vertical"
                         android:orientation="horizontal"
                         android:paddingTop="@dimen/_10sdp"
-                        android:paddingBottom="@dimen/_10sdp">
+                        android:paddingBottom="@dimen/_9sdp">
 
                         <ImageView
                             android:layout_width="@dimen/_10sdp"
                             android:layout_height="@dimen/_10sdp"
                             android:layout_marginLeft="@dimen/_12sdp"
                             android:tint="@color/white"
-
                             android:src="@drawable/baseline_help_outline_24" />
 
                         <TextView
@@ -759,12 +758,12 @@
                         android:layout_height="wrap_content"
                         android:gravity="center_vertical"
                         android:orientation="horizontal"
-                        android:paddingTop="@dimen/_8sdp"
+                        android:paddingTop="@dimen/_9sdp"
                         android:paddingBottom="@dimen/_8sdp">
 
                         <ImageView
-                            android:layout_width="16dp"
-                            android:layout_height="24dp"
+                            android:layout_width="14dp"
+                            android:layout_height="22dp"
                             android:layout_marginLeft="@dimen/_12sdp"
                             android:src="@drawable/baseline_delete_outline_24"
                             android:tint="@color/white" />
