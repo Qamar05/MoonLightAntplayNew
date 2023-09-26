@@ -173,8 +173,8 @@ public class VerifyOTP extends Activity implements View.OnClickListener {
 
             public void onFinish() {
                 tv_resend.setVisibility(View.VISIBLE);
-                linearLayout.setVisibility(View.INVISIBLE);
-                txtDidNotReceiveOTP.setVisibility(View.INVISIBLE);
+                linearLayout.setVisibility(View.GONE);
+                txtDidNotReceiveOTP.setVisibility(View.GONE);
                 //tv_timer.setText("Resend!");
             }
 
@@ -187,7 +187,7 @@ public class VerifyOTP extends Activity implements View.OnClickListener {
         switch (view.getId()){
             case R.id.tv_resend:
                 linearLayout.setVisibility(View.VISIBLE);
-                tv_resend.setVisibility(View.INVISIBLE);
+                tv_resend.setVisibility(View.GONE);
                 txtDidNotReceiveOTP.setVisibility(View.VISIBLE);
                 callSendOTP();
                 break;

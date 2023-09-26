@@ -89,7 +89,7 @@
                     android:layout_height="match_parent"
                     android:layout_marginLeft="@dimen/_10sdp"
                     android:layout_marginRight="@dimen/_10sdp"
-                    android:layout_marginBottom="@dimen/_60sdp"
+                    android:layout_marginBottom="@dimen/_20sdp"
                     android:orientation="vertical">
 
 
@@ -740,7 +740,24 @@
                     </LinearLayout>
 
                 </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="bottom"
+                    android:layout_marginBottom="@dimen/_20sdp"
+                    android:orientation="vertical">
 
+                    <Button
+                        android:id="@+id/buttonUpdateProfile"
+                        android:layout_width="match_parent"
+                        android:layout_height="42dp"
+                        android:layout_marginLeft="@dimen/landscape_marginLeft"
+                        android:layout_marginRight="@dimen/landscape_marginRight"
+                        android:background="@drawable/btngradient"
+                        android:fontFamily="sans-serif"
+                        android:text="@string/update_profile"
+                        android:textColor="@color/white" />
+                </LinearLayout>
 
             </LinearLayout>
 
@@ -748,24 +765,7 @@
 
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginBottom="@dimen/_10sdp"
-        android:gravity="bottom"
-        android:orientation="vertical">
 
-        <Button
-            android:id="@+id/buttonUpdateProfile"
-            android:layout_width="match_parent"
-            android:layout_height="42dp"
-            android:layout_marginLeft="@dimen/landscape_marginLeft"
-            android:layout_marginRight="@dimen/landscape_marginRight"
-            android:background="@drawable/btngradient"
-            android:fontFamily="sans-serif"
-            android:text="@string/update_profile"
-            android:textColor="@color/white" />
-    </LinearLayout>
 
     <ProgressBar
         android:id="@+id/progressBarEditProfile"
