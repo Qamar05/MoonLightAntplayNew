@@ -1,10 +1,15 @@
 package com.antplay.ui.activity;
 
+import android.app.Dialog;
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -82,6 +87,7 @@ public class PaymentHistoryActivity extends AppCompatActivity {
                     else if (response.code()==Const.ERROR_CODE_400||
                             response.code()==Const.ERROR_CODE_500 ||
                             response.code()==Const.ERROR_CODE_404){
+                        openDialog(getString(R.string.noPaymentHistory));
                         tvNoDataFound.setVisibility(View.VISIBLE);
                     }
                 }
@@ -91,6 +97,29 @@ public class PaymentHistoryActivity extends AppCompatActivity {
                     AppUtils.showToast(Const.something_went_wrong, PaymentHistoryActivity.this);
                 }
             });
+    }
+
+    private void openDialog(String msg) {
+        Dialog dialog = new Dialog(PaymentHistoryActivity.this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.dialog_logout);
+        dialog.setCancelable(false);
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.getWindow().setLayout(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        TextView titleText =  dialog.findViewById(R.id.titleText);
+        TextView msgText =  dialog.findViewById(R.id.msgText);
+        Button txtNo = dialog.findViewById(R.id.txtNo);
+        Button txtYes = dialog.findViewById(R.id.txtYes);
+        titleText.setText(getResources().getString(R.string.no_vm_title));
+        msgText.setText(msg);
+        txtYes.setVisibility(View.GONE);
+        txtNo.setText("Ok");
+
+        txtNo.setOnClickListener(view -> {
+            dialog.dismiss();
+        });
+        dialog.show();
     }
 
 }

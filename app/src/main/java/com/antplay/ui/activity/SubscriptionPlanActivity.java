@@ -129,6 +129,7 @@ public class SubscriptionPlanActivity extends AppCompatActivity implements Subsc
                         response.code()==401) {
                     tvNoDataFound.setVisibility(View.VISIBLE);
                     tvNoDataFound.setText(getString(R.string.noDataFound));
+                    openDialog(getString(R.string.noDataFound));
                 }
             }
 

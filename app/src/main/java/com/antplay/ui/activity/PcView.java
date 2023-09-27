@@ -536,27 +536,17 @@ public class PcView extends AppCompatActivity implements AdapterFragmentCallback
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        // Assume we're in the foreground when created to avoid a race
-        // between binding to CMS and onResume()
         retrofitAPI = APIClient.getRetrofitInstance().create(RetrofitAPI.class);
         accessToken = SharedPreferenceUtils.getString(PcView.this, Const.ACCESS_TOKEN);
         firstTimeStartVmApi = SharedPreferenceUtils.getBoolean(PcView.this, Const.FIRSTTIMESTARTVMAPI);
         String email = SharedPreferenceUtils.getString(PcView.this, Const.EMAIL_ID);
         String loginEmail = SharedPreferenceUtils.getString(PcView.this, Const.LOGIN_EMAIL);
-
-        Log.i("testt_emaillll" , email +" testt" + loginEmail);
-
         if(email==null|| !email.equalsIgnoreCase(loginEmail)){
-            Log.i("testt_emaillll2" , email +" testt" + loginEmail);
             SharedPreferenceUtils.saveString(PcView.this, Const.EMAIL_ID ,loginEmail);
             SharedPreferenceUtils.saveBoolean(PcView.this,Const.FIRSTTIMEVMTIMER ,false);
-
         }
-
         inForeground = true;
         firstTimeVMTimer =  SharedPreferenceUtils.getBoolean(PcView.this,Const.FIRSTTIMEVMTIMER);
-
         if (!firstTimeVMTimer) {
             SharedPreferenceUtils.saveString(PcView.this,Const.EMAIL_ID,loginEmail);
                 if (AppUtils.isOnline(PcView.this))
