@@ -2,13 +2,18 @@ package com.antplay.ui.activity;
 
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -35,6 +40,8 @@ import com.antplay.ui.adapter.SubscriptionPlanAdapter;
 import com.antplay.utils.AppUtils;
 import com.antplay.utils.Const;
 import com.antplay.utils.SharedPreferenceUtils;
+
+import org.json.JSONObject;
 
 import java.util.List;
 
@@ -150,6 +157,17 @@ public class SubscriptionPlanActivity extends AppCompatActivity implements Subsc
                             startActivity(browserIntent);
                         }
                     }
+                    else if(response.code()==403){
+                        try {
+                            JSONObject jObj = new JSONObject(response.errorBody().string());
+                            String value = jObj.getString("message");
+                            openDialog(value);
+
+                        }
+                        catch (Exception e){
+
+                        }
+                    }
                 }
                 @Override
                 public void onFailure(Call<StartPaymentResp> call, Throwable t) {
@@ -171,6 +189,28 @@ public class SubscriptionPlanActivity extends AppCompatActivity implements Subsc
             finish();
     }
 
+    private void openDialog(String msg) {
+        Dialog dialog = new Dialog(SubscriptionPlanActivity.this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.dialog_logout);
+        dialog.setCancelable(false);
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.getWindow().setLayout(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        TextView titleText =  dialog.findViewById(R.id.titleText);
+        TextView msgText =  dialog.findViewById(R.id.msgText);
+        Button txtNo = dialog.findViewById(R.id.txtNo);
+        Button txtYes = dialog.findViewById(R.id.txtYes);
+        titleText.setText(getResources().getString(R.string.no_vm_title));
+        msgText.setText(msg);
+        txtYes.setVisibility(View.GONE);
+        txtNo.setText("Ok");
+
+        txtNo.setOnClickListener(view -> {
+            dialog.dismiss();
+        });
+        dialog.show();
+    }
 
 }
 

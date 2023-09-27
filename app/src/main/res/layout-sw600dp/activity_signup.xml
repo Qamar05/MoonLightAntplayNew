@@ -234,7 +234,6 @@
         android:layout_height="52dp"
         android:layout_marginBottom="10dp"
         android:background="@drawable/white_border_bg"
-        android:focusable="false"
         android:fontFamily="sans-serif"
         android:hint="@string/state"
         android:inputType="text"

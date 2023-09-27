@@ -119,22 +119,15 @@ public class PcView extends AppCompatActivity implements AdapterFragmentCallback
     boolean startVMStatus,isVMConnected ,isVmDisConnected ,firstTimeVMTimer ,paymentStatus = false;
     Timer timerVmShutDown;
     boolean shutdownVMStatus ,startVmTimerStatus = false,firstTimeStartVmApi=false;
-
     String startVmValue = "" , connectbtnVisible;
-
     TextView  tvTimer;
     SpinnerDialog dialog;
-
     Timer startVmTimer;
     ComputerDetails myComputerDetails;
-
     String loginEmail="";
-
     TextView  text_PcName,timerText;
     Button btnStartVM,btnShutDownVM;
-
     boolean isFirstTime =  true;
-
     ProgressBar progressBar ,loadingBar;
     String time_remaining;
     private PcGridAdapter pcGridAdapter;
@@ -1312,6 +1305,19 @@ catch (Exception e){
                         }
                     }
                 }
+                else if(response.code()==403){
+                    try {
+                        JSONObject jObj = new JSONObject(response.errorBody().string());
+                        String value = jObj.getString("message");
+                        if(value.contains("Servers are full")){
+                            openDialog(true,value);
+                        }
+                    }
+                    catch (Exception e){
+
+                    }
+
+                }
                 else if(response.code()==401|| response.code()==Const.ERROR_CODE_404 ||
                         response.code()==Const.ERROR_CODE_400 || response.code()==Const.ERROR_CODE_500) {
                     try {
@@ -1403,13 +1409,18 @@ catch (Exception e){
 
                     }
                     else if (response.code() == 404 || response.code() == 500 || response.code() == 400) {
-                        openDialog(false, getResources().getString(R.string.searching_pc_first));
-
-                       try {
+                        try {
+                            JSONObject jObj = new JSONObject(response.errorBody().string());
+                            String value = jObj.getString("message");
+                            openDialog(false,value);
+                          }
+                        catch (Exception e){
+                        }
+                        try {
                            text_PcName.setText("");
                            tvTimer.setText("00:00:00 hrs.");
                            searchPC = findViewById(R.id.searchPC);
-                           searchPC.setText(getResources().getString(R.string.searching_pc_first));
+//                           searchPC.setText();
                            progressBar.setVisibility(View.GONE);
 
                        }

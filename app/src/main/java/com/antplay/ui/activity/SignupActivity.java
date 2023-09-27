@@ -229,8 +229,8 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
         }
 
         if (edTxtState.getText().toString().trim().length() == 0) {
-            edtCity.setError(getString(R.string.error_state));
-            edtCity.requestFocus();
+            edTxtState.setError(getString(R.string.error_state));
+            edTxtState.requestFocus();
             return false;
         }
         if (edtCity.getText().toString().trim().length() == 0) {
