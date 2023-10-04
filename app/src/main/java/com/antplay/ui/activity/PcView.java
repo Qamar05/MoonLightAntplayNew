@@ -102,9 +102,6 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-import org.java_websocket.client.WebSocketClient;
-import org.java_websocket.drafts.Draft_17;
-import org.java_websocket.handshake.ServerHandshake;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -137,7 +134,7 @@ public class PcView extends AppCompatActivity implements AdapterFragmentCallback
     private Thread addThread;
     RetrofitAPI retrofitAPI;
     ImageView ivRefresh;
-    private WebSocketClient mWebSocketClient;
+//    private WebSocketClient mWebSocketClient;
     private ComputerManagerService.ComputerManagerBinder managerBinder;
     private final LinkedBlockingQueue<String> computersToAdd = new LinkedBlockingQueue<>();
     private boolean freezeUpdates, runningPolling, inForeground, completeOnCreateCalled;
@@ -1742,38 +1739,5 @@ public class PcView extends AppCompatActivity implements AdapterFragmentCallback
         });
     }
 
-    public void connectWebSocket(){
-        URI uri;
-        try {
-            uri = new URI(Const.WEBSOCKET_URL);
-        } catch (URISyntaxException e) {
-            e.printStackTrace();
-            return;
-        }
-        mWebSocketClient = new WebSocketClient(uri, new Draft_17()) {
-            @Override
-            public void onOpen(ServerHandshake serverHandshake) {
-                Log.i("test_webSocket", "onOpen");
-                getVM("");
-//              Logger.LogInfo("Websocket", "Opened");
-            }
-            @Override
-            public void onMessage(String s) {
-                final String message = s;
-                Log.i("test_webSocket", "onMessage" + s);
-            }
-            @Override
-            public void onClose(int i, String s, boolean b) {
-                Log.i("test_webSocket", "onCLose" + s);
-//              Logger.LogInfo("Websocket", "Closed " + s);
-            }
-            @Override
-            public void onError(Exception e) {
-                Log.i("test_webSocket", "onError" + e.getMessage());
-//              Logger.LogInfo("Websocket", "Error " + e.getMessage());
-            }
-        };
-        mWebSocketClient.connect();
-    }
 }
 
