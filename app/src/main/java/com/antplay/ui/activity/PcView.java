@@ -102,9 +102,6 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-import org.java_websocket.client.WebSocketClient;
-import org.java_websocket.drafts.Draft_17;
-import org.java_websocket.handshake.ServerHandshake;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -117,6 +114,7 @@ import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import tech.gusavila92.websocketclient.WebSocketClient;
 
 public class PcView extends AppCompatActivity implements AdapterFragmentCallbacks {
     private RelativeLayout noPcFoundLayout;
@@ -137,7 +135,8 @@ public class PcView extends AppCompatActivity implements AdapterFragmentCallback
     private Thread addThread;
     RetrofitAPI retrofitAPI;
     ImageView ivRefresh;
-    private WebSocketClient mWebSocketClient;
+
+    private WebSocketClient webSocketClient;
     private ComputerManagerService.ComputerManagerBinder managerBinder;
     private final LinkedBlockingQueue<String> computersToAdd = new LinkedBlockingQueue<>();
     private boolean freezeUpdates, runningPolling, inForeground, completeOnCreateCalled;
@@ -399,9 +398,9 @@ public class PcView extends AppCompatActivity implements AdapterFragmentCallback
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             setShouldDockBigOverlays(false);
         }
-        Intent intent = new Intent(getBaseContext(), ClearService.class);
-//        intent.putExtra("MyService.data", "myValue");
-        startService(intent);
+//        Intent intent = new Intent(getBaseContext(), ClearService.class);
+////        intent.putExtra("MyService.data", "myValue");
+//        startService(intent);
 
         PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
         pcGridAdapter.updateLayoutWithPreferences(this, PreferenceConfiguration.readPreferences(this));
@@ -432,7 +431,8 @@ public class PcView extends AppCompatActivity implements AdapterFragmentCallback
         swipeLayout.setOnRefreshListener(() -> {
             new Handler().postDelayed(() -> {
                 swipeLayout.setRefreshing(false);
-                getVM("");
+                getVMInitiallyCall();
+               // getVM("");
             }, 1000);
         });
         swipeLayout.setColorSchemeColors(getResources().getColor(R.color.teal_700));
@@ -515,10 +515,11 @@ public class PcView extends AppCompatActivity implements AdapterFragmentCallback
         firstTimeVMTimer = SharedPreferenceUtils.getBoolean(PcView.this, Const.FIRSTTIMEVMTIMER);
         if (!firstTimeVMTimer) {
             SharedPreferenceUtils.saveString(PcView.this, Const.EMAIL_ID, loginEmail);
-            if (AppUtils.isOnline(PcView.this))
-                getVM("");
-            else
-                AppUtils.showInternetDialog(PcView.this);
+            getVMInitiallyCall();
+//            if (AppUtils.isOnline(PcView.this))
+//                getVM("");
+//            else
+//                AppUtils.showInternetDialog(PcView.this);
         } else {
             if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
                 Long time = timeDifference();
@@ -526,10 +527,10 @@ public class PcView extends AppCompatActivity implements AdapterFragmentCallback
                     SharedPreferenceUtils.saveBoolean(PcView.this, Const.FIRSTTIMEVMTIMER, false);
                     SharedPreferenceUtils.saveBoolean(PcView.this, Const.FIRSTTIMEDIALOG, false);
                     firstTimeDialog = false;
-                    connectWebSocket();
+                    getVMInitiallyCall();
                     //getVM("");
                 } else
-                    connectWebSocket();
+                    getVMInitiallyCall();
                     //openShutDownVMDialog("vmtimer", 1200 - time);
             }
         }
@@ -1178,6 +1179,7 @@ public class PcView extends AppCompatActivity implements AdapterFragmentCallback
             public void onResponse(Call<MessageResponse> call, Response<MessageResponse> response) {
                 loadingBar.setVisibility(View.GONE);
                 if (response.code() == Const.SUCCESS_CODE_200) {
+                    btnStartVM.setVisibility(View.INVISIBLE);
                     if (response.body().getSuccess().equalsIgnoreCase("true")) {
                         boolean firstTimeDialog = SharedPreferenceUtils.getBoolean(PcView.this, Const.FIRSTTIMEDIALOG);
 
@@ -1187,10 +1189,11 @@ public class PcView extends AppCompatActivity implements AdapterFragmentCallback
                             firstTimeVMTimer = true;
                             SharedPreferenceUtils.saveBoolean(PcView.this, Const.FIRSTTIMEVMTIMER, true);
                             saveTime();
-                            connectWebSocket();
+                            getVMInitiallyCall();
 //                            openShutDownVMDialog("vmtimer", 1200L);
                         } else if (btnStatus) {
-                            connectWebSocket();
+                            getVMInitiallyCall();
+//                            connectWebSocket();
                            // openShutDownVMDialog("start", 0L);
                         }
                     }
@@ -1746,34 +1749,91 @@ public class PcView extends AppCompatActivity implements AdapterFragmentCallback
         URI uri;
         try {
             uri = new URI(Const.WEBSOCKET_URL);
-        } catch (URISyntaxException e) {
+        }
+        catch (URISyntaxException e) {
             e.printStackTrace();
             return;
         }
-        mWebSocketClient = new WebSocketClient(uri, new Draft_17()) {
+        webSocketClient = new WebSocketClient(uri) {
             @Override
-            public void onOpen(ServerHandshake serverHandshake) {
-                Log.i("test_webSocket", "onOpen");
-                getVM("");
-//              Logger.LogInfo("Websocket", "Opened");
+            public void onOpen() {
+                Log.i("WebSocket", "Session is starting");
+            //    webSocketClient.send("Hello World!");
             }
             @Override
-            public void onMessage(String s) {
+            public void onTextReceived(String s) {
+                Log.i("WebSocket", "Message received");
                 final String message = s;
-                Log.i("test_webSocket", "onMessage" + s);
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try{
+                            Log.i("testt_websocket_msg", message);
+                            if(message.equalsIgnoreCase("Server Ready"))
+                                getVM("");
+//                            else
+
+//                            Server Ready
+                        } catch (Exception e){
+                            e.printStackTrace();
+                        }
+                    }
+                });
             }
             @Override
-            public void onClose(int i, String s, boolean b) {
-                Log.i("test_webSocket", "onCLose" + s);
-//              Logger.LogInfo("Websocket", "Closed " + s);
+            public void onBinaryReceived(byte[] data) {
             }
             @Override
-            public void onError(Exception e) {
-                Log.i("test_webSocket", "onError" + e.getMessage());
-//              Logger.LogInfo("Websocket", "Error " + e.getMessage());
+            public void onPingReceived(byte[] data) {
+            }
+            @Override
+            public void onPongReceived(byte[] data) {
+            }
+            @Override
+            public void onException(Exception e) {
+                Log.i("WebSocket", "OnException");
+                System.out.println(e.getMessage());
+            }
+            @Override
+            public void onCloseReceived() {
+                Log.i("WebSocket", "Closed ");
+                System.out.println("onCloseReceived");
             }
         };
-        mWebSocketClient.connect();
+        webSocketClient.addHeader("vmid", strVMId);
+        webSocketClient.addHeader("CurrUser", "ClientApp");
+        webSocketClient.addHeader("Authorization", accessToken);
+        webSocketClient.setConnectTimeout(10000);
+        webSocketClient.setReadTimeout(60000);
+        webSocketClient.enableAutomaticReconnection(5000);
+        webSocketClient.connect();
+    }
+
+    private void getVMInitiallyCall() {
+        Call<ResponseBody> call = retrofitAPI.getVMFromServer("Bearer " + accessToken);
+        call.enqueue(new Callback<>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if (response.isSuccessful()) {
+                    try{
+                        JSONObject jsonObject = new JSONObject(response.body().string());
+                        JSONArray jsonArray = jsonObject.getJSONArray("data");
+                        strVMId = jsonArray.getJSONObject(0).getString("vmid");
+                        time_remaining = jsonArray.getJSONObject(0).getString("time_remaining");
+                        status = jsonArray.getJSONObject(0).getString("status");
+                        vmip = jsonArray.getJSONObject(0).getString("vmip");
+                        connectWebSocket();
+                    }
+                    catch (Exception e){
+                    }
+                }
+            }
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                // progressBar.setVisibility(View.GONE);
+                AppUtils.showToast(Const.something_went_wrong, PcView.this);
+            }
+        });
     }
 }
 

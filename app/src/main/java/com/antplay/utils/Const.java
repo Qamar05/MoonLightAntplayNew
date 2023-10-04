@@ -2,7 +2,7 @@ package com.antplay.utils;
 
 public class Const {
     public static String DEV_URL="https://api.antplay.tech/v1/api/";
-    public static String WEBSOCKET_URL="ws://api.antplay.tech:8765";
+    public static String WEBSOCKET_URL="ws://api.antplay.tech:8765/";
     public static String emailPattern ="^\\w+([\\.-]?\\w+)*@\\w+([\\.-]?\\w+)*(\\.\\w{2,3})+$";
     public static String passwordRegex = "^(?=.*\\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$";
     public static String phoneRegex = "^[1-9][0-9]{9,10}$";

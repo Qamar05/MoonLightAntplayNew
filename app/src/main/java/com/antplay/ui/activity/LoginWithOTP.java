@@ -30,7 +30,6 @@ import retrofit2.Response;
 public class LoginWithOTP extends AppCompatActivity implements View.OnClickListener {
     EditText edt_phone;
     Button btn_lestGo;
-    boolean isPhoneNumberEntered = false;
     ProgressBar progressBar;
     TextView tv_register;
     Context mContext;
