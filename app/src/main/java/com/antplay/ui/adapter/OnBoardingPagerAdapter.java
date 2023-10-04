@@ -18,9 +18,6 @@ import com.antplay.ui.fragments.OnBoardingTwo;
 public class OnBoardingPagerAdapter extends FragmentStatePagerAdapter {
     int PAGE_COUNT = 7;
 
-
-
-
     public OnBoardingPagerAdapter(FragmentManager fm) {
         super(fm);
     }

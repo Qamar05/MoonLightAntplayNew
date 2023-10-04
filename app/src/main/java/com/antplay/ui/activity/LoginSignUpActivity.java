@@ -16,9 +16,6 @@ public class LoginSignUpActivity extends Activity implements View.OnClickListene
     Button btnLogin, btnRegister, btnGoogleLogin, btn_otp;
     Context mContext;
     TextView tv_tandC;
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

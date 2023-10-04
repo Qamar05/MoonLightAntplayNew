@@ -91,7 +91,6 @@ public class PaymentHistoryActivity extends AppCompatActivity {
                         tvNoDataFound.setVisibility(View.VISIBLE);
                     }
                 }
-
                 @Override
                 public void onFailure(Call<PaymentHistory_modal> call, Throwable t) {
                     AppUtils.showToast(Const.something_went_wrong, PaymentHistoryActivity.this);
@@ -115,11 +114,9 @@ public class PaymentHistoryActivity extends AppCompatActivity {
         msgText.setText(msg);
         txtYes.setVisibility(View.GONE);
         txtNo.setText("Ok");
-
         txtNo.setOnClickListener(view -> {
             dialog.dismiss();
         });
         dialog.show();
     }
-
 }

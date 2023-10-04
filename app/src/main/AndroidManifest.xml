@@ -244,10 +244,9 @@
                 android:value="true" />
         </activity>
 
+
         <service
-            android:name=".ui.intrface.ClearService"
-            android:launchMode="singleTop"
-            android:stopWithTask="false" />
+            android:name=".ui.intrface.ClearService"/>
         <service
             android:name=".discovery.DiscoveryService"
             android:label="mDNS PC Auto-Discovery Service" />

@@ -11,6 +11,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public  class APIClient {
     public static final String UOMYYGUKCD = "wMEFxx3HLShV61A!3f";
     private static Retrofit retrofit;
+
     public static Retrofit getRetrofitInstance() {
         HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
         interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);

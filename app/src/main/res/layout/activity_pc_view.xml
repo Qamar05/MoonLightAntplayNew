@@ -201,6 +201,7 @@
             android:visibility="gone">
 
             <RelativeLayout
+                android:visibility="gone"
                 android:id="@+id/no_pc_found_layout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

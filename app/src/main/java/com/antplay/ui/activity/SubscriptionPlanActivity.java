@@ -148,28 +148,27 @@ public class SubscriptionPlanActivity extends AppCompatActivity implements Subsc
             //start Payment APi  ...
             StartPaymentReq startPaymentReq = new StartPaymentReq(idValue,Const.ANDROID);
             Call<StartPaymentResp> call = retrofitAPI.startPayment("Bearer " + accessToken, startPaymentReq);
-            call.enqueue(new Callback<StartPaymentResp>() {
+            call.enqueue(new Callback<>() {
                 @Override
                 public void onResponse(Call<StartPaymentResp> call, Response<StartPaymentResp> response) {
                     progressSubscriptionPlan.setVisibility(View.GONE);
-                    if (response.code()==Const.SUCCESS_CODE_200) {
+                    if (response.code() == Const.SUCCESS_CODE_200) {
                         if (response.body().getPayment_url() != null) {
                             Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(response.body().getPayment_url()));
                             startActivity(browserIntent);
                         }
-                    }
-                    else if(response.code()==403){
+                    } else if (response.code() == 403) {
                         try {
                             JSONObject jObj = new JSONObject(response.errorBody().string());
                             String value = jObj.getString("message");
                             openDialog(value);
 
-                        }
-                        catch (Exception e){
+                        } catch (Exception e) {
 
                         }
                     }
                 }
+
                 @Override
                 public void onFailure(Call<StartPaymentResp> call, Throwable t) {
                     progressSubscriptionPlan.setVisibility(View.GONE);

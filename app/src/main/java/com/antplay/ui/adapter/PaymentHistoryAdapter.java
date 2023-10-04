@@ -21,7 +21,6 @@ import com.antplay.models.Payment;
 import java.util.List;
 
 public class PaymentHistoryAdapter extends RecyclerView.Adapter<PaymentHistoryAdapter.MyViewHolder> {
-
     private Context context;
     List<Payment> paymentHistory_modals;
     private static int currentPosition = 0;
@@ -30,14 +29,12 @@ public class PaymentHistoryAdapter extends RecyclerView.Adapter<PaymentHistoryAd
         this.context = context;
         this.paymentHistory_modals = paymentHistory_modals;
     }
-
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.paymenthistory_adapter, parent, false);
         return new MyViewHolder(view);
     }
-
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, @SuppressLint("RecyclerView") int position) {
 
@@ -83,23 +80,17 @@ public class PaymentHistoryAdapter extends RecyclerView.Adapter<PaymentHistoryAd
                 notifyDataSetChanged();
             }
         });
-
-
     }
-
     @Override
     public int getItemCount() {
         return paymentHistory_modals.size();
     }
-
     public class MyViewHolder extends RecyclerView.ViewHolder {
-
         TextView tv_planName, tv_transactionId, tv_status, tv_amount, tv_plan, tv_amountUp, tv_trans_date;
         LinearLayout linearLayout, linearLayout_upper;
         ImageView  img_forward;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
-
             tv_transactionId = itemView.findViewById(R.id.transactionId);
             tv_amount = itemView.findViewById(R.id.amount);
             tv_status = itemView.findViewById(R.id.status);
@@ -110,8 +101,6 @@ public class PaymentHistoryAdapter extends RecyclerView.Adapter<PaymentHistoryAd
             linearLayout = itemView.findViewById(R.id.linearLayout_payment_adapter);
             linearLayout_upper = itemView.findViewById(R.id.linearUpper_paymentHistory_adapter);
             img_forward = itemView.findViewById(R.id.img_forward);
-
-
         }
     }
 }

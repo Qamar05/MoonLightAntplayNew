@@ -20,7 +20,7 @@ import com.antplay.utils.Const;
 import com.antplay.utils.SharedPreferenceUtils;
 import com.google.android.material.tabs.TabLayout;
 
-public class  OnBoardingActivity extends AppCompatActivity implements View.OnClickListener {
+public class OnBoardingActivity extends AppCompatActivity implements View.OnClickListener {
     ViewPager viewPager;
     TabLayout tabLayout;
     TextView txtSkip;
@@ -118,16 +118,13 @@ public class  OnBoardingActivity extends AppCompatActivity implements View.OnCli
         } else {
             viewPager.setCurrentItem(currentItem);
         }
-
     }
 
     private void updateSharedPreferences(boolean isNotFirstTime) {
-
 //        SharedPreferenceUtils.saveBoolean(OnBoardingActivity.this, Const.IS_FIRST_TIME,isNotFirstTime);
        /* SharedPreferences preferences = context.getSharedPreferences("com.vms.antplay",Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
         editor.putBoolean(getString(R.string.is_first_time),isNotFirstTime);
         editor.apply();*/
     }
-
 }

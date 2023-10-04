@@ -84,7 +84,7 @@ public class VerifyOTP extends Activity implements View.OnClickListener {
         }
         String verificationCodeSent = getResources().getString(R.string.verification_cade_sent_to)+" "+getMobile;
         txtVerificationCodeSentTo.setText(verificationCodeSent);
-       // Log.e("mobile get number", getMobile);
+
 
 
         EditText[] edit = {otp_textbox_one, otp_textbox_two, otp_textbox_three, otp_textbox_four, otp_textbox_five, otp_textbox_six};

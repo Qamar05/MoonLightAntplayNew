@@ -2,7 +2,6 @@ package com.antplay.ui.activity;
 
 
 import static com.antplay.utils.Const.emailPattern;
-
 import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Color;
@@ -22,7 +21,6 @@ import android.widget.Toast;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.antplay.R;
 import com.antplay.api.APIClient;
 import com.antplay.api.RetrofitAPI;
@@ -33,12 +31,13 @@ import com.antplay.ui.adapter.StateListAdapter;
 import com.antplay.utils.AppUtils;
 import com.antplay.utils.Const;
 import com.antplay.utils.SharedPreferenceUtils;
-
 import java.util.ArrayList;
 import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
+
 
 
 public class EditProfileActivity extends AppCompatActivity implements View.OnClickListener, StateListAdapter.ButtonClickListener {

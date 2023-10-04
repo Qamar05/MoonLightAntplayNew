@@ -31,28 +31,23 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class AppUtils {
-
     public static void showToast(String msg, Context ctx) {
         Toast.makeText(ctx, msg, Toast.LENGTH_LONG).show();
     }
-
     public static void showSnack(View view, int color, String message, Context context){
         Snackbar sb = Snackbar.make(view, message, BaseTransientBottomBar.LENGTH_LONG);
         sb.getView().setBackgroundColor(ContextCompat.getColor(context, color));
         sb.show();
     }
-
     public static void navigateScreen(Activity activity, Class loginActivityClass){
         Intent i = new Intent(activity,loginActivityClass);
         activity.startActivity(i);
         activity.finish();
     }
-
     public static void navigateScreenWithoutFinish(Activity activity, Class loginActivityClass){
         Intent i = new Intent(activity,loginActivityClass);
         activity.startActivity(i);
     }
-
     public static void navigateScreenSendValue(Activity activity, Class loginActivityClass ,String key , String value){
         Intent i = new Intent(activity,loginActivityClass);
         i.putExtra(key,value);
@@ -69,11 +64,8 @@ public class AppUtils {
             edtEmail.setError(mContext.getString(R.string.error_invalidEmail));
             return false;
         }
-
         return true;
     }
-
-
     public static boolean isOnline(final Context context) {
         ConnectivityManager cm = (ConnectivityManager) context
                 .getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -131,9 +123,7 @@ public class AppUtils {
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         Button close =(Button) dialog.findViewById(R.id.txtClose);
         close.setOnClickListener(view -> {dialog.dismiss();});
-
         dialog.show();
     return dialog;
     }
-
 }

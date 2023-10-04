@@ -52,17 +52,13 @@ public class StateListAdapter extends RecyclerView.Adapter<StateListAdapter.MyVi
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-
         TextView tvStateName;
         RelativeLayout rlState;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
-
             tvStateName = itemView.findViewById(R.id.tvStateName);
             rlState = itemView.findViewById(R.id.rlState);
-
-
         }
     }
     public interface ButtonClickListener {

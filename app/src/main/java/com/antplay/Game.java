@@ -309,20 +309,13 @@ public class Game extends Activity implements SurfaceHolder.Callback,
             ivClose.setVisibility(View.GONE);
 
 
-
-
         ivClose.setOnClickListener(view -> {
             ivClose.setVisibility(View.GONE);
             SharedPreferenceUtils.saveString(Game.this,Const.SHOW_OVERLAY,"true");
             overlayLayout.setVisibility(View.GONE);
         });
 
-        ivKeyboard.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                toggleKeyboard();
-            }
-        });
+        ivKeyboard.setOnClickListener(view -> toggleKeyboard());
 
 
 
@@ -428,14 +421,10 @@ public class Game extends Activity implements SurfaceHolder.Callback,
             e.printStackTrace();
         }
 
-        Log.i("testt_appp"  , "testt_11");
         if (appId == StreamConfiguration.INVALID_APP_ID) {
             finish();
             return;
         }
-
-
-        Log.i("testt_appp"  , "testt_1");
 
         // Report this shortcut being used
         ComputerDetails computer = new ComputerDetails();
@@ -2206,7 +2195,6 @@ public class Game extends Activity implements SurfaceHolder.Callback,
             public void onResponse(Call<MessageResponse> call, Response<MessageResponse> response) {
                 if(response.body().getSuccess().equalsIgnoreCase("True"))
                     callTimer(Long.valueOf(time_remaining));
-
             }
             @Override
             public void onFailure(Call<MessageResponse> call, Throwable t) {

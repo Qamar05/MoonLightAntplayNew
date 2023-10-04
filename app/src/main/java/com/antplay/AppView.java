@@ -59,7 +59,6 @@ public class AppView extends AppCompatActivity implements AdapterFragmentCallbac
     private AppGridAdapter appGridAdapter;
     private String uuidString;
     private ShortcutHelper shortcutHelper;
-
     private ComputerDetails computer;
     private ComputerManagerService.ApplistPoller poller;
     private SpinnerDialog blockingLoadSpinner;
@@ -69,7 +68,6 @@ public class AppView extends AppCompatActivity implements AdapterFragmentCallbac
     private boolean inForeground;
     private boolean showHiddenApps;
     private HashSet<Integer> hiddenAppIds = new HashSet<>();
-
     private final static int START_OR_RESUME_ID = 1;
     private final static int QUIT_ID = 2;
     private final static int START_WITH_QUIT = 4;
@@ -95,8 +93,6 @@ public class AppView extends AppCompatActivity implements AdapterFragmentCallbac
                 @Override
                 public void run() {
                     // Wait for the binder to be ready
-                    localBinder.waitForReady();
-
                     // Get the computer object
                     computer = localBinder.getComputer(uuidString);
                     if (computer == null) {
@@ -622,18 +618,14 @@ public class AppView extends AppCompatActivity implements AdapterFragmentCallbac
     @Override
     public void receiveAbsListView(AbsListView listView) {
         listView.setAdapter(appGridAdapter);
-        listView.setOnItemClickListener(new OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> arg0, View arg1, int pos,
-                                    long id) {
-                AppObject app = (AppObject) appGridAdapter.getItem(pos);
+        listView.setOnItemClickListener((arg0, arg1, pos, id) -> {
+            AppObject app = (AppObject) appGridAdapter.getItem(pos);
 
-                // Only open the context menu if something is running, otherwise start it
-                if (lastRunningAppId != 0) {
-                    openContextMenu(arg1);
-                } else {
-                    ServerHelper.doStart(AppView.this, app.app, computer, managerBinder);
-                }
+            // Only open the context menu if something is running, otherwise start it
+            if (lastRunningAppId != 0) {
+                openContextMenu(arg1);
+            } else {
+                ServerHelper.doStart(AppView.this, app.app, computer, managerBinder);
             }
         });
         UiHelper.applyStatusBarPadding(listView);

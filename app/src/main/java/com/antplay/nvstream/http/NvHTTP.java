@@ -68,14 +68,9 @@ public class NvHTTP {
     public static final int SHORT_CONNECTION_TIMEOUT = 3000;
     public static final int LONG_CONNECTION_TIMEOUT = 5000;
     public static final int READ_TIMEOUT = 7000;
-
-    // Print URL and content to logcat on debug builds
     private static boolean verbose = BuildConfig.DEBUG;
-
     private HttpUrl baseUrlHttp;
-
     private int httpsPort;
-    
     private OkHttpClient httpClientLongConnectTimeout;
     private OkHttpClient httpClientLongConnectNoReadTimeout;
     private OkHttpClient httpClientShortConnectTimeout;

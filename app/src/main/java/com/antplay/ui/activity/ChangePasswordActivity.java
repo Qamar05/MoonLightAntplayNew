@@ -38,15 +38,12 @@ public class ChangePasswordActivity extends AppCompatActivity implements View.On
     LinearLayout backLinear;
     EditText edTxtOldPassword, edTxtNewPassword, edTxtConfirmPassword;
     Button btnUpdate;
-
     private ProgressBar progressBar;
     String access_token;
     RetrofitAPI retrofitAPI;
     ImageView ivOldPasswordShow,ivNewPasswordShow,ivConfirmPasswordShow;
     boolean showOldPassword = false,showNewPassword = false,showConfirmPassword = false;
     Context mContext;
-
-
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
@@ -73,7 +70,6 @@ public class ChangePasswordActivity extends AppCompatActivity implements View.On
         ivNewPasswordShow.setOnClickListener(this);
         ivConfirmPasswordShow.setOnClickListener(this);
     }
-
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -99,7 +95,6 @@ public class ChangePasswordActivity extends AppCompatActivity implements View.On
                 break;
             }
     }
-
     private boolean CheckAllFields() {
         if (edTxtOldPassword.getText().toString().trim().length() == 0) {
             edTxtOldPassword.setError(getString(R.string.error_old_password));
@@ -122,7 +117,6 @@ public class ChangePasswordActivity extends AppCompatActivity implements View.On
         }
         return true;
     }
-
     private void callChangePasswordAPI() {
         progressBar.setVisibility(View.VISIBLE);
         ChangePassReq changePasswordRequestModal = new ChangePassReq(edTxtOldPassword.getText().toString(),
@@ -188,7 +182,6 @@ public class ChangePasswordActivity extends AppCompatActivity implements View.On
             showNewPassword = false;
         }
     }
-
     private void showHideConfirmPassword(EditText  passwordEditText , ImageView ivPassword) {
         if(!showConfirmPassword) {
             if (passwordEditText.getTransformationMethod().equals(PasswordTransformationMethod.getInstance())) {

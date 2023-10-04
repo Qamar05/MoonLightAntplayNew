@@ -23,6 +23,7 @@ public class SplashActivity extends Activity {
         isAlreadyLogin =  SharedPreferenceUtils.getBoolean(SplashActivity.this, Const.IS_LOGGED_IN);
         //doSomethingAfterAppKilled();
 
+
         new Handler().postDelayed(() -> {
             Intent i;
             if (isAlreadyLogin)

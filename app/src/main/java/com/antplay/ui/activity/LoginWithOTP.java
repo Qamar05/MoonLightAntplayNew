@@ -28,10 +28,8 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class LoginWithOTP extends AppCompatActivity implements View.OnClickListener {
-
     EditText edt_phone;
     Button btn_lestGo;
-
     boolean isPhoneNumberEntered = false;
     ProgressBar progressBar;
     TextView tv_register;
@@ -68,7 +66,6 @@ public class LoginWithOTP extends AppCompatActivity implements View.OnClickListe
                     Toast.makeText(mContext, getString(R.string.enter_registered_mobile), Toast.LENGTH_SHORT).show();
                 }
             }
-
             @Override
             public void onFailure(Call<SendOTPResponse> call, Throwable t) {
                 progressBar.setVisibility(View.GONE);
@@ -86,7 +83,6 @@ public class LoginWithOTP extends AppCompatActivity implements View.OnClickListe
             return false;
         }
         return true;
-
     }
 
     @Override
@@ -104,7 +100,6 @@ public class LoginWithOTP extends AppCompatActivity implements View.OnClickListe
                         AppUtils.showInternetDialog(mContext);
                 }
                 break;
-
         }
     }
 }

@@ -280,7 +280,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
     }
     private void getUserDetails() {
         Call<UserDetailsModal> call = retrofitAPI.getUserDetails("Bearer " + access_token);
-        call.enqueue(new Callback<UserDetailsModal>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<UserDetailsModal> call, Response<UserDetailsModal> response) {
                 if (response.code() == Const.SUCCESS_CODE_200) {
@@ -309,7 +309,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
             @Override
             public void onFailure(Call<UserDetailsModal> call, Throwable t) {
-            //    progressBar.setVisibility(View.GONE);
+                //    progressBar.setVisibility(View.GONE);
                 AppUtils.showToast(Const.something_went_wrong, mContext);
             }
         });
@@ -327,13 +327,9 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
                         try {
                             for (int i = 0; i < paymentHistory_list.size(); i++) {
                                 if (paymentHistory_list.get(i).getPaymentStatus().equalsIgnoreCase("active")) {
-                                   // txtCurrentPlan.setText(paymentHistory_list.get(i).getBillingPlan());
                                     convertDateToString(paymentHistory_list.get(i).getExpiry_date() ,paymentHistory_list.get(i).getBillingPlan());
-                                   // txtExpiryDate.setText(newdate);
                                     break;
                                 }
-                                Log.i("test_time2" , "testttt");
-
                                 txtCurrentPlan.setText("No Active Plan");
                                 txtExpiryDate.setText("N/A");
                             }
@@ -361,23 +357,16 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         Calendar c = Calendar.getInstance();
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
         SimpleDateFormat formatterOut = new SimpleDateFormat(" dd MMM , yyyy");
-
         SimpleDateFormat formatterOutTime = new SimpleDateFormat(" HH:mm:ss");
-
         String getCurrentDateTime = formatterOut.format(c.getTime());
         String getCurrentTime = formatterOutTime.format(c.getTime());
-
-
-
         String convertedDate = null;
         String convertedTime = null;
         try {
             Date date = formatter.parse(expiry_date);
             Date date2 = formatter.parse(expiry_date);
-//            System.out.println(date);
             convertedDate = formatterOut.format(date);
             convertedTime = formatterOutTime.format(date2);
-
             if (getCurrentDateTime.compareTo(convertedDate) < 0) {
                  txtCurrentPlan.setText(billingPlan);
                  txtExpiryDate.setText(convertedDate);
@@ -421,7 +410,6 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
                 }
 
             }
-
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
                 AppUtils.showToast(Const.something_went_wrong, mContext);

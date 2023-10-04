@@ -27,7 +27,6 @@ import retrofit2.Response;
 public class ForgotPasswordActivity extends Activity {
     EditText edtEmail;
     Button btnResetPassword;
-    String strEmail;
     ProgressBar  progressBar;
     Context  mContext;
     RetrofitAPI retrofitAPI;
@@ -51,7 +50,6 @@ public class ForgotPasswordActivity extends Activity {
     }
 
     private void callForgotPasswordApi() {
-        if (AppUtils.isOnline(mContext)) {
             progressBar.setVisibility(View.VISIBLE);
             ResetEmailReq resetEmailReq = new ResetEmailReq(edtEmail.getText().toString());
             Call<ResultResponse> call = retrofitAPI.forgotPassword(resetEmailReq);
@@ -81,7 +79,4 @@ public class ForgotPasswordActivity extends Activity {
                 }
             });
         }
-        else
-            Toast.makeText(mContext, getString(R.string.check_internet_connection), Toast.LENGTH_SHORT).show();
-    }
 }
