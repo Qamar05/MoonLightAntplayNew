@@ -526,11 +526,11 @@ public class PcView extends AppCompatActivity implements AdapterFragmentCallback
                     SharedPreferenceUtils.saveBoolean(PcView.this, Const.FIRSTTIMEVMTIMER, false);
                     SharedPreferenceUtils.saveBoolean(PcView.this, Const.FIRSTTIMEDIALOG, false);
                     firstTimeDialog = false;
-                    //connectWebSocket();
-                    getVM("");
+                    connectWebSocket();
+                    //getVM("");
                 } else
-                    //connectWebSocket();
-                    openShutDownVMDialog("vmtimer", 1200 - time);
+                    connectWebSocket();
+                    //openShutDownVMDialog("vmtimer", 1200 - time);
             }
         }
 
@@ -1186,12 +1186,12 @@ public class PcView extends AppCompatActivity implements AdapterFragmentCallback
                             SharedPreferenceUtils.saveBoolean(PcView.this, Const.FIRST_TIME_PAYMENT, false);
                             firstTimeVMTimer = true;
                             SharedPreferenceUtils.saveBoolean(PcView.this, Const.FIRSTTIMEVMTIMER, true);
-                           // connectWebSocket();
                             saveTime();
-                            openShutDownVMDialog("vmtimer", 1200L);
+                            connectWebSocket();
+//                            openShutDownVMDialog("vmtimer", 1200L);
                         } else if (btnStatus) {
-                            //connectWebSocket();
-                            openShutDownVMDialog("start", 0L);
+                            connectWebSocket();
+                           // openShutDownVMDialog("start", 0L);
                         }
                     }
                 } else if (response.code() == 403) {
