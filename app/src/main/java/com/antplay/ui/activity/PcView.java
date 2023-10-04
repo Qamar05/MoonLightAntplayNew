@@ -1822,7 +1822,11 @@ public class PcView extends AppCompatActivity implements AdapterFragmentCallback
                         time_remaining = jsonArray.getJSONObject(0).getString("time_remaining");
                         status = jsonArray.getJSONObject(0).getString("status");
                         vmip = jsonArray.getJSONObject(0).getString("vmip");
-                        connectWebSocket();
+                        String userType = jsonArray.getJSONObject(0).getString("user_type");
+                        if(userType.equalsIgnoreCase("android"))
+                            connectWebSocket();
+                        else
+                            openDialog(true,getResources().getString(R.string.other_vmMsg));
                     }
                     catch (Exception e){
                     }

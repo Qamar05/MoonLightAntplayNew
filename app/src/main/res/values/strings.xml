@@ -397,6 +397,7 @@
     <string name="payment_success">Payment Success</string>
     <string name="delete_txt">Delete Account!</string>
     <string name="delete_msg">Are you sure, you want to delete your account permanently?</string>
+    <string name="other_vmMsg">please login Your account</string>
 
 <!--    <string name="server_msg">Servers are full. You are in queue. please wait for sometime</string>-->
 
