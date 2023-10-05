@@ -58,11 +58,11 @@ public class ForgotPasswordActivity extends Activity {
                 public void onResponse(Call<ResultResponse> call, Response<ResultResponse> response) {
                     progressBar.setVisibility(View.GONE);
 
-                    Toast.makeText(mContext, "" + response.body().getMessage(), Toast.LENGTH_SHORT).show();
                     if (response.code() == Const.SUCCESS_CODE_200) {
                         Toast.makeText(mContext, "" + response.body().getMessage(), Toast.LENGTH_SHORT).show();
                         AppUtils.navigateScreen(ForgotPasswordActivity.this, LoginActivity.class);
-                    } else if (response.code() == Const.ERROR_CODE_500 ||
+                    }
+                    else if (response.code() == Const.ERROR_CODE_500 ||
                             response.code() == Const.ERROR_CODE_400 ||
                             response.code() == Const.ERROR_CODE_404) {
                         try {

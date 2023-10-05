@@ -396,9 +396,9 @@ public class PcView extends AppCompatActivity implements AdapterFragmentCallback
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             setShouldDockBigOverlays(false);
         }
-        Intent intent = new Intent(getBaseContext(), ClearService.class);
-//        intent.putExtra("MyService.data", "myValue");
-        startService(intent);
+//        Intent intent = new Intent(getBaseContext(), ClearService.class);
+////        intent.putExtra("MyService.data", "myValue");
+//        startService(intent);
 
         PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
         pcGridAdapter.updateLayoutWithPreferences(this, PreferenceConfiguration.readPreferences(this));
@@ -1248,16 +1248,28 @@ public class PcView extends AppCompatActivity implements AdapterFragmentCallback
                             vmip = jsonArray.getJSONObject(0).getString("vmip");
                             time_remaining = jsonArray.getJSONObject(0).getString("time_remaining");
                             SharedPreferenceUtils.saveString(PcView.this, Const.VMID, strVMId);
-
-                            if (startVmCallCount.equalsIgnoreCase("0")) {
-                                firstTimeDialog = true;
-                                SharedPreferenceUtils.saveBoolean(PcView.this, Const.FIRSTTIMEDIALOG, true);
-                                paymentStatus = SharedPreferenceUtils.getBoolean(PcView.this, Const.PAYMENT_STATUS);
-                                if (!paymentStatus) {
-                                    openPaymentSuccessDialog();
-                                    paymentStatus = true;
-                                    SharedPreferenceUtils.saveBoolean(PcView.this, Const.PAYMENT_STATUS, true);
-                                } else {
+                            String userType = jsonArray.getJSONObject(0).getString("platform_type");
+                            if(userType.equalsIgnoreCase("android")) {
+                                if (startVmCallCount.equalsIgnoreCase("0")) {
+                                    firstTimeDialog = true;
+                                    SharedPreferenceUtils.saveBoolean(PcView.this, Const.FIRSTTIMEDIALOG, true);
+                                    paymentStatus = SharedPreferenceUtils.getBoolean(PcView.this, Const.PAYMENT_STATUS);
+                                    if (!paymentStatus) {
+                                        openPaymentSuccessDialog();
+                                        paymentStatus = true;
+                                        SharedPreferenceUtils.saveBoolean(PcView.this, Const.PAYMENT_STATUS, true);
+                                    } else {
+                                        ivRefresh.setVisibility(View.GONE);
+                                        btnStartVM.setVisibility(View.VISIBLE);
+                                        btnShutDownVM.setVisibility(View.GONE);
+                                        progressBar.setVisibility(View.GONE);
+                                        btnStartVM.setText("Start");
+                                        showTimer(time_remaining);
+                                    }
+                                }
+                                else if (status.equalsIgnoreCase("running"))
+                                    getVMIP(time_remaining, startVm);
+                                else {
                                     ivRefresh.setVisibility(View.GONE);
                                     btnStartVM.setVisibility(View.VISIBLE);
                                     btnShutDownVM.setVisibility(View.GONE);
@@ -1265,16 +1277,10 @@ public class PcView extends AppCompatActivity implements AdapterFragmentCallback
                                     btnStartVM.setText("Start");
                                     showTimer(time_remaining);
                                 }
-                            } else if (status.equalsIgnoreCase("running"))
-                                getVMIP(time_remaining, startVm);
-                            else {
-                                ivRefresh.setVisibility(View.GONE);
-                                btnStartVM.setVisibility(View.VISIBLE);
-                                btnShutDownVM.setVisibility(View.GONE);
-                                progressBar.setVisibility(View.GONE);
-                                btnStartVM.setText("Start");
-                                showTimer(time_remaining);
                             }
+                            else
+                                openDialogOtherVM(getResources().getString(R.string.other_vmMsg));
+
                         } catch (Exception e) {
                         }
                     } else if (response.code() == 401) {
@@ -1737,6 +1743,29 @@ public class PcView extends AppCompatActivity implements AdapterFragmentCallback
             public void onFailure(Call<ResponseBody> call, Throwable t) {
             }
         });
+    }
+
+    private void openDialogOtherVM(String msg) {
+        Dialog dialog = new Dialog(PcView.this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.dialog_logout);
+        dialog.setCancelable(false);
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.getWindow().setLayout(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        TextView titleText = dialog.findViewById(R.id.titleText);
+        TextView msgText = dialog.findViewById(R.id.msgText);
+        Button txtNo = dialog.findViewById(R.id.txtNo);
+        Button txtYes = dialog.findViewById(R.id.txtYes);
+        titleText.setText("Oops!");
+
+        msgText.setText(msg);
+        txtYes.setVisibility(View.GONE);
+        txtNo.setText("Ok");
+        txtNo.setOnClickListener(view -> {
+            dialog.dismiss();
+        });
+        dialog.show();
     }
 
 }
