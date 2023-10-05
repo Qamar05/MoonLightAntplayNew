@@ -431,8 +431,8 @@ public class PcView extends AppCompatActivity implements AdapterFragmentCallback
         swipeLayout.setOnRefreshListener(() -> {
             new Handler().postDelayed(() -> {
                 swipeLayout.setRefreshing(false);
-                getVMInitiallyCall();
-               // getVM("");
+              //  getVMInitiallyCall();
+               getVM("");
             }, 1000);
         });
         swipeLayout.setColorSchemeColors(getResources().getColor(R.color.teal_700));
@@ -448,6 +448,7 @@ public class PcView extends AppCompatActivity implements AdapterFragmentCallback
                 if (firstTimeDialog) {
                     startVm(strVMId);
                 } else {
+                    Log.i("testt_statrr" , "1");
                     btnStatus = true;
                     btnShutDownStatus = false;
                     SharedPreferenceUtils.saveBoolean(PcView.this, Const.STARTBtnStatus, true);
@@ -506,6 +507,7 @@ public class PcView extends AppCompatActivity implements AdapterFragmentCallback
         accessToken = SharedPreferenceUtils.getString(PcView.this, Const.ACCESS_TOKEN);
         firstTimeStartVmApi = SharedPreferenceUtils.getBoolean(PcView.this, Const.FIRSTTIMESTARTVMAPI);
         String email = SharedPreferenceUtils.getString(PcView.this, Const.EMAIL_ID);
+        btnStatus = SharedPreferenceUtils.getBoolean(PcView.this, Const.STARTBtnStatus);
         String loginEmail = SharedPreferenceUtils.getString(PcView.this, Const.LOGIN_EMAIL);
         if (email == null || !email.equalsIgnoreCase(loginEmail)) {
             SharedPreferenceUtils.saveString(PcView.this, Const.EMAIL_ID, loginEmail);
@@ -513,25 +515,30 @@ public class PcView extends AppCompatActivity implements AdapterFragmentCallback
         }
         inForeground = true;
         firstTimeVMTimer = SharedPreferenceUtils.getBoolean(PcView.this, Const.FIRSTTIMEVMTIMER);
+        Log.i("test_firstttt" ,""+firstTimeVMTimer);
         if (!firstTimeVMTimer) {
             SharedPreferenceUtils.saveString(PcView.this, Const.EMAIL_ID, loginEmail);
-            getVMInitiallyCall();
-//            if (AppUtils.isOnline(PcView.this))
-//                getVM("");
-//            else
-//                AppUtils.showInternetDialog(PcView.this);
+            if (AppUtils.isOnline(PcView.this))
+                getVM("");
+            else
+                AppUtils.showInternetDialog(PcView.this);
         } else {
-            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-                Long time = timeDifference();
-                if (time == null || time > 1200) {
-                    SharedPreferenceUtils.saveBoolean(PcView.this, Const.FIRSTTIMEVMTIMER, false);
-                    SharedPreferenceUtils.saveBoolean(PcView.this, Const.FIRSTTIMEDIALOG, false);
-                    firstTimeDialog = false;
-                    getVMInitiallyCall();
-                    //getVM("");
-                } else
-                    getVMInitiallyCall();
+            if(btnStatus) {
+                getVMInitiallyCall();
+            }
+            else {
+                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                    Long time = timeDifference();
+                    if (time == null || time > 1200) {
+                        SharedPreferenceUtils.saveBoolean(PcView.this, Const.FIRSTTIMEVMTIMER, false);
+                        SharedPreferenceUtils.saveBoolean(PcView.this, Const.FIRSTTIMEDIALOG, false);
+                        firstTimeDialog = false;
+                        getVMInitiallyCall();
+                        //getVM("");
+                    } else
+                        getVMInitiallyCall();
                     //openShutDownVMDialog("vmtimer", 1200 - time);
+                }
             }
         }
 
@@ -1192,6 +1199,9 @@ public class PcView extends AppCompatActivity implements AdapterFragmentCallback
                             getVMInitiallyCall();
 //                            openShutDownVMDialog("vmtimer", 1200L);
                         } else if (btnStatus) {
+                            Log.i("testt_statrr" , "2");
+                            firstTimeVMTimer = true;
+                            SharedPreferenceUtils.saveBoolean(PcView.this, Const.FIRSTTIMEVMTIMER, true);
                             getVMInitiallyCall();
 //                            connectWebSocket();
                            // openShutDownVMDialog("start", 0L);
@@ -1746,6 +1756,7 @@ public class PcView extends AppCompatActivity implements AdapterFragmentCallback
     }
 
     public void connectWebSocket(){
+        Log.i("testt_statrr" , "6");
         URI uri;
         try {
             uri = new URI(Const.WEBSOCKET_URL);
@@ -1769,11 +1780,21 @@ public class PcView extends AppCompatActivity implements AdapterFragmentCallback
                     public void run() {
                         try{
                             Log.i("testt_websocket_msg", message);
-                            if(message.equalsIgnoreCase("Server Ready"))
+                            if(message.equalsIgnoreCase("Server Ready")) {
+                                firstTimeVMTimer = false;
+                                SharedPreferenceUtils.saveBoolean(PcView.this, Const.FIRSTTIMEVMTIMER, false);
+                                btnStatus = false;
+                                SharedPreferenceUtils.saveBoolean(PcView.this, Const.STARTBtnStatus, false);
                                 getVM("");
-//                            else
 
-//                            Server Ready
+//                                firstTimeStartVmApi = true;
+//                                SharedPreferenceUtils.saveBoolean(PcView.this, Const.FIRSTTIMESTARTVMAPI, true);
+//                                SharedPreferenceUtils.saveBoolean(PcView.this, Const.FIRSTTIMEDIALOG, false);
+//                                firstTimeDialog = false;
+
+                            }
+                            else
+                                getVM("");
                         } catch (Exception e){
                             e.printStackTrace();
                         }
@@ -1810,6 +1831,7 @@ public class PcView extends AppCompatActivity implements AdapterFragmentCallback
     }
 
     private void getVMInitiallyCall() {
+        Log.i("testt_statrr" , "3");
         Call<ResponseBody> call = retrofitAPI.getVMFromServer("Bearer " + accessToken);
         call.enqueue(new Callback<>() {
             @Override
@@ -1822,11 +1844,13 @@ public class PcView extends AppCompatActivity implements AdapterFragmentCallback
                         time_remaining = jsonArray.getJSONObject(0).getString("time_remaining");
                         status = jsonArray.getJSONObject(0).getString("status");
                         vmip = jsonArray.getJSONObject(0).getString("vmip");
-                        String userType = jsonArray.getJSONObject(0).getString("user_type");
-                        if(userType.equalsIgnoreCase("android"))
+                        String userType = jsonArray.getJSONObject(0).getString("platform_type");
+                        if(userType.equalsIgnoreCase("android")) {
+                            Log.i("testt_statrr", "4");
                             connectWebSocket();
+                        }
                         else
-                            openDialog(true,getResources().getString(R.string.other_vmMsg));
+                            openDialogForOtherVM(getResources().getString(R.string.other_vmMsg));
                     }
                     catch (Exception e){
                     }
@@ -1838,6 +1862,29 @@ public class PcView extends AppCompatActivity implements AdapterFragmentCallback
                 AppUtils.showToast(Const.something_went_wrong, PcView.this);
             }
         });
+    }
+    private void openDialogForOtherVM(String msg) {
+        Dialog dialog = new Dialog(PcView.this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.dialog_logout);
+        dialog.setCancelable(false);
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.getWindow().setLayout(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        TextView titleText = dialog.findViewById(R.id.titleText);
+        TextView msgText = dialog.findViewById(R.id.msgText);
+        Button txtNo = dialog.findViewById(R.id.txtNo);
+        Button txtYes = dialog.findViewById(R.id.txtYes);
+        titleText.setText("Oops!");
+        msgText.setText(msg);
+        txtYes.setVisibility(View.GONE);
+        txtNo.setText("Ok");
+
+
+        txtNo.setOnClickListener(view -> {
+            dialog.dismiss();
+        });
+        dialog.show();
     }
 }
 
