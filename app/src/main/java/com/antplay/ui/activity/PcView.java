@@ -118,7 +118,7 @@ import tech.gusavila92.websocketclient.WebSocketClient;
 
 public class PcView extends AppCompatActivity implements AdapterFragmentCallbacks {
     private RelativeLayout noPcFoundLayout;
-    Dialog shutDownVMDialog, paymentSuccessDialog;
+    Dialog shutDownVMDialog, paymentSuccessDialog,mDialog;
     boolean shutdownVMStatus, startVMStatus, isVMConnected, isVmDisConnected, firstTimeVMTimer,
             paymentStatus = false, startVmTimerStatus = false, firstTimeStartVmApi = false,
             isFirstTime = true, btnStatus = false, btnShutDownStatus = false, firstTimeDialog = false,
@@ -245,8 +245,8 @@ public class PcView extends AppCompatActivity implements AdapterFragmentCallback
         int portTestResult;
 
         if (startVmValue.equalsIgnoreCase("")) {
-            dialog = SpinnerDialog.displayDialog(this, getResources().getString(R.string.title_add_pc),
-                    getResources().getString(R.string.msg_add_pc), false);
+//            dialog = SpinnerDialog.displayDialog(this, getResources().getString(R.string.title_add_pc),
+//                    getResources().getString(R.string.msg_add_pc), false);
         }
 
         try {
@@ -275,7 +275,7 @@ public class PcView extends AppCompatActivity implements AdapterFragmentCallback
             }
         } catch (InterruptedException e) {
             if (startVmValue.equalsIgnoreCase("")) {
-                dialog.dismiss();
+//                dialog.dismiss();
             }
             throw e;
         } catch (IllegalArgumentException e) {
@@ -448,7 +448,6 @@ public class PcView extends AppCompatActivity implements AdapterFragmentCallback
                 if (firstTimeDialog) {
                     startVm(strVMId);
                 } else {
-                    Log.i("testt_statrr" , "1");
                     btnStatus = true;
                     btnShutDownStatus = false;
                     SharedPreferenceUtils.saveBoolean(PcView.this, Const.STARTBtnStatus, true);
@@ -515,7 +514,6 @@ public class PcView extends AppCompatActivity implements AdapterFragmentCallback
         }
         inForeground = true;
         firstTimeVMTimer = SharedPreferenceUtils.getBoolean(PcView.this, Const.FIRSTTIMEVMTIMER);
-        Log.i("test_firstttt" ,""+firstTimeVMTimer);
         if (!firstTimeVMTimer) {
             SharedPreferenceUtils.saveString(PcView.this, Const.EMAIL_ID, loginEmail);
             if (AppUtils.isOnline(PcView.this))
@@ -533,10 +531,14 @@ public class PcView extends AppCompatActivity implements AdapterFragmentCallback
                         SharedPreferenceUtils.saveBoolean(PcView.this, Const.FIRSTTIMEVMTIMER, false);
                         SharedPreferenceUtils.saveBoolean(PcView.this, Const.FIRSTTIMEDIALOG, false);
                         firstTimeDialog = false;
+//                        getVMInitiallyCall();
+                        getVM("");
+                    } else{
+                        openDialog(true,getResources().getString(R.string.startVMMsg),"startSocket");
                         getVMInitiallyCall();
-                        //getVM("");
-                    } else
-                        getVMInitiallyCall();
+
+                    }
+
                     //openShutDownVMDialog("vmtimer", 1200 - time);
                 }
             }
@@ -1075,6 +1077,14 @@ public class PcView extends AppCompatActivity implements AdapterFragmentCallback
         text_PcName.setText("" + details.name);
         if (status != null) {
             if (status.equalsIgnoreCase("running")) {
+                try {
+                    if (mDialog.isShowing())
+                        mDialog.dismiss();
+                }
+                catch (Exception e){
+
+                }
+
                 if (!btnShutDownStatus)
                     btnStartVM.setVisibility(View.VISIBLE);
                 else
@@ -1115,7 +1125,7 @@ public class PcView extends AppCompatActivity implements AdapterFragmentCallback
                 noPcFoundLayout.setVisibility(View.INVISIBLE);
                 try {
                     if (startVmValue.equalsIgnoreCase("")) {
-                        dialog.dismiss();
+                       // dialog.dismiss();
                     }
                 } catch (Exception e) {
                 }
@@ -1196,10 +1206,12 @@ public class PcView extends AppCompatActivity implements AdapterFragmentCallback
                             firstTimeVMTimer = true;
                             SharedPreferenceUtils.saveBoolean(PcView.this, Const.FIRSTTIMEVMTIMER, true);
                             saveTime();
+                            openDialog(true,getResources().getString(R.string.startVMMsg),"startSocket");
+
                             getVMInitiallyCall();
 //                            openShutDownVMDialog("vmtimer", 1200L);
                         } else if (btnStatus) {
-                            Log.i("testt_statrr" , "2");
+                            openDialog(true,getResources().getString(R.string.startVMMsg),"startSocket");
                             firstTimeVMTimer = true;
                             SharedPreferenceUtils.saveBoolean(PcView.this, Const.FIRSTTIMEVMTIMER, true);
                             getVMInitiallyCall();
@@ -1212,7 +1224,7 @@ public class PcView extends AppCompatActivity implements AdapterFragmentCallback
                         JSONObject jObj = new JSONObject(response.errorBody().string());
                         String value = jObj.getString("message");
                         if (value.contains("Servers are full")) {
-                            openDialog(true, value);
+                            openDialog(true, value ,"");
                         }
                     } catch (Exception e) {
 
@@ -1310,7 +1322,7 @@ public class PcView extends AppCompatActivity implements AdapterFragmentCallback
                         try {
                             JSONObject jObj = new JSONObject(response.errorBody().string());
                             String value = jObj.getString("message");
-                            openDialog(false, value);
+                            openDialog(false, value , "");
                         } catch (Exception e) {
                         }
                         try {
@@ -1370,7 +1382,7 @@ public class PcView extends AppCompatActivity implements AdapterFragmentCallback
                     showTimer(timeRemaing);
                     if (status.equalsIgnoreCase("running")) {
                         if (!startVmTimerStatus) {
-                            openDialog(true, getResources().getString(R.string.startVMMsg));
+                            openDialog(true, getResources().getString(R.string.startVMMsg) ,"");
                             searchPC.setText(getResources().getString(R.string.startVMMsg));
                         } else
                             callTimer(timerText, 60, "start");
@@ -1657,18 +1669,18 @@ public class PcView extends AppCompatActivity implements AdapterFragmentCallback
         new Handler().postDelayed(() -> doubleBackToExitPressedOnce = false, 2000);
     }
 
-    private void openDialog(boolean purchaseVmFLag, String msg) {
-        Dialog dialog = new Dialog(PcView.this);
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setContentView(R.layout.dialog_logout);
-        dialog.setCancelable(false);
-        dialog.setCanceledOnTouchOutside(false);
-        dialog.getWindow().setLayout(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
-        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        TextView titleText = dialog.findViewById(R.id.titleText);
-        TextView msgText = dialog.findViewById(R.id.msgText);
-        Button txtNo = dialog.findViewById(R.id.txtNo);
-        Button txtYes = dialog.findViewById(R.id.txtYes);
+    private void openDialog(boolean purchaseVmFLag, String msg,String strStartSocket) {
+        mDialog = new Dialog(PcView.this);
+        mDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        mDialog.setContentView(R.layout.dialog_logout);
+        mDialog.setCancelable(false);
+        mDialog.setCanceledOnTouchOutside(false);
+        mDialog.getWindow().setLayout(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
+        mDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        TextView titleText = mDialog.findViewById(R.id.titleText);
+        TextView msgText = mDialog.findViewById(R.id.msgText);
+        Button txtNo = mDialog.findViewById(R.id.txtNo);
+        Button txtYes = mDialog.findViewById(R.id.txtYes);
         titleText.setText(getResources().getString(R.string.no_vm_title));
         txtYes.setText("purchase");
 
@@ -1681,15 +1693,22 @@ public class PcView extends AppCompatActivity implements AdapterFragmentCallback
             txtNo.setText("Ok");
         }
 
+
+        if(strStartSocket.equalsIgnoreCase("startSocket"))
+            txtNo.setVisibility(View.GONE);
+        else
+            txtNo.setVisibility(View.VISIBLE);
+
+
         txtYes.setOnClickListener(view -> {
-            dialog.dismiss();
+            mDialog.dismiss();
             SharedPreferenceUtils.saveBoolean(PcView.this, Const.FIRST_TIME_PAYMENT, true);
             AppUtils.navigateScreenWithoutFinish(PcView.this, SubscriptionPlanActivity.class);
         });
         txtNo.setOnClickListener(view -> {
-            dialog.dismiss();
+            mDialog.dismiss();
         });
-        dialog.show();
+        mDialog.show();
     }
 
     private void openPaymentSuccessDialog() {
@@ -1791,11 +1810,13 @@ public class PcView extends AppCompatActivity implements AdapterFragmentCallback
 //                                SharedPreferenceUtils.saveBoolean(PcView.this, Const.FIRSTTIMESTARTVMAPI, true);
 //                                SharedPreferenceUtils.saveBoolean(PcView.this, Const.FIRSTTIMEDIALOG, false);
 //                                firstTimeDialog = false;
+                                }
+                            else{
+                                // getVM("");
 
                             }
-                            else
-                                getVM("");
                         } catch (Exception e){
+                            Log.i("websocket_msg_expp", "exception " + e.getMessage());
                             e.printStackTrace();
                         }
                     }
