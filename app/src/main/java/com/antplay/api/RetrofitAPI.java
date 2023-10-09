@@ -77,6 +77,8 @@ public interface RetrofitAPI {
     Call<ResponseBody> getVMIP(@Header("Authorization") String token);
     @POST("deleteuser/")
     Call<ResponseBody> deleteUser(@Header("Authorization") String Token);
+    @POST("vmqueuesystem/")
+    Call<ResponseBody> vmQueueSystem(@Header("Authorization") String Token);
 }
 
 

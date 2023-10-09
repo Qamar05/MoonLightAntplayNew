@@ -57,7 +57,6 @@ public class ForgotPasswordActivity extends Activity {
                 @Override
                 public void onResponse(Call<ResultResponse> call, Response<ResultResponse> response) {
                     progressBar.setVisibility(View.GONE);
-
                     if (response.code() == Const.SUCCESS_CODE_200) {
                         Toast.makeText(mContext, "" + response.body().getMessage(), Toast.LENGTH_SHORT).show();
                         AppUtils.navigateScreen(ForgotPasswordActivity.this, LoginActivity.class);

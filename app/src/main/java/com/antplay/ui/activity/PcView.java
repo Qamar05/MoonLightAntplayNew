@@ -542,13 +542,13 @@ public class PcView extends AppCompatActivity implements AdapterFragmentCallback
                     if (!isFirstTime) {
                         if (AppUtils.isOnline(PcView.this))
                             getVMForShutDown();
-                        else
-                            AppUtils.showInternetDialog(PcView.this);
+//                        else
+//                            AppUtils.showInternetDialog(PcView.this);
                     } else {
                         isFirstTime = false;
                     }
                 }
-            }, 0, 400 * 1000);
+            }, 0, 300 * 1000);
         }
 
 
@@ -1189,6 +1189,8 @@ public class PcView extends AppCompatActivity implements AdapterFragmentCallback
                         } else if (btnStatus) {
                             //connectWebSocket();
                             openShutDownVMDialog("start", 0L);
+//                            openDialogOtherVM(true, "jkvhsjvgsfkvbs");
+
                         }
                     }
                 } else if (response.code() == 403) {
@@ -1196,7 +1198,7 @@ public class PcView extends AppCompatActivity implements AdapterFragmentCallback
                         JSONObject jObj = new JSONObject(response.errorBody().string());
                         String value = jObj.getString("message");
                         if (value.contains("Servers are full")) {
-                            openDialog(true, value);
+                            openDialogOtherVM(true, value);
                         }
                     } catch (Exception e) {
 
@@ -1279,7 +1281,7 @@ public class PcView extends AppCompatActivity implements AdapterFragmentCallback
                                 }
                             }
                             else
-                                openDialogOtherVM(getResources().getString(R.string.other_vmMsg));
+                                openDialogOtherVM(false,getResources().getString(R.string.other_vmMsg));
 
                         } catch (Exception e) {
                         }
@@ -1647,6 +1649,43 @@ public class PcView extends AppCompatActivity implements AdapterFragmentCallback
         new Handler().postDelayed(() -> doubleBackToExitPressedOnce = false, 2000);
     }
 
+    private void callRefreshAPi() {
+        String refreshToken = SharedPreferenceUtils.getString(PcView.this, Const.REFRESH_TOKEN);
+        RefreshRequestModel refreshRequestModel = new RefreshRequestModel(refreshToken);
+        Call<ResponseBody> call = retrofitAPI.userRefresh(refreshRequestModel);
+        call.enqueue(new Callback<>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if (response.code() == 200) {
+                    try {
+                        String responseValue = response.body().string();
+                        JSONObject jObj = new JSONObject(responseValue);
+                        String accessToken = jObj.getString("access");
+                        SharedPreferenceUtils.saveString(PcView.this, Const.ACCESS_TOKEN, accessToken);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                } else if (response.code() == Const.ERROR_CODE_400 ||
+                        response.code() == Const.ERROR_CODE_500 ||
+                        response.code() == Const.ERROR_CODE_404 ||
+                        response.code() == 401) {
+                    try {
+                        JSONObject jObj = new JSONObject(response.errorBody().string());
+                        Toast.makeText(PcView.this, jObj.getString("detail"), Toast.LENGTH_SHORT).show();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    Toast.makeText(PcView.this, "Something went wrong, please try again later.", Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+            }
+        });
+    }
+
     private void openDialog(boolean purchaseVmFLag, String msg) {
         Dialog dialog = new Dialog(PcView.this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -1708,10 +1747,47 @@ public class PcView extends AppCompatActivity implements AdapterFragmentCallback
         paymentSuccessDialog.show();
     }
 
-    private void callRefreshAPi() {
-        String refreshToken = SharedPreferenceUtils.getString(PcView.this, Const.REFRESH_TOKEN);
-        RefreshRequestModel refreshRequestModel = new RefreshRequestModel(refreshToken);
-        Call<ResponseBody> call = retrofitAPI.userRefresh(refreshRequestModel);
+    private void openDialogOtherVM(boolean status , String msg) {
+        Dialog dialog = new Dialog(PcView.this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.dialog_logout);
+        dialog.setCancelable(false);
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.getWindow().setLayout(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        TextView titleText = dialog.findViewById(R.id.titleText);
+        TextView msgText = dialog.findViewById(R.id.msgText);
+        Button txtNo = dialog.findViewById(R.id.txtNo);
+        Button txtYes = dialog.findViewById(R.id.txtYes);
+        titleText.setText("Oops!");
+        msgText.setText(msg);
+        if(!status) {
+            txtNo.setVisibility(View.GONE);
+            txtYes.setText("Ok");
+        }
+        else {
+            txtNo.setVisibility(View.VISIBLE);
+            txtNo.setText("Try Again");
+            txtYes.setText("Exit");
+        }
+
+        txtNo.setOnClickListener(view -> {
+            dialog.dismiss();
+            callVMQueueSystemApi(msg);
+        });
+        txtYes.setOnClickListener(view -> {
+            if(!status)
+                dialog.dismiss();
+            else {
+                dialog.dismiss();
+                finish();
+            }
+        });
+        dialog.show();
+    }
+
+    private void callVMQueueSystemApi(String msg) {
+        Call<ResponseBody> call = retrofitAPI.vmQueueSystem("Bearer "+accessToken);
         call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1719,8 +1795,14 @@ public class PcView extends AppCompatActivity implements AdapterFragmentCallback
                     try {
                         String responseValue = response.body().string();
                         JSONObject jObj = new JSONObject(responseValue);
-                        String accessToken = jObj.getString("access");
-                        SharedPreferenceUtils.saveString(PcView.this, Const.ACCESS_TOKEN, accessToken);
+                        String value = jObj.getString("message");
+                        boolean status = jObj.getBoolean("status");
+//                        {"status":true,"message":"Servers are free."}
+                        if(status){
+                            startVm(strVMId);
+                        }
+                        else
+                            openDialogOtherVM(true,msg);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -1738,35 +1820,10 @@ public class PcView extends AppCompatActivity implements AdapterFragmentCallback
                     Toast.makeText(PcView.this, "Something went wrong, please try again later.", Toast.LENGTH_LONG).show();
                 }
             }
-
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
             }
         });
     }
-
-    private void openDialogOtherVM(String msg) {
-        Dialog dialog = new Dialog(PcView.this);
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setContentView(R.layout.dialog_logout);
-        dialog.setCancelable(false);
-        dialog.setCanceledOnTouchOutside(false);
-        dialog.getWindow().setLayout(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
-        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        TextView titleText = dialog.findViewById(R.id.titleText);
-        TextView msgText = dialog.findViewById(R.id.msgText);
-        Button txtNo = dialog.findViewById(R.id.txtNo);
-        Button txtYes = dialog.findViewById(R.id.txtYes);
-        titleText.setText("Oops!");
-
-        msgText.setText(msg);
-        txtYes.setVisibility(View.GONE);
-        txtNo.setText("Ok");
-        txtNo.setOnClickListener(view -> {
-            dialog.dismiss();
-        });
-        dialog.show();
-    }
-
 }
 
