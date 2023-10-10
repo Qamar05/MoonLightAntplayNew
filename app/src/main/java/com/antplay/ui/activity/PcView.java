@@ -60,6 +60,12 @@ import com.antplay.utils.SharedPreferenceUtils;
 import com.antplay.utils.ShortcutHelper;
 import com.antplay.utils.SpinnerDialog;
 import com.antplay.utils.UiHelper;
+import com.google.android.gms.tasks.Task;
+import com.google.android.play.core.appupdate.AppUpdateInfo;
+import com.google.android.play.core.appupdate.AppUpdateManager;
+import com.google.android.play.core.appupdate.AppUpdateManagerFactory;
+import com.google.android.play.core.install.model.AppUpdateType;
+import com.google.android.play.core.install.model.UpdateAvailability;
 
 
 import android.app.ActivityManager;
@@ -67,6 +73,7 @@ import android.app.Dialog;
 import android.app.Service;
 import android.content.ComponentName;
 import android.content.Intent;
+import android.content.IntentSender;
 import android.content.ServiceConnection;
 import android.content.res.Configuration;
 import android.graphics.Color;
@@ -98,6 +105,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 
+import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
@@ -118,6 +126,8 @@ import retrofit2.Response;
 public class PcView extends AppCompatActivity implements AdapterFragmentCallbacks {
     private RelativeLayout noPcFoundLayout;
     Dialog shutDownVMDialog, paymentSuccessDialog;
+    AppUpdateManager appUpdateManager;
+    int APP_UPDATE_REQUEST_CODE = 32023;
     boolean shutdownVMStatus, startVMStatus, isVMConnected, isVmDisConnected, firstTimeVMTimer,
             paymentStatus = false, startVmTimerStatus = false, firstTimeStartVmApi = false,
             isFirstTime = true, btnStatus = false, btnShutDownStatus = false, firstTimeDialog = false,
@@ -504,6 +514,8 @@ public class PcView extends AppCompatActivity implements AdapterFragmentCallback
         firstTimeStartVmApi = SharedPreferenceUtils.getBoolean(PcView.this, Const.FIRSTTIMESTARTVMAPI);
         String email = SharedPreferenceUtils.getString(PcView.this, Const.EMAIL_ID);
         String loginEmail = SharedPreferenceUtils.getString(PcView.this, Const.LOGIN_EMAIL);
+        appUpdateManager = AppUpdateManagerFactory.create(PcView.this);
+        checkForAppUpdateAvailability();
         if (email == null || !email.equalsIgnoreCase(loginEmail)) {
             SharedPreferenceUtils.saveString(PcView.this, Const.EMAIL_ID, loginEmail);
             SharedPreferenceUtils.saveBoolean(PcView.this, Const.FIRSTTIMEVMTIMER, false);
@@ -1824,6 +1836,31 @@ public class PcView extends AppCompatActivity implements AdapterFragmentCallback
             public void onFailure(Call<ResponseBody> call, Throwable t) {
             }
         });
+    }
+    private void checkForAppUpdateAvailability() {
+        Task<AppUpdateInfo> appUpdateInfoTask = appUpdateManager.getAppUpdateInfo();
+        appUpdateInfoTask.addOnSuccessListener(appUpdateInfo -> {
+            if (appUpdateInfo.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE &&
+                    appUpdateInfo.isUpdateTypeAllowed(AppUpdateType.IMMEDIATE)) {
+                try {
+                    appUpdateManager.startUpdateFlowForResult(appUpdateInfo, AppUpdateType.IMMEDIATE, this, APP_UPDATE_REQUEST_CODE);
+                } catch (IntentSender.SendIntentException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == APP_UPDATE_REQUEST_CODE) {
+            if (resultCode != RESULT_OK) {
+                Log.d(TAG, "Update flow failed! Result code: " + resultCode);
+                // If the update is cancelled or fails,
+                // you can request to start the update again.
+                checkForAppUpdateAvailability();
+            }
+        }
     }
 }
 
