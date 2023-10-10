@@ -97,7 +97,7 @@
             android:resizeableActivity="true" />
         <activity
             android:name=".ui.activity.VerifyOTP"
-            android:exported="true"
+            android:exported="false"
             android:resizeableActivity="true" />
 
         <activity

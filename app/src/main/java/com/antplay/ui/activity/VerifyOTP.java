@@ -212,6 +212,7 @@ public class VerifyOTP extends Activity implements View.OnClickListener {
             @Override
             public void onSuccess(Intent intent) {
                 startActivityForResult(intent,REQ_USER_CONSENT);
+
             }
 
             @Override
