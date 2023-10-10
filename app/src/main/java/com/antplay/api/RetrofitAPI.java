@@ -4,6 +4,7 @@ import com.antplay.models.AllBillingPlanResp;
 import com.antplay.models.ChangePassReq;
 import com.antplay.models.ChangePasswordResp;
 import com.antplay.models.GetVMResponse;
+import com.antplay.models.GetVmReq;
 import com.antplay.models.LoginRequestModal;
 import com.antplay.models.MessageResponse;
 import com.antplay.models.PaymentHistory_modal;
@@ -41,7 +42,8 @@ public interface RetrofitAPI {
     Call<UpdatePinResponseModal> updatePin(@Header("Authorization") String token, @Body UpdatePinRequestModal updatePinRequestModal);
     @GET("getvm")
     Call<ResponseBody> getVMFromServer(@Header("Authorization") String token);
-//    Call<ResponseBody> getVMTEST(@Header("Authorization") String token ,@Query("user_type") String userType);
+    @GET("getvm")
+    Call<ResponseBody> getVMTEST(@Header("Authorization") String token , @Query("user_type") String userType);
     @POST("login/")
     Call<ResponseBody> userLogin(@Body LoginRequestModal loginRequestModal);
     @POST("login/refresh/")

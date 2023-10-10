@@ -32,6 +32,7 @@ import com.antplay.binding.crypto.AndroidCryptoProvider;
 import com.antplay.computers.ComputerManagerService;
 import com.antplay.grid.PcGridAdapter;
 import com.antplay.grid.assets.DiskAssetLoader;
+import com.antplay.models.GetVmReq;
 import com.antplay.models.LoginRequestModal;
 import com.antplay.models.MessageResponse;
 import com.antplay.models.RefreshRequestModel;
@@ -1248,7 +1249,8 @@ public class PcView extends AppCompatActivity implements AdapterFragmentCallback
 
     private void getVM(String startVm) {
         try {
-            Call<ResponseBody> call = retrofitAPI.getVMFromServer("Bearer " + accessToken);
+//            GetVmReq getVmReq =  new GetVmReq("android");
+            Call<ResponseBody> call = retrofitAPI.getVMTEST("Bearer " + accessToken, "android");
             call.enqueue(new Callback<>() {
                 @Override
                 public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1338,6 +1340,7 @@ public class PcView extends AppCompatActivity implements AdapterFragmentCallback
                 }
             });
         } catch (Exception e) {
+            Log.i("testt_exceppp" , ""+e.getMessage());
         }
     }
 
