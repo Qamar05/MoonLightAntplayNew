@@ -1248,7 +1248,7 @@ public class PcView extends AppCompatActivity implements AdapterFragmentCallback
 
     private void getVM(String startVm) {
         try {
-            Call<ResponseBody> call = retrofitAPI.getVMFromServer("Bearer " + accessToken);
+            Call<ResponseBody> call = retrofitAPI.getVMFromServer("Bearer " + accessToken,Const.ANDROID);
             call.enqueue(new Callback<>() {
                 @Override
                 public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1485,7 +1485,7 @@ public class PcView extends AppCompatActivity implements AdapterFragmentCallback
 
     public void getVMForShutDown() {
         try {
-            Call<ResponseBody> call = retrofitAPI.getVMFromServer("Bearer " + accessToken);
+            Call<ResponseBody> call = retrofitAPI.getVMFromServer("Bearer " + accessToken,Const.ANDROID);
             call.enqueue(new Callback<>() {
                 @Override
                 public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {

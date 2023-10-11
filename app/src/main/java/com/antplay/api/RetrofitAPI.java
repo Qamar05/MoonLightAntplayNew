@@ -40,7 +40,7 @@ public interface RetrofitAPI {
     @POST("vmauth/")
     Call<UpdatePinResponseModal> updatePin(@Header("Authorization") String token, @Body UpdatePinRequestModal updatePinRequestModal);
     @GET("getvm")
-    Call<ResponseBody> getVMFromServer(@Header("Authorization") String token);
+    Call<ResponseBody> getVMFromServer(@Header("Authorization") String token, @Query("user_type") String userType);
     @POST("login/")
     Call<ResponseBody> userLogin(@Body LoginRequestModal loginRequestModal);
     @POST("login/refresh/")

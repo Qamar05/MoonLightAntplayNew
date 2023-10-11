@@ -138,7 +138,7 @@ public class MyApplication extends Application {
     }
 
     public void getVMForShutDown() {
-        Call<ResponseBody> call = retrofitAPI.getVMFromServer("Bearer " + accessToken);
+        Call<ResponseBody> call = retrofitAPI.getVMFromServer("Bearer " + accessToken,Const.ANDROID);
         call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
