@@ -248,7 +248,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
                 break;
             case R.id.linear_privacyPolicy:
                 AppUtils.navigateScreenSendValue((Activity) mContext, GeneralWebViewActivity.class,Const.REDIRECT_URL, Const.PRIVACY_POLICY_URL);
-                    break;
+                break;
             case R.id.linear_website:
                 Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(Const.WEBSITE_URL));
                 startActivity(browserIntent);
@@ -273,6 +273,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
             case R.id.linear_FAQ:
                 Intent faqIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(Const.FAQ_URL));
                 startActivity(faqIntent);
+                break;
             case R.id.lineardeleteUser:
                 deleteAccountDialog();
                 break;
