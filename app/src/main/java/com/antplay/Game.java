@@ -2235,7 +2235,7 @@ public class Game extends Activity implements SurfaceHolder.Callback,
 
    private void getVM(String getVmSTatus) {
         strVMId = "";
-        Call<ResponseBody> call = retrofitAPI.getVMFromServer("Bearer " + accessToken);
+        Call<ResponseBody> call = retrofitAPI.getVMFromServer("Bearer " + accessToken,Const.ANDROID);
         call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
