@@ -1343,7 +1343,7 @@ public class PcView extends AppCompatActivity implements AdapterFragmentCallback
 
     private void getVMIP(String timeRemaing, String startVm) {
         loadingBar.setVisibility(View.VISIBLE);
-        Call<ResponseBody> call = retrofitAPI.getVMIP("Bearer " + accessToken);
+        Call<ResponseBody> call = retrofitAPI.getVMIP("Bearer " + accessToken , Const.ANDROID);
         call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {

@@ -41,19 +41,16 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
     private String TAG = "ANT_PLAY";
     LinearLayout linearLayout;
     EditText edTxtName, edTxtUserName, edTxtPhoneNumber, edTxtEmail, edTxtAge , edTxtCity, edTxtAddress, editTextPinCode;
-   TextView edTxtState;
+    TextView edTxtState;
     Button buttonUpdateProfile;
-
     Spinner spinnerStateList;
     private ProgressBar progressBar;
     List<String> stateList;
-
     String access_token, email, phoneNumber;
     String city,address,state,pinCode;
     RetrofitAPI retrofitAPI;
     Context mContext;
     Dialog dialog;
-
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
