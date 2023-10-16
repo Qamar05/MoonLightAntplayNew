@@ -402,6 +402,7 @@
     <!--    <string name="server_msg">Servers are full. You are in queue. please wait for sometime</string>-->
 
 
+    <string name="default_notification_channel_id" translatable="false">fcm_default_channel</string>
 
 
 </resources>

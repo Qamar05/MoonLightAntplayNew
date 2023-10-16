@@ -1,7 +1,5 @@
 package com.antplay.api;
 
-
-
 import com.antplay.utils.Const;
 
 import okhttp3.OkHttpClient;

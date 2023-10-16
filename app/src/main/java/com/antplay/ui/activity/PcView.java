@@ -66,6 +66,8 @@ import com.google.android.play.core.appupdate.AppUpdateManager;
 import com.google.android.play.core.appupdate.AppUpdateManagerFactory;
 import com.google.android.play.core.install.model.AppUpdateType;
 import com.google.android.play.core.install.model.UpdateAvailability;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 
 import android.app.ActivityManager;
@@ -510,6 +512,20 @@ public class PcView extends AppCompatActivity implements AdapterFragmentCallback
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         retrofitAPI = APIClient.getRetrofitInstance().create(RetrofitAPI.class);
+        FirebaseApp.initializeApp(getApplicationContext());
+        FirebaseMessaging.getInstance().getToken().addOnCompleteListener(task -> {
+            if (!task.isSuccessful()) {
+                Log.w("ThinkSaaS Get FCM ID", "getInstanceId failed", task.getException());
+                return;
+            }
+
+            // Get new Instance ID token
+            String str_fcmid = task.getResult();
+            Log.i("testtt" , ""+ str_fcmid);
+
+           // AppPreferenceManager.getInstance(context).saveString(Constants.str_fcmid, str_fcmid);
+        });
+       // FirebaseMessaging.getInstance().subscribeToTopic("allDevices");
         accessToken = SharedPreferenceUtils.getString(PcView.this, Const.ACCESS_TOKEN);
         firstTimeStartVmApi = SharedPreferenceUtils.getBoolean(PcView.this, Const.FIRSTTIMESTARTVMAPI);
         String email = SharedPreferenceUtils.getString(PcView.this, Const.EMAIL_ID);
@@ -1809,22 +1825,31 @@ public class PcView extends AppCompatActivity implements AdapterFragmentCallback
                         JSONObject jObj = new JSONObject(responseValue);
                         String value = jObj.getString("message");
                         boolean status = jObj.getBoolean("status");
-//                        {"status":true,"message":"Servers are free."}
-                        if(status){
+                        if(status)
                             startVm(strVMId);
-                        }
-                        else
-                            openDialogOtherVM(true,msg);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
-                } else if (response.code() == Const.ERROR_CODE_400 ||
+                }
+                else if(response.code()==226){
+                    try {
+                        String responseValue = response.body().string();
+                        JSONObject jObj = new JSONObject(responseValue);
+                        String value = jObj.getString("message");
+                        openDialogOtherVM(true, value);
+                    }
+                    catch (Exception e){
+
+                    }
+                }
+                else if (response.code() == Const.ERROR_CODE_400 ||
                         response.code() == Const.ERROR_CODE_500 ||
                         response.code() == Const.ERROR_CODE_404 ||
                         response.code() == 401) {
                     try {
                         JSONObject jObj = new JSONObject(response.errorBody().string());
-                        Toast.makeText(PcView.this, jObj.getString("detail"), Toast.LENGTH_SHORT).show();
+                        String msg= jObj.getString("detail");
+                        Toast.makeText(PcView.this, ""+ msg, Toast.LENGTH_SHORT).show();
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
