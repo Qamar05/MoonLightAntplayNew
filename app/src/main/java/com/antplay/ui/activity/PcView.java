@@ -431,7 +431,7 @@ public class PcView extends AppCompatActivity implements AdapterFragmentCallback
         swipeLayout.setOnRefreshListener(() -> {
             new Handler().postDelayed(() -> {
                 swipeLayout.setRefreshing(false);
-              //  getVMInitiallyCall();
+               // getVMInitiallyCall();
                getVM("");
             }, 1000);
         });
@@ -531,7 +531,7 @@ public class PcView extends AppCompatActivity implements AdapterFragmentCallback
                         SharedPreferenceUtils.saveBoolean(PcView.this, Const.FIRSTTIMEVMTIMER, false);
                         SharedPreferenceUtils.saveBoolean(PcView.this, Const.FIRSTTIMEDIALOG, false);
                         firstTimeDialog = false;
-//                        getVMInitiallyCall();
+                      getVMInitiallyCall();
                         getVM("");
                     } else{
                         openDialog(true,getResources().getString(R.string.startVMMsg),"startSocket");
