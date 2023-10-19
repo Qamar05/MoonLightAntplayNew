@@ -1,4 +1,4 @@
-package com.antplay.ui.activity;
+package com.antplay.ui .activity;
 
 import android.app.Activity;
 import android.content.Context;

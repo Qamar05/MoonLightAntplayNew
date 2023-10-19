@@ -34,7 +34,6 @@ import retrofit2.http.PUT;
 import retrofit2.http.Query;
 import retrofit2.http.Url;
 
-
 public interface RetrofitAPI {
     @GET("getbillingplan")
     Call<AllBillingPlanResp> getBillingPlan(@Header("Authorization") String token , @Query("user_type") String userType);
