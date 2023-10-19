@@ -143,40 +143,48 @@ public class SubscriptionPlanActivity extends AppCompatActivity implements Subsc
 
     @Override
     public void onButtonClick(int idValue) {
-        if (AppUtils.isOnline(mContext)) {
-            progressSubscriptionPlan.setVisibility(View.VISIBLE);
-            //start Payment APi  ...
-            StartPaymentReq startPaymentReq = new StartPaymentReq(idValue,Const.ANDROID);
-            Call<StartPaymentResp> call = retrofitAPI.startPayment("Bearer " + accessToken, startPaymentReq);
-            call.enqueue(new Callback<>() {
-                @Override
-                public void onResponse(Call<StartPaymentResp> call, Response<StartPaymentResp> response) {
-                    progressSubscriptionPlan.setVisibility(View.GONE);
-                    if (response.code() == Const.SUCCESS_CODE_200) {
-                        if (response.body().getPayment_url() != null) {
-                            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(response.body().getPayment_url()));
-                            startActivity(browserIntent);
-                        }
-                    } else if (response.code() == 403) {
-                        try {
-                            JSONObject jObj = new JSONObject(response.errorBody().string());
-                            String value = jObj.getString("message");
-                            openDialog(value);
+        if(AppUtils.isOnline(mContext)){
+            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(Const.PLANS));
+            startActivity(browserIntent);
+        }
+        else
+            AppUtils.showInternetDialog(mContext);
 
-                        } catch (Exception e) {
 
-                        }
-                    }
-                }
-
-                @Override
-                public void onFailure(Call<StartPaymentResp> call, Throwable t) {
-                    progressSubscriptionPlan.setVisibility(View.GONE);
-                    Log.i("Error: ", "" + t.getMessage());
-                }
-            });
-        } else
-           AppUtils.showInternetDialog(mContext);
+//        if (AppUtils.isOnline(mContext)) {
+//            progressSubscriptionPlan.setVisibility(View.VISIBLE);
+//            //start Payment APi  ...
+//            StartPaymentReq startPaymentReq = new StartPaymentReq(idValue,Const.ANDROID);
+//            Call<StartPaymentResp> call = retrofitAPI.startPayment("Bearer " + accessToken, startPaymentReq);
+//            call.enqueue(new Callback<>() {
+//                @Override
+//                public void onResponse(Call<StartPaymentResp> call, Response<StartPaymentResp> response) {
+//                    progressSubscriptionPlan.setVisibility(View.GONE);
+//                    if (response.code() == Const.SUCCESS_CODE_200) {
+//                        if (response.body().getPayment_url() != null) {
+//                            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(response.body().getPayment_url()));
+//                            startActivity(browserIntent);
+//                        }
+//                    } else if (response.code() == 403) {
+//                        try {
+//                            JSONObject jObj = new JSONObject(response.errorBody().string());
+//                            String value = jObj.getString("message");
+//                            openDialog(value);
+//
+//                        } catch (Exception e) {
+//
+//                        }
+//                    }
+//                }
+//
+//                @Override
+//                public void onFailure(Call<StartPaymentResp> call, Throwable t) {
+//                    progressSubscriptionPlan.setVisibility(View.GONE);
+//                    Log.i("Error: ", "" + t.getMessage());
+//                }
+//            });
+//        } else
+//           AppUtils.showInternetDialog(mContext);
     }
 
     @Override

@@ -38,6 +38,8 @@ public class Const {
     public static String PRIVACY_POLICY_URL="https://antplay.tech/privacy-policy";
     public static String ABOUT_US_URL="https://antplay.tech/contact-us";
     public static String WEBSITE_URL="https://antplay.tech/";
+
+    public static String PLANS="https://antplay.tech/price-plans";
     public static String DISCORD_URL="https://discord.gg/vGHsh8MYXX";
     public static String INSTAGRAM_URL="https://www.instagram.com/antplay.tech/";
     public static String FAQ_URL="https://antplay.tech/faq";
