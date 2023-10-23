@@ -514,13 +514,15 @@ public class PcView extends AppCompatActivity implements AdapterFragmentCallback
         }
         inForeground = true;
         firstTimeVMTimer = SharedPreferenceUtils.getBoolean(PcView.this, Const.FIRSTTIMEVMTIMER);
+        Log.i("testtt_firsttime" , ""+firstTimeVMTimer);
         if (!firstTimeVMTimer) {
             SharedPreferenceUtils.saveString(PcView.this, Const.EMAIL_ID, loginEmail);
             if (AppUtils.isOnline(PcView.this))
                 getVM("");
             else
                 AppUtils.showInternetDialog(PcView.this);
-        } else {
+        }
+        else {
             if(btnStatus) {
                 getVMInitiallyCall();
             }
@@ -1799,7 +1801,8 @@ public class PcView extends AppCompatActivity implements AdapterFragmentCallback
                     public void run() {
                         try{
                             Log.i("testt_websocket_msg", message);
-                            if(message.equalsIgnoreCase("Server Ready")) {
+                            if(message.contains("Ready")) {
+                                Log.i("testt_websocket_msg2", "3e3f");
                                 firstTimeVMTimer = false;
                                 SharedPreferenceUtils.saveBoolean(PcView.this, Const.FIRSTTIMEVMTIMER, false);
                                 btnStatus = false;
