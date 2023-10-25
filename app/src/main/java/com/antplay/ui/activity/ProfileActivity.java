@@ -363,36 +363,50 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
         SimpleDateFormat formatterOut = new SimpleDateFormat(" dd MMM , yyyy");
         SimpleDateFormat formatterOutTime = new SimpleDateFormat(" HH:mm:ss");
+        SimpleDateFormat formatterOutMonth = new SimpleDateFormat("M");
         String getCurrentDateTime = formatterOut.format(c.getTime());
         String getCurrentTime = formatterOutTime.format(c.getTime());
+
+        Date d=new Date();
+       Log.i("getMonth" ,""+d.getMonth());
         String convertedDate = null;
         String convertedTime = null;
+        String convertedMonth = null;
         try {
             Date date = formatter.parse(expiry_date);
             Date date2 = formatter.parse(expiry_date);
             convertedDate = formatterOut.format(date);
             convertedTime = formatterOutTime.format(date2);
-            Log.i("testtt_time" , ""+getCurrentDateTime.compareTo(convertedDate));
-
+            convertedMonth = formatterOutMonth.format(date2);
             if(getCurrentDateTime.compareTo(convertedDate)==0){
                 if(getCurrentTime.compareTo(convertedTime)<0){
                         txtCurrentPlan.setText(billingPlan);
                         txtExpiryDate.setText(convertedDate);
                     }
                     else{
-                    Log.i("test_time4" , "testttt");
                         txtCurrentPlan.setText("No Active Plan");
                         txtExpiryDate.setText("Expired");
                     }
             }
-            else if (getCurrentDateTime.compareTo(convertedDate) > 0) {
-                txtCurrentPlan.setText(billingPlan);
-                txtExpiryDate.setText(convertedDate);
+            else if (getCurrentDateTime.compareTo(convertedDate) < 0) {
+                if(d.getMonth()+1<=Integer.parseInt(convertedMonth)) {
+                    txtCurrentPlan.setText(billingPlan);
+                    txtExpiryDate.setText(convertedDate);
+                }
+                else {
+                    txtCurrentPlan.setText("No Active Plan");
+                    txtExpiryDate.setText("Expired");
+                }
             }
-            else {
-                Log.i("test_time55" , "testttt");
-                txtCurrentPlan.setText("No Active Plan");
-                txtExpiryDate.setText("Expired");
+            else if (getCurrentDateTime.compareTo(convertedDate) > 0) {
+                if (d.getMonth() + 1 < Integer.parseInt(convertedMonth)) {
+                    txtCurrentPlan.setText(billingPlan);
+                    txtExpiryDate.setText(convertedDate);
+                } else {
+                    txtCurrentPlan.setText("No Active Plan");
+                    txtExpiryDate.setText("Expired");
+                }
+
             }
 
         } catch (ParseException e) {
