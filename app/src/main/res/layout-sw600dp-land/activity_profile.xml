@@ -89,14 +89,29 @@
                     android:orientation="horizontal">
 
                     <TextView
+                        android:layout_weight=".8"
                         android:id="@+id/txtUserEmailID"
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/_15sdp"
                         android:fontFamily="sans-serif"
                         android:textColor="@color/white"
                         android:textSize="@dimen/_12sdp"
                         android:textStyle="bold" />
+
+            <TextView
+                android:layout_weight=".2"
+                android:id="@+id/txtAppVersion"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_1sdp"
+                android:layout_marginRight="@dimen/_20sdp"
+                android:fontFamily="sans-serif"
+                android:text="wvwrvrwsvsrv"
+                android:gravity="right"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_9sdp" />
 
                 </LinearLayout>
 

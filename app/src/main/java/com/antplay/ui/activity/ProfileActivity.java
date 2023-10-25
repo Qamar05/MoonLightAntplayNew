@@ -21,6 +21,7 @@ import android.widget.Toast;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.antplay.BuildConfig;
 import com.antplay.R;
 import com.antplay.api.APIClient;
 import com.antplay.api.RetrofitAPI;
@@ -52,7 +53,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
     LinearLayout backLinear, logoutLinear, linear_Change, linearAgree, linearWebsite, linearAbout,
             linearPayment, linearEdit, linearDiscord, linearInstagram, linearPrivacyPolicy,linear_FAQ,lineardeleteUser;
 
-    TextView  tv_manageSubs, txtUserID,txtExpiryDate,txtCurrentPlan;
+    TextView  tv_manageSubs, txtUserID,txtExpiryDate,txtCurrentPlan,txtAppVersion;
     String strEmailId,access_token;
     Context mContext;
     long days = 0, month = 0,year = 0;
@@ -73,7 +74,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         access_token = SharedPreferenceUtils.getString(mContext, Const.ACCESS_TOKEN);
 
 
-
+        txtAppVersion = findViewById(R.id.txtAppVersion);
         backLinear = (LinearLayout) findViewById(R.id.back_linear);
         txtCurrentPlan =  findViewById(R.id.txtCurrentPlan);
         logoutLinear = (LinearLayout) findViewById(R.id.logout_linear);
@@ -113,6 +114,9 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
             callPaymentHistoryAPI();
         } else
             AppUtils.showInternetDialog(mContext);
+
+
+        txtAppVersion.setText("version - "+ BuildConfig.VERSION_NAME);
     }
 
     private void logoutMethod() {
@@ -368,21 +372,25 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
             Date date2 = formatter.parse(expiry_date);
             convertedDate = formatterOut.format(date);
             convertedTime = formatterOutTime.format(date2);
-            if (getCurrentDateTime.compareTo(convertedDate) < 0) {
-                 txtCurrentPlan.setText(billingPlan);
-                 txtExpiryDate.setText(convertedDate);
-            }
-            else if(getCurrentDateTime.compareTo(convertedDate)==0){
+            Log.i("testtt_time" , ""+getCurrentDateTime.compareTo(convertedDate));
+
+            if(getCurrentDateTime.compareTo(convertedDate)==0){
                 if(getCurrentTime.compareTo(convertedTime)<0){
-                    txtCurrentPlan.setText(billingPlan);
+                        txtCurrentPlan.setText(billingPlan);
                         txtExpiryDate.setText(convertedDate);
                     }
                     else{
+                    Log.i("test_time4" , "testttt");
                         txtCurrentPlan.setText("No Active Plan");
                         txtExpiryDate.setText("Expired");
                     }
             }
+            else if (getCurrentDateTime.compareTo(convertedDate) > 0) {
+                txtCurrentPlan.setText(billingPlan);
+                txtExpiryDate.setText(convertedDate);
+            }
             else {
+                Log.i("test_time55" , "testttt");
                 txtCurrentPlan.setText("No Active Plan");
                 txtExpiryDate.setText("Expired");
             }

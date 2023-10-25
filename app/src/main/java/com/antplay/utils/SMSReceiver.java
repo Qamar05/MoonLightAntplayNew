@@ -14,15 +14,10 @@ public class SMSReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-
         if(intent.getAction().equals(SmsRetriever.SMS_RETRIEVED_ACTION)){
-
             Bundle extras = intent.getExtras();
-
             Status smsRetreiverStatus = (Status) extras.get(SmsRetriever.EXTRA_STATUS);
-
             switch (smsRetreiverStatus.getStatusCode()){
-
                 case CommonStatusCodes.SUCCESS:
                     Intent messageIntent = extras.getParcelable(SmsRetriever.EXTRA_CONSENT_INTENT);
                     smsBroadcastReceiverListener.onSuccess(messageIntent);
@@ -30,15 +25,11 @@ public class SMSReceiver extends BroadcastReceiver {
                 case CommonStatusCodes.TIMEOUT:
                     smsBroadcastReceiverListener.onFailure();
                     break;
-
             }
         }
     }
-
     public interface SmsBroadcastReceiverListener{
-
         void onSuccess(Intent intent);
-
         void onFailure();
     }
 }
