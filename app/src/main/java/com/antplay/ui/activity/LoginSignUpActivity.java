@@ -26,7 +26,7 @@ public class LoginSignUpActivity extends Activity implements View.OnClickListene
         btn_otp = (Button) findViewById(R.id.continueWithOTP);
         btnRegister = (Button) findViewById(R.id.btn_register);
         tv_tandC = (TextView) findViewById(R.id.tv_termsandc_login);
-
+        
 
         btn_otp.setOnClickListener(this);
         tv_tandC.setOnClickListener(this);
