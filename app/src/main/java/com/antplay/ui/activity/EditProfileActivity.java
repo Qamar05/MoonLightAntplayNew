@@ -87,10 +87,7 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
         stateList = new ArrayList<>();
         stateList = AppUtils.stateList();
         getUserDetails();
-
     }
-
-
     private void setData(UserDetailsModal userDetail) {
         if (userDetail.getFirstName() != null || userDetail.getLastName() != null)
             edTxtName.setText(userDetail.getFirstName() + " " + userDetail.getLastName());
@@ -117,8 +114,6 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
             editTextPinCode.setText(userDetail.getPincode());
 
     }
-
-
     private void updateUserProfile() {
         progressBar.setVisibility(View.VISIBLE);
         UserUpdateRequestModal updateRequestModal = new UserUpdateRequestModal(
@@ -147,7 +142,6 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
             }
         });
     }
-
     private void getUserDetails() {
         if(AppUtils.isOnline(mContext)) {
             Call<UserDetailsModal> call = retrofitAPI.getUserDetails("Bearer " + access_token);

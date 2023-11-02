@@ -133,7 +133,7 @@ public class PcView extends AppCompatActivity implements AdapterFragmentCallback
     boolean shutdownVMStatus, startVMStatus, isVMConnected, isVmDisConnected, firstTimeVMTimer,
             paymentStatus = false, startVmTimerStatus = false, firstTimeStartVmApi = false,
             isFirstTime = true, btnStatus = false, btnShutDownStatus = false, firstTimeDialog = false,
-            doubleBackToExitPressedOnce = false;
+            doubleBackToExitPressedOnce = false,isStartTimer ;
     Timer timerVmShutDown;
     SpinnerDialog dialog;
     ComputerDetails myComputerDetails, saveComputerDeatails;
@@ -145,6 +145,7 @@ public class PcView extends AppCompatActivity implements AdapterFragmentCallback
     private ShortcutHelper shortcutHelper;
     private Thread addThread;
     RetrofitAPI retrofitAPI;
+    String vmTime,saveVMTIme;
     ImageView ivRefresh;
 //    private WebSocketClient mWebSocketClient;
     private ComputerManagerService.ComputerManagerBinder managerBinder;
@@ -473,11 +474,13 @@ public class PcView extends AppCompatActivity implements AdapterFragmentCallback
             if (status.equalsIgnoreCase("running")) {
                 openShutDownVMDialog("shutdown", 0L);
                 btnShutDownStatus = true;
-                if (vmip != "")
-                    shutDownVM("", strVMId);
-                else
-                    Toast.makeText(PcView.this, "ip is" + vmip, Toast.LENGTH_LONG).show();
-                // stopVM("" ,strVMId);
+                  if(isStartTimer){
+                      endVMTimer();
+                  }
+                  else {
+                      shutDownVM("", strVMId);
+                  }
+
             }
         });
         ivRefresh.setOnClickListener(view -> getVM(""));
@@ -508,6 +511,7 @@ public class PcView extends AppCompatActivity implements AdapterFragmentCallback
         // pcGridAdapter.notifyDataSetChanged();
     }
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -523,6 +527,7 @@ public class PcView extends AppCompatActivity implements AdapterFragmentCallback
             String str_fcmid = task.getResult();
             Log.i("testtt" , ""+ str_fcmid);
 
+
            // AppPreferenceManager.getInstance(context).saveString(Constants.str_fcmid, str_fcmid);
         });
        // FirebaseMessaging.getInstance().subscribeToTopic("allDevices");
@@ -530,6 +535,8 @@ public class PcView extends AppCompatActivity implements AdapterFragmentCallback
         firstTimeStartVmApi = SharedPreferenceUtils.getBoolean(PcView.this, Const.FIRSTTIMESTARTVMAPI);
         String email = SharedPreferenceUtils.getString(PcView.this, Const.EMAIL_ID);
         String loginEmail = SharedPreferenceUtils.getString(PcView.this, Const.LOGIN_EMAIL);
+         isStartTimer = SharedPreferenceUtils.getBoolean(PcView.this,Const.ISSTARTTIMER);
+
         appUpdateManager = AppUpdateManagerFactory.create(PcView.this);
         checkForAppUpdateAvailability();
         if (email == null || !email.equalsIgnoreCase(loginEmail)) {
@@ -561,23 +568,23 @@ public class PcView extends AppCompatActivity implements AdapterFragmentCallback
 
         tvTimer = findViewById(R.id.tvTimer);
         isVmDisConnected = SharedPreferenceUtils.getBoolean(PcView.this, Const.IS_VM_DISCONNECTED);
-        if (isVmDisConnected) {
-            timerVmShutDown = new Timer();
-            timerVmShutDown.scheduleAtFixedRate(new TimerTask() {
-                @Override
-                public void run() {
-                    Log.i("test_background", "testttt");
-                    if (!isFirstTime) {
-                        if (AppUtils.isOnline(PcView.this))
-                            getVMForShutDown();
-//                        else
-//                            AppUtils.showInternetDialog(PcView.this);
-                    } else {
-                        isFirstTime = false;
-                    }
-                }
-            }, 0, 300 * 1000);
-        }
+//        if (isVmDisConnected) {
+//            timerVmShutDown = new Timer();
+//            timerVmShutDown.scheduleAtFixedRate(new TimerTask() {
+//                @Override
+//                public void run() {
+//                    Log.i("test_background", "testttt");
+//                    if (!isFirstTime) {
+//                        if (AppUtils.isOnline(PcView.this))
+//                            getVMForShutDown();
+////                        else
+////                            AppUtils.showInternetDialog(PcView.this);
+//                    } else {
+//                        isFirstTime = false;
+//                    }
+//                }
+//            }, 0, 300 * 1000);
+//        }
 
 
 
@@ -675,19 +682,7 @@ public class PcView extends AppCompatActivity implements AdapterFragmentCallback
         }
     }
 
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        try {
-            if (managerBinder != null) {
-                unbindService(serviceConnection);
-                joinAddThread();
-                unbindService(serviceConnection2);
 
-            }
-        } catch (Exception e) {
-        }
-    }
 
     @Override
     protected void onResume() {
@@ -977,6 +972,8 @@ public class PcView extends AppCompatActivity implements AdapterFragmentCallback
             return;
         }
 
+        SharedPreferenceUtils.saveString(PcView.this,Const.VMTIME,saveVMTIme);
+
         Intent i = new Intent(this, AppView.class);
         i.putExtra(AppView.NAME_EXTRA, computer.name);
         i.putExtra(AppView.UUID_EXTRA, computer.uuid);
@@ -1087,7 +1084,10 @@ public class PcView extends AppCompatActivity implements AdapterFragmentCallback
     }
 
     private void updateComputer(ComputerDetails details, String value) {
-        showTimer(value);
+    //    showTimer(value);
+        showTimerAfterConnection("local");
+//        }
+
         myComputerDetails = details;
         text_PcName.setText("" + details.name);
         if (status != null) {
@@ -1235,9 +1235,9 @@ public class PcView extends AppCompatActivity implements AdapterFragmentCallback
                 } else if (response.code() == 401 || response.code() == Const.ERROR_CODE_404 ||
                         response.code() == Const.ERROR_CODE_400 || response.code() == Const.ERROR_CODE_500) {
                     try {
-                        if (shutDownVMDialog.isShowing()) {
-                            shutDownVMDialog.dismiss();
-                        }
+//                        if (shutDownVMDialog.isShowing()) {
+//                            shutDownVMDialog.dismiss();
+//                        }
                         JSONObject jObj = new JSONObject(response.errorBody().string());
                         String value = jObj.getString("message");
                         Toast.makeText(PcView.this, "" + value, Toast.LENGTH_SHORT).show();
@@ -1300,12 +1300,15 @@ public class PcView extends AppCompatActivity implements AdapterFragmentCallback
                                 else if (status.equalsIgnoreCase("running"))
                                     getVMIP(time_remaining, startVm);
                                 else {
+                                    SharedPreferenceUtils.saveString(PcView.this,Const.VMTIME,"");
+                                    SharedPreferenceUtils.saveBoolean(PcView.this,Const.ISSTARTTIMER,false);
                                     ivRefresh.setVisibility(View.GONE);
                                     btnStartVM.setVisibility(View.VISIBLE);
                                     btnShutDownVM.setVisibility(View.GONE);
                                     progressBar.setVisibility(View.GONE);
                                     btnStartVM.setText("Start");
-                                    showTimer(time_remaining);
+                                    showTimerAfterConnection("server");
+//                                   showTimer(time_remaining);
                                 }
                             }
                             else
@@ -1377,7 +1380,8 @@ public class PcView extends AppCompatActivity implements AdapterFragmentCallback
                             String vmIp = jsonArray.getJSONObject(0).getString("vmip");
                             startVmTimerStatus = false;
                             progressBar.setVisibility(View.GONE);
-                            showTimer(time_remaining);
+//                            showTimerAfterConnection("local");
+//                            showTimer(time_remaining);
                             handleDoneEvent(vmIp, startVm);
                             bindService(new Intent(PcView.this, ComputerManagerService.class), serviceConnection2, Service.BIND_AUTO_CREATE);
                             pcGridAdapter = new PcGridAdapter(PcView.this, PreferenceConfiguration.readPreferences(PcView.this));
@@ -1414,7 +1418,14 @@ public class PcView extends AppCompatActivity implements AdapterFragmentCallback
             @Override
             public void onResponse(Call<MessageResponse> call, Response<MessageResponse> response) {
                 if (response.code() == 200) {
+                    try {
+                        loadingBar.setVisibility(View.GONE);
+                    }
+                    catch (Exception e){
+
+                    }
                     btnStartVM.setVisibility(View.INVISIBLE);
+                    showTimerAfterConnection("server");
 
                     if (status.equalsIgnoreCase("background")) {
                         if (timerVmShutDown != null) {
@@ -1519,10 +1530,10 @@ public class PcView extends AppCompatActivity implements AdapterFragmentCallback
                                 boolean firstTimeVMTimer = SharedPreferenceUtils.getBoolean(PcView.this, Const.FIRSTTIMEVMTIMER);
                                 if (!firstTimeVMTimer) {
                                     if (status.equalsIgnoreCase("running")) {
-                                        if (vmip != "")
-                                            shutDownVM("background", strVMId);
-                                        else
-                                            Toast.makeText(PcView.this, "ip is" + vmip, Toast.LENGTH_LONG).show();
+//                                        if (vmip != "")
+//                                            shutDownVM("background", strVMId);
+//                                        else
+//                                            Toast.makeText(PcView.this, "ip is" + vmip, Toast.LENGTH_LONG).show();
                                         //  stopVM("background" ,strVMId);
                                     }
                                 }
@@ -1663,6 +1674,7 @@ public class PcView extends AppCompatActivity implements AdapterFragmentCallback
             String timeString = String.format("%02d:%02d:%02d", hours, minutes, sec);
             tvTimer.setText(timeString + " hrs.");
         } catch (Exception e) {
+            Log.i("testtttfafefdvd" , ""+timeRemaining);
         }
     }
 
@@ -1886,6 +1898,111 @@ public class PcView extends AppCompatActivity implements AdapterFragmentCallback
                 checkForAppUpdateAvailability();
             }
         }
+    }
+    private void endVMTimer() {
+        if (vmip != ""){
+            loadingBar.setVisibility(View.VISIBLE);
+            VMTimerReq vmTimerReq = new VMTimerReq(strVMId);
+            Call<MessageResponse> call = retrofitAPI.endVmTime("Bearer " + accessToken , vmTimerReq);
+            call.enqueue(new Callback<>() {
+                @Override
+                public void onResponse(Call<MessageResponse> call, Response<MessageResponse> response) {
+                    if (response.code() ==200) {
+                        SharedPreferenceUtils.saveBoolean(PcView.this,Const.ISSTARTTIMER,false);
+                        SharedPreferenceUtils.saveString(PcView.this,Const.VMTIME,"");
+
+                        shutDownVM("", strVMId);
+                    }
+                }
+                @Override
+                public void onFailure(Call<MessageResponse> call, Throwable t) {
+                    AppUtils.showToast(Const.something_went_wrong, PcView.this);
+                }
+            });
+        }
+        else {
+            stopVM("", strVMId);
+        }
+    }
+
+    private void callTimer(long seconds) {
+        new CountDownTimer(seconds*1000, 1000) {
+
+            public void onTick(long millisUntilFinished) {
+                long value = millisUntilFinished / 1000;
+                long hours = value / 3600;
+                long minutes =value % 3600 / 60;
+                long   sec = value % 60;
+                saveVMTIme= String.valueOf(value);
+
+
+                String  timeString = String.format("%02d:%02d:%02d", hours, minutes,sec);
+                tvTimer.setText(timeString);
+
+
+
+                if(value<300)
+                    timerText.setVisibility(View.VISIBLE);
+            }
+
+            public void onFinish() {
+           //     endVMTimeAPi(true);
+                //AppUtils.navigateScreen(Game.this,PcView.class);
+            }
+        }.start();
+
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+
+        Log.i("testtt_onDestroy" , "rrwv" + saveVMTIme);
+        if(isStartTimer){
+            SharedPreferenceUtils.saveString(PcView.this,Const.VMTIME,saveVMTIme);
+        }
+
+        try {
+            if (managerBinder != null) {
+                unbindService(serviceConnection);
+                joinAddThread();
+                unbindService(serviceConnection2);
+
+            }
+        } catch (Exception e) {
+        }
+    }
+    public void showTimerAfterConnection(String value){
+        Log.i("testttt" , ""+value);
+        if(value.equalsIgnoreCase("local")) {
+
+                String saveVmTime = SharedPreferenceUtils.getString(PcView.this, Const.VMTIME);
+                Log.i("testttt_RETURN " , ""+saveVmTime);
+                if (getIntent().hasExtra(Const.VMTIME)) {
+                    Log.i("testtfeqttfaefdvd" , ""+value);
+                    vmTime = getIntent().getStringExtra(Const.VMTIME);
+                    callTimer(Long.parseLong(vmTime));
+                    Log.i("vmTimeValue", vmTime);
+                } else if (!saveVmTime.equalsIgnoreCase("")) {
+                    Log.i("testtttfaefdvvdvd" , ""+value);
+                    try {
+                        callTimer(Long.parseLong(saveVmTime));
+                    }
+                    catch (Exception e) {
+                        Log.i("testtttfaef" , ""+value);
+                        showTimer(time_remaining);
+                    }
+                }
+                else{
+                    showTimer(time_remaining);
+                    Log.i("testtttfaefdvd" , ""+value);
+                }
+            }
+
+        else{
+            showTimer(time_remaining);
+        }
+
     }
 }
 

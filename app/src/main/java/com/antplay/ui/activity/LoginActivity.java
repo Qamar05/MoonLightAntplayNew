@@ -66,6 +66,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         btnLetsGo = (Button) findViewById(R.id.btn_signup);
         loadingPB = (ProgressBar) findViewById(R.id.loadingLogin_progress_xml);
 
+        etEmail.setText("testing790@yopmail.com");
+        etPass.setText("Test@123");
+
         tvForgetPass.setOnClickListener(this);
         tvSignupHere.setOnClickListener(this);
         btnLetsGo.setOnClickListener(this);

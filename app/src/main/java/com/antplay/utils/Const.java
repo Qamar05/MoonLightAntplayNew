@@ -54,4 +54,6 @@ public class Const {
     public static String FIRSTTIMESTARTVMAPI = "firstTimeStartVmApi";
     public static String PAYMENT_STATUS = "payment_status";
     public static String LOGIN_EMAIL = "login_email";
+    public static String ISSTARTTIMER = "isStartTimer";
+    public static String VMTIME = "vmtime";
 }

@@ -121,6 +121,7 @@ public class Game extends Activity implements SurfaceHolder.Callback,
         PerfOverlayListener, UsbDriverService.UsbDriverStateListener, View.OnKeyListener {
     private int lastButtonState = 0;
     int width , height;
+    String saveTimeString;
     Dialog endVMDialog;
     // Only 2 touches are supported
     private final TouchContext[] touchContextMap = new TouchContext[2];
@@ -2193,8 +2194,20 @@ public class Game extends Activity implements SurfaceHolder.Callback,
         call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<MessageResponse> call, Response<MessageResponse> response) {
-                if(response.body().getSuccess().equalsIgnoreCase("True"))
-                    callTimer(Long.valueOf(time_remaining));
+                if(response.body().getSuccess().equalsIgnoreCase("True")) {
+                    String saveVmTime = SharedPreferenceUtils.getString(Game.this, Const.VMTIME);
+                    try {
+                        if(!saveVmTime.equalsIgnoreCase(""))
+                            callTimer(Long.valueOf(saveVmTime));
+                        else
+                            callTimer(Long.valueOf(time_remaining));
+                    }
+                    catch (Exception e){
+                        callTimer(Long.valueOf(time_remaining));
+                    }
+                    SharedPreferenceUtils.saveBoolean(Game.this,Const.ISSTARTTIMER,true);
+                }
+
             }
             @Override
             public void onFailure(Call<MessageResponse> call, Throwable t) {
@@ -2204,33 +2217,37 @@ public class Game extends Activity implements SurfaceHolder.Callback,
     }
 
     private void endVMTimeAPi(boolean value) {
-        Log.i("test_onEndVmm" , "testt" + value);
-        vmTimerReq = new VMTimerReq(strVMId);
-        Call<MessageResponse> call = retrofitAPI.endVmTime("Bearer " + accessToken , vmTimerReq);
-        call.enqueue(new Callback<>() {
-            @Override
-            public void onResponse(Call<MessageResponse> call, Response<MessageResponse> response) {
-               try {
-                   if (response.body().getSuccess().equalsIgnoreCase("true")) {
-                       if(value) {
-                           getVM("endVmTImer");
-                       }
-                       else {
-                           AppUtils.navigateScreen(Game.this, PcView.class);
-                               finishAffinity();
+        Log.i("testt_put" ,saveTimeString);
+        AppUtils.navigateScreenSendValue(Game.this, PcView.class,Const.VMTIME,saveTimeString);
+        finishAffinity();
 
-                       }
-                   }
-               }
-               catch (Exception e){
-               }
-
-            }
-            @Override
-            public void onFailure(Call<MessageResponse> call, Throwable t) {
-                AppUtils.showToast(Const.something_went_wrong, Game.this);
-            }
-        });
+//        Log.i("test_onEndVmm" , "testt" + value);
+//        vmTimerReq = new VMTimerReq(strVMId);
+//        Call<MessageResponse> call = retrofitAPI.endVmTime("Bearer " + accessToken , vmTimerReq);
+//        call.enqueue(new Callback<>() {
+//            @Override
+//            public void onResponse(Call<MessageResponse> call, Response<MessageResponse> response) {
+//               try {
+//                   if (response.body().getSuccess().equalsIgnoreCase("true")) {
+//                       if(value) {
+//                           getVM("endVmTImer");
+//                       }
+//                       else {
+//                           AppUtils.navigateScreen(Game.this, PcView.class);
+//                               finishAffinity();
+//
+//                       }
+//                   }
+//               }
+//               catch (Exception e){
+//               }
+//
+//            }
+//            @Override
+//            public void onFailure(Call<MessageResponse> call, Throwable t) {
+//                AppUtils.showToast(Const.something_went_wrong, Game.this);
+//            }
+//        });
     }
 
    private void getVM(String getVmSTatus) {
@@ -2250,10 +2267,10 @@ public class Game extends Activity implements SurfaceHolder.Callback,
 
                         if(getVmSTatus.equalsIgnoreCase("endVmTImer")){
                             if (status.equalsIgnoreCase("running")){
-                                if(vmip!=null)
-                                    shutDownVM();
-                                else
-                                    Toast.makeText(Game.this,"ip is" + vmip,Toast.LENGTH_LONG).show();
+//                                if(vmip!=null)
+//                                   // shutDownVM();
+//                                else
+//                                    Toast.makeText(Game.this,"ip is" + vmip,Toast.LENGTH_LONG).show();
 
                                 //stopVM();
                             }
@@ -2535,7 +2552,6 @@ public class Game extends Activity implements SurfaceHolder.Callback,
 
     @Override
     public void onBackPressed() {
-
         if (doubleBackToExitPressedOnce) {
             isBackPressed =  true;
             endVMTimeAPi(false);
@@ -2585,7 +2601,9 @@ public class Game extends Activity implements SurfaceHolder.Callback,
                 long minutes =value % 3600 / 60;
                 long   sec = value % 60;
 
-                String  timeString = String.format("%02d:%02d:%02d", hours, minutes, sec);
+                String  timeString = String.format("%02d:%02d", hours, minutes);
+                 saveTimeString  = String.valueOf(value);
+
                 tvTimer.setText("Time Remaining : "+ timeString + " hrs.");
 
                 if(value<300)
@@ -2594,7 +2612,7 @@ public class Game extends Activity implements SurfaceHolder.Callback,
 
             public void onFinish() {
                 endVMTimeAPi(true);
-                AppUtils.navigateScreen(Game.this,PcView.class);
+                //AppUtils.navigateScreen(Game.this,PcView.class);
             }
         }.start();
 

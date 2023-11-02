@@ -277,7 +277,7 @@
                     android:layout_height="@dimen/_12sdp"
                     android:layout_gravity="center"
                     android:indeterminate="true"
-                    android:visibility="gone"></ProgressBar>
+                    android:visibility="gone"/>
 
 
                 <TextView
